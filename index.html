@@ -2388,7 +2388,28 @@
         overflow: visible !important;
         text-overflow: clip !important;
       }
-    </style>
+    
+      /* Cập nhật: thêm STT cho 2 bảng Chi tiết ĐUQ chưa PSSL */
+      .notpssl-detail-table td.stt-cell {
+        text-align: center;
+        font-weight: 900;
+        background: #fff !important;
+        white-space: nowrap;
+      }
+      .notpssl-detail-table th:nth-child(1) { width: 5% !important; }
+      .notpssl-detail-table th:nth-child(2) { width: 13% !important; }
+      .notpssl-detail-table th:nth-child(3) { width: 11% !important; }
+      .notpssl-detail-table th:nth-child(4) { width: 15% !important; }
+      .notpssl-detail-table th:nth-child(5) { width: 29% !important; }
+      .notpssl-detail-table th:nth-child(6) { width: 12% !important; }
+      .notpssl-detail-table th:nth-child(7) { width: 15% !important; }
+      .notpssl-detail-table.exist-table th:nth-child(1) { width: 5% !important; }
+      .notpssl-detail-table.exist-table th:nth-child(2) { width: 13% !important; }
+      .notpssl-detail-table.exist-table th:nth-child(3) { width: 12% !important; }
+      .notpssl-detail-table.exist-table th:nth-child(4) { width: 16% !important; }
+      .notpssl-detail-table.exist-table th:nth-child(5) { width: 39% !important; }
+      .notpssl-detail-table.exist-table th:nth-child(6) { width: 15% !important; }
+</style>
   </head>
   <body>
     <header>
@@ -2966,12 +2987,13 @@
           <div class="notpssl-detail-grid">
             <section class="notpssl-detail-card">
               <div class="notpssl-detail-title exist">
-                Cảnh báo ĐUQ hiện hữu chưa phát sinh sản lượng nhiều ngày
+                Cảnh báo ĐUQ hiện hữu chưa phát sinh sản lượng nhiều ngày (Trong vòng 60 ngày chưa phát sinh sản lượng)
               </div>
               <div class="notpssl-table-wrap">
                 <table class="notpssl-detail-table exist-table">
                   <thead>
                     <tr>
+                      <th>STT</th>
                       <th>Mã KBH</th>
                       <th>Số Eload</th>
                       <th>Tên NV</th>
@@ -2996,6 +3018,7 @@
                 <table class="notpssl-detail-table">
                   <thead>
                     <tr>
+                      <th>STT</th>
                       <th>Mã KBH</th>
                       <th>Số Eload</th>
                       <th>Tên NV</th>
@@ -19686,7 +19709,8 @@
           rankTone(Math.max(1, total - position), Math.max(1, total));
 
         // Bảng hiện hữu: ẨN hoàn toàn cột Số ngày chưa PSSL.
-        const existRowHtml = (x) => `<tr data-detail-index="${x.index}">
+        const existRowHtml = (x, position) => `<tr data-detail-index="${x.index}">
+    <td class="stt-cell">${position + 1}</td>
     <td class="code-cell">${esc(x.r["ID điểm bán"] || "—")}</td>
     <td class="eload-cell">${esc(eloadValue(x.r))}</td>
     <td class="manager-cell">${esc(x.r["Nhân viên hỗ trợ"] || "—")}</td>
@@ -19696,6 +19720,7 @@
 
         // Bảng ĐUQ mới vẫn hiển thị Số ngày chưa PSSL để tiện theo dõi/xếp hạng.
         const newRowHtml = (x, position, total) => `<tr data-detail-index="${x.index}">
+    <td class="stt-cell">${position + 1}</td>
     <td class="code-cell">${esc(x.r["ID điểm bán"] || "—")}</td>
     <td class="eload-cell">${esc(eloadValue(x.r))}</td>
     <td class="manager-cell">${esc(x.r["Nhân viên hỗ trợ"] || "—")}</td>
@@ -19705,12 +19730,12 @@
   </tr>`;
 
         existBody.innerHTML = existing.length
-          ? existing.map((x) => existRowHtml(x)).join("")
-          : `<tr><td class="notpssl-empty" colspan="5">Không có ĐUQ hiện hữu nào đạt ngưỡng ≥ ${NOT_PSSL_WARNING_DAYS} ngày.</td></tr>`;
+          ? existing.map((x, i) => existRowHtml(x, i)).join("")
+          : `<tr><td class="notpssl-empty" colspan="6">Không có ĐUQ hiện hữu nào đạt ngưỡng ≥ ${NOT_PSSL_WARNING_DAYS} ngày.</td></tr>`;
 
         newBody.innerHTML = newly.length
           ? newly.map((x, i) => newRowHtml(x, i, newly.length)).join("")
-          : `<tr><td class="notpssl-empty" colspan="6">Không có ĐUQ mới nào chưa phát sinh sản lượng.</td></tr>`;
+          : `<tr><td class="notpssl-empty" colspan="7">Không có ĐUQ mới nào chưa phát sinh sản lượng.</td></tr>`;
 
         if ($("notPsslExistCount")) $("notPsslExistCount").textContent = existing.length;
         if ($("notPsslNewCount")) $("notPsslNewCount").textContent = newly.length;
@@ -19910,14 +19935,23 @@
               "rev2m",
               "rev3m",
             ];
-            const keepWhite =
+            const existingWhiteMetrics = [
+              "sim_under5", "sim5", "sim10", "sim20", "sim30",
+              "rev_under500", "rev500", "rev1m", "rev2m", "rev3m",
+            ];
+            const keepWhiteExisting =
+              statusType === "exist" && existingWhiteMetrics.includes(key);
+            const keepWhiteNew =
               statusType === "new" &&
               sparseNewMetrics.includes(key) &&
               metricValue(a, key) <= 5;
+            const keepWhite = keepWhiteExisting || keepWhiteNew;
             const tone = keepWhite ? WHITE_TONE : rankTone(rank, list.length);
-            const toneTitle = keepWhite
-              ? "Sản lượng từ 0 đến 5 - không tô màu"
-              : `Xếp hạng ${rank}/${list.length}`;
+            const toneTitle = keepWhiteExisting
+              ? "Không áp dụng tông màu xếp hạng"
+              : keepWhiteNew
+                ? "Sản lượng từ 0 đến 5 - không tô màu"
+                : `Xếp hạng ${rank}/${list.length}`;
             return `<td class="click-cell rank-tone ${css}" style="${tone}" title="${toneTitle}" data-area="${esc(a.area)}" data-key="${key}" data-label="${label.replace(/&lt;/g, "<")}" data-status-type="${statusType}">${metricDisplay(key, metricValue(a, key))}</td>`;
           })
           .join("")}
