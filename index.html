@@ -722,7 +722,7 @@
         border: 1px solid var(--line);
         background: #fff;
         color: var(--p);
-        font-weight: 900;
+        font-weight: 700;
         border-radius: 12px;
         padding: 11px 16px;
         cursor: pointer;
@@ -773,15 +773,36 @@
         background: #fff;
         border: 1px solid var(--line);
         border-radius: 16px;
-        overflow: hidden;
+        overflow: visible;
         box-shadow: var(--shadow);
       }
       .notpssl-detail-title {
         padding: 10px 12px;
-        font-size: 13px;
-        font-weight: 900;
+        font-size: 15px;
+        font-weight: 700;
         letter-spacing: 0.1px;
         text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        font-family: emoji;
+        justify-content: space-between;
+        gap: 12px;
+        border-radius: 16px 16px 0 0;
+      }
+
+      .notpssl-title-count {
+        flex: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 42px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(255,255,255,.78);
+        color: #005baa;
+        font-size: 17px;
+        font-weight: 900;
+        line-height: 1;
       }
       .notpssl-detail-title.exist {
         background: #fff0a8;
@@ -806,7 +827,9 @@
         font-family: Arial, sans-serif;
       }
       .notpssl-detail-table th {
-        position: static !important;
+        position: sticky !important;
+        top: 72px;
+        z-index: 35;
         background: #005baa !important;
         color: #fff !important;
         border: 1px solid #dbe5ee;
@@ -816,6 +839,7 @@
         text-align: center;
         white-space: normal;
         font-weight: 900;
+        box-shadow: 0 2px 0 rgba(0,0,0,.08);
       }
       .notpssl-detail-table td {
         border: 1px solid #e2eaf1;
@@ -838,12 +862,12 @@
         filter: saturate(1.06) brightness(0.98);
       }
       .notpssl-detail-table td.days-cell {
-        background: var(--rank-bg, #fff) !important;
+        /* background: var(--rank-bg, #fff) !important; */
         color: #17324d !important;
         font-weight: 900;
         text-align: center;
         font-size: 13px;
-        border-color: var(--rank-border, #dbe5ee) !important;
+        /* border-color: var(--rank-border, #dbe5ee) !important; */
         font-variant-numeric: tabular-nums;
       }
       .notpssl-detail-table td.area-cell {
@@ -2032,6 +2056,42 @@
         will-change: transform !important;
       }
 
+      /* STICKY TAB CHI TIẾT ĐUQ: ghim cả tiêu đề cảnh báo và hàng tên cột */
+      #areaNotPsslDetailPanel {
+        --notpssl-sticky-top: 72px;
+        --notpssl-title-height: 56px;
+      }
+
+      #areaNotPsslDetailPanel .notpssl-detail-title {
+        position: sticky !important;
+        top: var(--notpssl-sticky-top) !important;
+        z-index: 42 !important;
+        min-height: var(--notpssl-title-height);
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 12px;
+        box-shadow: 0 2px 0 rgba(0, 91, 170, 0.10);
+      }
+
+      #areaNotPsslDetailPanel .notpssl-title-count {
+        flex: 0 0 auto;
+      }
+
+      #areaNotPsslDetailPanel .notpssl-detail-table thead th {
+        position: sticky !important;
+        top: calc(var(--notpssl-sticky-top) + var(--notpssl-title-height)) !important;
+        z-index: 41 !important;
+        background: #005baa !important;
+      }
+
+      @media (max-width: 650px) {
+        #areaNotPsslDetailPanel {
+          --notpssl-sticky-top: 68px;
+          --notpssl-title-height: 62px;
+        }
+      }
+
       .tribute-view {
         display: none;
       }
@@ -2180,7 +2240,7 @@
         align-items: center;
         justify-content: space-between;
         gap: 10px;
-        margin: 16px 0 8px;
+        margin: -19px 0 8px;
       }
       .area-dual-title h3 {
         margin: 0;
@@ -2332,14 +2392,15 @@
       #areaView.overview-compact .area-table-wrap tfoot td {
         padding-top: 9px !important;
         padding-bottom: 9px !important;
-        line-height: 1.2 !important;
+        line-height: 0.2 !important;
       }
       #areaView.overview-compact .area-table-wrap tbody td:nth-child(1),
       #areaView.overview-compact .area-table-wrap tbody td:nth-child(n + 3),
       #areaView.overview-compact .area-table-wrap tfoot td:nth-child(1),
       #areaView.overview-compact .area-table-wrap tfoot td:nth-child(n + 3) {
-        font-size: 27px !important; /* CỠ SỐ RIÊNG CỦA TAB TỔNG QUAN */
+        font-size: 23px !important; /* CỠ SỐ RIÊNG CỦA TAB TỔNG QUAN */
         font-weight: 900 !important;
+        text-align: center;
         font-variant-numeric: tabular-nums;
       }
       #areaView.overview-compact .area-table-wrap tbody td:nth-child(2) {
@@ -2356,7 +2417,7 @@
       #areaView:not(.overview-compact) .area-table-wrap tfoot td {
         padding-top: 9px !important;
         padding-bottom: 9px !important;
-        line-height: 1.2 !important;
+        line-height: 0.2 !important;
       }
       #areaView:not(.overview-compact) .area-table-wrap tbody td:nth-child(1),
       #areaView:not(.overview-compact)
@@ -2370,6 +2431,7 @@
         td:nth-child(n + 3) {
         font-size: 15px !important; /* CỠ SỐ RIÊNG CỦA TAB THUÊ BAO & DOANH THU */
         font-weight: 900 !important;
+        text-align: center;
         font-variant-numeric: tabular-nums;
       }
       #areaView:not(.overview-compact) .area-table-wrap tbody td:nth-child(2) {
@@ -2987,7 +3049,8 @@
           <div class="notpssl-detail-grid">
             <section class="notpssl-detail-card">
               <div class="notpssl-detail-title exist">
-                Cảnh báo ĐUQ hiện hữu chưa phát sinh sản lượng nhiều ngày (Trong vòng 60 ngày chưa phát sinh sản lượng)
+                <span>Cảnh báo ĐUQ hiện hữu chưa phát sinh sản lượng nhiều ngày (Trong vòng 60 ngày chưa phát sinh sản lượng)</span>
+                <b class="notpssl-title-count" id="notPsslExistCount">0</b>
               </div>
               <div class="notpssl-table-wrap">
                 <table class="notpssl-detail-table exist-table">
@@ -3005,14 +3068,11 @@
                   <tbody id="notPsslExistBody"></tbody>
                 </table>
               </div>
-              <div class="notpssl-detail-summary">
-                <span>ĐUQ hiện hữu chưa PSSL ≥ 60 ngày</span
-                ><b id="notPsslExistCount">0</b>
-              </div>
             </section>
             <section class="notpssl-detail-card">
               <div class="notpssl-detail-title new">
-                Cảnh báo ĐUQ mới nhiều ngày chưa phát sinh sản lượng
+                <span>Cảnh báo ĐUQ mới nhiều ngày chưa phát sinh sản lượng</span>
+                <b class="notpssl-title-count" id="notPsslNewCount">0</b>
               </div>
               <div class="notpssl-table-wrap">
                 <table class="notpssl-detail-table">
@@ -3029,10 +3089,6 @@
                   </thead>
                   <tbody id="notPsslNewBody"></tbody>
                 </table>
-              </div>
-              <div class="notpssl-detail-summary">
-                <span>Tổng ĐUQ mới chưa phát sinh sản lượng</span
-                ><b id="notPsslNewCount">0</b>
               </div>
             </section>
           </div>
