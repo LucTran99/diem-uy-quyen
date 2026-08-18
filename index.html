@@ -847,12 +847,12 @@
         font-variant-numeric: tabular-nums;
       }
       .notpssl-detail-table td.area-cell {
-        font-weight: 800;
+        font-weight: 700;
         white-space: nowrap;
         background: #fff !important;
       }
       .notpssl-detail-table td.name-cell {
-        font-weight: 800;
+        font-weight: 700;
         background: #fff !important;
       }
       .notpssl-detail-table td.manager-cell {
@@ -916,13 +916,13 @@
         padding: 9px 11px;
         background: #f7fafc;
         border-top: 1px solid var(--line);
-        font-size: 11px;
+        font-size: 16px;
         color: var(--muted);
-        font-weight: 800;
+        font-weight: 700;
       }
       .notpssl-detail-summary b {
         color: var(--p);
-        font-size: 13px;
+        font-size: 21px;
       }
       @media (max-width: 950px) {
         .notpssl-detail-grid {
@@ -963,8 +963,8 @@
         border-radius: 14px;
         padding: 10px 12px;
         margin-bottom: 8px;
-        font-size: 13px;
-        font-weight: 800;
+        font-size: 17px;
+        font-weight: 700;
         color: var(--p);
       }
       .area-table-wrap {
@@ -2192,15 +2192,15 @@
         color: #a75a00;
         padding: 5px 10px;
         border-radius: 999px;
-        font-size: 11px;
-        font-weight: 900;
+        font-size: 20px;
+        font-weight: 700;
       }
       .area-dual-title .pill-exist {
         background: #e4f1ff;
         color: #075faa;
         padding: 5px 10px;
         border-radius: 999px;
-        font-size: 11px;
+        font-size: 16px;
         font-weight: 900;
       }
       .area-table-wrap td.rank-tone {
@@ -2231,11 +2231,11 @@
 
       /* Chỉ thu gọn hai bảng khi đang ở tab Tổng quan. */
       #areaView.overview-compact {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        column-gap: 16px;
+        grid-template-columns: 1fr;
+        row-gap: 16px;
         align-items: start;
       }
-      #areaView.overview-compact > :not(.area-table-block) {
+      #areaView.overview-compact > * {
         grid-column: 1 / -1;
       }
       #areaView.overview-compact .area-table-wrap {
@@ -19682,20 +19682,39 @@
               Number.isFinite(x.days) &&
               x.days >= NOT_PSSL_WARNING_DAYS,
           )
-          .sort(
-            (a, b) =>
+          .sort((a, b) => {
+            const areaCompare = String(a.r["Đơn vị"] || "").localeCompare(
+              String(b.r["Đơn vị"] || ""),
+              "vi",
+            );
+            if (areaCompare !== 0) return areaCompare;
+            return (
               b.days - a.days ||
-              String(a.r["Tên ĐUQ"] || "").localeCompare(String(b.r["Tên ĐUQ"] || ""), "vi"),
-          );
+              String(a.r["Tên ĐUQ"] || "").localeCompare(
+                String(b.r["Tên ĐUQ"] || ""),
+                "vi",
+              )
+            );
+          });
 
         // ĐUQ mới: cứ chưa PSSL là hiển thị, không lọc 60 ngày hay bất kỳ ngưỡng ngày nào.
         const newly = allNoPssl
           .filter((x) => String(x.r["Trạng thái ĐUQ"] || "").trim() === "ĐUQ mới")
-          .sort(
-            (a, b) =>
-              (Number.isFinite(b.days) ? b.days : -1) - (Number.isFinite(a.days) ? a.days : -1) ||
-              String(a.r["Tên ĐUQ"] || "").localeCompare(String(b.r["Tên ĐUQ"] || ""), "vi"),
-          );
+          .sort((a, b) => {
+            const areaCompare = String(a.r["Đơn vị"] || "").localeCompare(
+              String(b.r["Đơn vị"] || ""),
+              "vi",
+            );
+            if (areaCompare !== 0) return areaCompare;
+            return (
+              (Number.isFinite(b.days) ? b.days : -1) -
+                (Number.isFinite(a.days) ? a.days : -1) ||
+              String(a.r["Tên ĐUQ"] || "").localeCompare(
+                String(b.r["Tên ĐUQ"] || ""),
+                "vi",
+              )
+            );
+          });
 
         const eloadValue = (r) =>
           r["Số điện thoại nhân viên hỗ trợ"] ||
@@ -19859,7 +19878,7 @@
             pillEl = $(pillId);
           if (!headEl || !bodyEl || !footEl) return;
 
-          headEl.innerHTML = `<tr><th>XH</th><th>Địa bàn</th>${columns.map((c) => `<th>${c[1]}</th>`).join("")}</tr>`;
+          headEl.innerHTML = `<tr><th>TT</th><th>Địa bàn</th>${columns.map((c) => `<th>${c[1]}</th>`).join("")}</tr>`;
 
           if (!list.length) {
             bodyEl.innerHTML = `<tr><td colspan="${columns.length + 2}" style="padding:24px;color:var(--muted)">Không có địa bàn phù hợp với bộ lọc đã chọn.</td></tr>`;
