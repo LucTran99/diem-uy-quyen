@@ -156,7 +156,7 @@
       }
       .menu {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 10px;
       }
       .menu-card {
@@ -2471,6 +2471,540 @@
       .notpssl-detail-table.exist-table th:nth-child(4) { width: 16% !important; }
       .notpssl-detail-table.exist-table th:nth-child(5) { width: 39% !important; }
       .notpssl-detail-table.exist-table th:nth-child(6) { width: 15% !important; }
+
+      /* ================================================================
+         ĐIỂM ỦY QUYỀN ĐẠT CHUẨN
+         Điều kiện theo địa bàn:
+         - Nhóm 5 SIM + 500K
+         - Nhóm 8 SIM + 800K
+         - Nhóm 10 SIM + 1 triệu
+         ================================================================ */
+      .standard-panel{
+        display:none;
+        margin-top:10px;
+      }
+      .standard-note{
+        background:#eef8ff;
+        border:1px solid #b9d9ef;
+        border-radius:14px;
+        padding:11px 13px;
+        margin-bottom:12px;
+        color:#17496e;
+        font-size:12px;
+        line-height:1.5;
+      }
+      .standard-grid{
+        display:grid;
+        grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);
+        gap:14px;
+        align-items:start;
+      }
+      .standard-card{
+        background:#fff;
+        border:1px solid var(--line);
+        border-radius:16px;
+        overflow:hidden;
+        box-shadow:var(--shadow);
+      }
+      .standard-card-title{
+        padding:11px 13px;
+        background:linear-gradient(135deg,#005baa,#0086d1);
+        color:#fff;
+        font-size:15px;
+        font-weight:900;
+        text-transform:uppercase;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:8px;
+      }
+      .standard-count{
+        min-width:40px;
+        padding:4px 9px;
+        border-radius:999px;
+        background:rgba(255,255,255,.9);
+        color:#005baa;
+        text-align:center;
+        font-size:16px;
+      }
+      .standard-table-wrap{
+        overflow:auto;
+        max-height:720px;
+      }
+      .standard-table{
+        width:100%;
+        min-width:0!important;
+        border-collapse:separate;
+        border-spacing:0;
+        table-layout:auto;
+      }
+      .standard-table th{
+        position:sticky;
+        top:0;
+        z-index:5;
+        background:#eef5fb!important;
+        color:#073a68!important;
+        padding:10px 9px!important;
+        border-bottom:1px solid #d9e5ee;
+        font-size:12px!important;
+        font-weight:800;
+        text-align:left;
+        white-space:nowrap;
+      }
+      .standard-table td{
+        padding:10px 9px!important;
+        border-bottom:1px solid #edf1f5;
+        font-size:12px!important;
+        color:#16283b;
+        background:#fff;
+        vertical-align:middle;
+      }
+      .standard-table tbody tr:hover td{
+        background:#f7fbfe!important;
+      }
+      .standard-rank{
+        width:30px;
+        height:30px;
+        border-radius:50%;
+        display:inline-grid;
+        place-items:center;
+        background:#e7f3fb;
+        color:#005baa;
+        font-weight:900;
+      }
+      .standard-area{
+        color:#005baa;
+        font-weight:700;
+        font-family:emoji;
+      }
+      .standard-pct{
+        color:#005baa;
+        font-weight:700;
+        font-variant-numeric:tabular-nums;
+        font-family:emoji;
+      }
+      .standard-score{
+        font-weight:700;
+        color:#005baa;
+        font-family:emoji;
+        font-variant-numeric:tabular-nums;
+      }
+      .standard-name{
+        color:#005baa;
+        font-weight:900;
+      }
+      .standard-badge{
+        display:inline-block;
+        padding:6px 9px;
+        border-radius:999px;
+        background:#e6f8ed;
+        color:#087740;
+        font-weight:900;
+        white-space:nowrap;
+      }
+      .standard-top{
+        color:#005baa;
+        font-weight:700;
+        font-family:emoji;
+        white-space:nowrap;
+      }
+      .standard-empty{
+        text-align:center!important;
+        padding:22px!important;
+        color:var(--muted)!important;
+      }
+      .standard-threshold{
+        display:inline-block;
+        margin-left:5px;
+        padding:2px 7px;
+        border-radius:999px;
+        background:#fff6df;
+        color:#8b6200;
+        font-size:10px;
+        font-weight:900;
+      }
+      @media(max-width:950px){
+        .standard-grid{grid-template-columns:1fr}
+      }
+
+
+      /* ĐUQ đạt chuẩn: mỗi bảng nằm trên một hàng riêng */
+      #standardNewPanel .standard-grid,
+      #standardExistingPanel .standard-grid{
+        grid-template-columns: 1fr !important;
+      }
+
+      #standardNewPanel .standard-card,
+      #standardExistingPanel .standard-card{
+        width: 100%;
+      }
+
+
+      .standard-badge.fail{
+        background:#ffe8e8;
+        color:#a62f2f;
+      }
+      .standard-eload{
+        font-weight:800;
+        white-space:nowrap;
+        color:#17324d;
+      }
+      .standard-staff{
+        font-weight:800;
+        color:#17324d;
+      }
+      #standardNewPanel .standard-table-wrap,
+      #standardExistingPanel .standard-table-wrap{
+        width:100%;
+      }
+      #standardNewPanel .standard-card:nth-child(2) .standard-table,
+      #standardExistingPanel .standard-card:nth-child(2) .standard-table{
+        min-width:980px!important;
+      }
+
+
+      /* ================================================================
+         4 BẢNG ĐUQ ĐẠT CHUẨN - GIAO DIỆN GIỐNG TAB 1. TỔNG QUAN
+         Không áp dụng tông màu / heatmap cho thứ hạng.
+         ================================================================ */
+      #standardNewPanel .standard-card,
+      #standardExistingPanel .standard-card{
+        border:1px solid var(--line)!important;
+        border-radius:1px!important;
+        box-shadow:none!important;
+        background:#fff!important;
+        overflow:visible!important;
+      }
+
+      #standardNewPanel .standard-card-title,
+      #standardExistingPanel .standard-card-title{
+        background:#fff!important;
+        color:var(--p)!important;
+        border:1px solid var(--line)!important;
+        border-bottom:0!important;
+        border-radius:0!important;
+        padding:10px 10px!important;
+        font-size:16px!important;
+        font-weight:900!important;
+        text-transform:none!important;
+        min-height:auto!important;
+      }
+
+      #standardNewPanel .standard-count,
+      #standardExistingPanel .standard-count{
+        background:#eaf4fb!important;
+        color:#005baa!important;
+        border-radius:999px!important;
+        font-size:16px!important;
+        font-weight:900!important;
+        padding:4px 10px!important;
+      }
+
+      #standardNewPanel .standard-table-wrap,
+      #standardExistingPanel .standard-table-wrap{
+        overflow:visible!important;
+        max-height:none!important;
+        border:1px solid var(--line)!important;
+        border-radius:1px!important;
+        background:#fff!important;
+      }
+
+      #standardNewPanel .standard-table,
+      #standardExistingPanel .standard-table{
+        width:100%!important;
+        min-width:0!important;
+        max-width:100%!important;
+        table-layout:fixed!important;
+        border-collapse:separate!important;
+        border-spacing:0!important;
+        font-family:emoji,Arial,sans-serif!important;
+      }
+
+      #standardNewPanel .standard-table thead th,
+      #standardExistingPanel .standard-table thead th{
+        position:sticky!important;
+        top:0!important;
+        z-index:10!important;
+        background:#005baa!important;
+        color:#fff!important;
+        border:0.5px solid #dbe5ee!important;
+        padding:8px 6px!important;
+        font-size:13px!important;
+        line-height:1.05!important;
+        font-weight:900!important;
+        text-align:center!important;
+        white-space:normal!important;
+        overflow-wrap:anywhere!important;
+      }
+
+      #standardNewPanel .standard-table tbody td,
+      #standardExistingPanel .standard-table tbody td{
+        background:#fff!important;
+        color:#182435!important;
+        border:0.5px solid #e2eaf1!important;
+        padding:9px 6px!important;
+        font-size:18px!important;
+        line-height:1.2!important;
+        font-weight:700!important;
+        text-align:center !important;
+        vertical-align:middle!important;
+      }
+
+      #standardNewPanel .standard-table tbody tr:hover td,
+      #standardExistingPanel .standard-table tbody tr:hover td{
+        background:#f7fbfe!important;
+      }
+
+      /* Tổng hợp: căn giống bảng Tổng quan */
+      #standardNewPanel .standard-card:first-child .standard-table tbody td,
+      #standardExistingPanel .standard-card:first-child .standard-table tbody td{
+        text-align:center!important;
+        font-size:19px!important;
+        font-weight:900!important;
+        font-variant-numeric:tabular-nums!important;
+      }
+
+      #standardNewPanel .standard-card:first-child .standard-table tbody td:nth-child(2),
+      #standardExistingPanel .standard-card:first-child .standard-table tbody td:nth-child(2){
+        text-align:left!important;
+        font-size:15px!important;
+        font-weight:700!important;
+        font-family:emoji!important;
+      }
+
+      /* Hạng: số thường, không huy chương / không màu theo thứ hạng */
+      #standardNewPanel .standard-rank,
+      #standardExistingPanel .standard-rank{
+        width:auto!important;
+        height:auto!important;
+        display:inline!important;
+        border-radius:0!important;
+        background:transparent!important;
+        color:#182435!important;
+        font-size:18px!important;
+        font-weight:700!important;
+        font-family:emoji;
+      }
+
+      #standardNewPanel .standard-area,
+      #standardExistingPanel .standard-area,
+      #standardNewPanel .standard-pct,
+      #standardExistingPanel .standard-pct,
+      #standardNewPanel .standard-score,
+      #standardExistingPanel .standard-score{
+        color:#182435!important;
+        background:transparent!important;
+        font-weight:900!important;
+      }
+
+      /* Chi tiết: giữ dữ liệu dễ đọc như bảng Tổng quan, không heatmap */
+      #standardNewPanel .standard-card:nth-child(2) .standard-table,
+      #standardExistingPanel .standard-card:nth-child(2) .standard-table{
+        min-width:0!important;
+      }
+
+      #standardNewPanel .standard-card:nth-child(2) .standard-table tbody td,
+      #standardExistingPanel .standard-card:nth-child(2) .standard-table tbody td{
+        font-size:12px!important;
+        font-weight:700!important;
+        font-family:emoji!important;
+      }
+
+      #standardNewPanel .standard-card:nth-child(2) .standard-table tbody td:nth-child(1),
+      #standardExistingPanel .standard-card:nth-child(2) .standard-table tbody td:nth-child(1),
+      #standardNewPanel .standard-card:nth-child(2) .standard-table tbody td:nth-child(6),
+      #standardExistingPanel .standard-card:nth-child(2) .standard-table tbody td:nth-child(6){
+        text-align:center!important;
+        font-weight:900!important;
+      }
+
+      #standardNewPanel .standard-name,
+      #standardExistingPanel .standard-name,
+      #standardNewPanel .standard-eload,
+      #standardExistingPanel .standard-eload,
+      #standardNewPanel .standard-staff,
+      #standardExistingPanel .standard-staff,
+      #standardNewPanel .standard-top,
+      #standardExistingPanel .standard-top{
+        color:#182435!important;
+        background:transparent!important;
+        font-weight:700!important;
+        font-family:emoji!important;
+      }
+
+      #standardNewPanel .standard-top,
+      #standardExistingPanel .standard-top{
+        white-space:nowrap!important;
+      }
+
+      /* Trạng thái vẫn phân biệt đạt/chưa đạt, nhưng không liên quan xếp hạng */
+      #standardNewPanel .standard-badge,
+      #standardExistingPanel .standard-badge{
+        border-radius:999px!important;
+        padding:5px 9px!important;
+        font-size:13px!important;
+      }
+
+      /* Chiều rộng các cột Tổng hợp */
+      #standardNewPanel .standard-card:first-child th:nth-child(1),
+      #standardExistingPanel .standard-card:first-child th:nth-child(1){width:8%!important;}
+      #standardNewPanel .standard-card:first-child th:nth-child(2),
+      #standardExistingPanel .standard-card:first-child th:nth-child(2){width:32%!important;}
+      #standardNewPanel .standard-card:first-child th:nth-child(3),
+      #standardExistingPanel .standard-card:first-child th:nth-child(3){width:20%!important;}
+      #standardNewPanel .standard-card:first-child th:nth-child(4),
+      #standardExistingPanel .standard-card:first-child th:nth-child(4){width:20%!important;}
+      #standardNewPanel .standard-card:first-child th:nth-child(5),
+      #standardExistingPanel .standard-card:first-child th:nth-child(5){width:20%!important;}
+
+      /* Chiều rộng các cột Chi tiết */
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(1),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(1){width:7%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(2),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(2){width:25%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(3),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(3){width:8%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(4),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(4){width:13%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(5),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(5){width:17%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(6),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(6){width:7%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(7),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(7){width:13%!important;}
+
+      @media(max-width:700px){
+        #standardNewPanel .standard-table-wrap,
+        #standardExistingPanel .standard-table-wrap{
+          overflow-x:auto!important;
+        }
+        #standardNewPanel .standard-card:nth-child(2) .standard-table,
+        #standardExistingPanel .standard-card:nth-child(2) .standard-table{
+          min-width:900px!important;
+        }
+        #standardNewPanel .standard-table tbody td,
+        #standardExistingPanel .standard-table tbody td{
+          font-size:12px!important;
+        }
+      }
+
+
+      /* Bảng Tổng hợp ĐUQ đạt chuẩn theo mẫu Excel người dùng */
+      #standardNewPanel .standard-card:first-child .standard-table,
+      #standardExistingPanel .standard-card:first-child .standard-table{
+        table-layout:fixed!important;
+        min-width:1080px!important;
+      }
+      #standardNewPanel .standard-card:first-child .standard-table thead th,
+      #standardExistingPanel .standard-card:first-child .standard-table thead th{
+        background:#fff!important;color:#111!important;border:1px solid #222!important;
+        font-family:"Times New Roman",serif!important;font-size:14px!important;font-weight:700!important;
+        text-align:center!important;white-space:normal!important;padding:8px 5px!important;
+      }
+      #standardNewPanel .standard-card:first-child .standard-table tbody td,
+      #standardExistingPanel .standard-card:first-child .standard-table tbody td{
+        background:#fff!important;color:#111!important;border:1px solid #222!important;
+        font-family:"Times New Roman",serif!important;font-size:14px!important;font-weight:700!important;
+        text-align:center!important;padding:5px!important;line-height:0.5!important;
+      }
+      #standardNewPanel .standard-card:first-child .standard-table tbody td:nth-child(2),
+      #standardExistingPanel .standard-card:first-child .standard-table tbody td:nth-child(2){text-align:left!important;}
+      #standardNewPanel .standard-card:first-child .standard-table tbody td:nth-child(3),
+      #standardExistingPanel .standard-card:first-child .standard-table tbody td:nth-child(3){color:#d22!important;font-weight:700!important;}
+      #standardNewPanel .standard-total-row td,
+      #standardExistingPanel .standard-total-row td{font-weight:700!important;background:#fff!important;}
+      #standardNewPanel .standard-card:first-child th:nth-child(1),
+      #standardExistingPanel .standard-card:first-child th:nth-child(1){width:5%!important;}
+      #standardNewPanel .standard-card:first-child th:nth-child(2),
+      #standardExistingPanel .standard-card:first-child th:nth-child(2){width:17%!important;}
+      #standardNewPanel .standard-card:first-child th:nth-child(3),
+      #standardExistingPanel .standard-card:first-child th:nth-child(3){width:17%!important;}
+      #standardNewPanel .standard-card:first-child th:nth-child(4),
+      #standardExistingPanel .standard-card:first-child th:nth-child(4){width:11%!important;}
+      #standardNewPanel .standard-card:first-child th:nth-child(5),
+      #standardExistingPanel .standard-card:first-child th:nth-child(5){width:12%!important;}
+      #standardNewPanel .standard-card:first-child th:nth-child(6),
+      #standardExistingPanel .standard-card:first-child th:nth-child(6){width:7%!important;}
+      #standardNewPanel .standard-card:first-child th:nth-child(7),
+      #standardExistingPanel .standard-card:first-child th:nth-child(7){width:13%!important;}
+      #standardNewPanel .standard-card:first-child th:nth-child(8),
+      #standardExistingPanel .standard-card:first-child th:nth-child(8){width:8%!important;}
+      #standardNewPanel .standard-card:first-child th:nth-child(9),
+      #standardExistingPanel .standard-card:first-child th:nth-child(9){width:10%!important;}
+
+      /* Bảng chi tiết: Nhóm định biên + Doanh thu */
+      #standardNewPanel .standard-card:nth-child(2) .standard-table,
+      #standardExistingPanel .standard-card:nth-child(2) .standard-table{
+        min-width:1120px!important;table-layout:fixed!important;
+      }
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(1),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(1){width:13%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(2),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(2){width:22%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(3),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(3){width:12%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(4),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(4){width:17%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(5),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(5){width:12%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(6),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(6){width:8%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(7),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(7){width:9%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(8),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(8){width:7%!important;}
+      .standard-group-detail{font-weight:900!important;color:#b13400!important;white-space:nowrap!important;}
+      .standard-group-label{font-weight:700!important;}
+
+
+      /* Chi tiết ĐUQ đạt chuẩn: TT đầu tiên, Đơn vị thứ 2 */
+      #standardNewPanel .standard-card:nth-child(2) .standard-table,
+      #standardExistingPanel .standard-card:nth-child(2) .standard-table{
+        min-width:1220px!important;
+      }
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(1),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(1){width:4%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(2),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(2){width:8%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(3),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(3){width:8%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(4),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(4){width:20%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(5),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(5){width:7%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(6),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(6){width:9%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(7),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(7){width:6%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(8),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(8){width:7%!important;}
+      #standardNewPanel .standard-card:nth-child(2) th:nth-child(9),
+      #standardExistingPanel .standard-card:nth-child(2) th:nth-child(9){width:8%!important;}
+
+      #standardNewPanel .standard-stt,
+      #standardExistingPanel .standard-stt{
+        text-align:center!important;
+        font-weight:900!important;
+      }
+
+
+      /* Căn phải giá trị tiền ở cột Doanh thu của 2 bảng Chi tiết */
+      #standardNewPanel .standard-card:nth-child(2) .standard-table tbody td:nth-child(8),
+      #standardExistingPanel .standard-card:nth-child(2) .standard-table tbody td:nth-child(8){
+        text-align:right!important;
+        padding-right:12px!important;
+        font-variant-numeric:tabular-nums!important;
+      }
+
+
+/* Căn phải cột Doanh thu ở 2 bảng Tổng hợp ĐUQ đạt chuẩn */
+#standardNewPanel .standard-card:nth-child(1) .standard-table tbody td:nth-child(9),
+#standardExistingPanel .standard-card:nth-child(1) .standard-table tbody td:nth-child(9){
+  text-align:right!important;
+  padding-right:12px!important;
+  font-variant-numeric:tabular-nums!important;
+}
+
 </style>
   </head>
   <body>
@@ -2939,6 +3473,20 @@
           >
             3. Chi tiết ĐUQ Chưa Phát Sinh Sản Lượng
           </button>
+          <button
+            type="button"
+            class="area-menu-tab"
+            data-area-tab="standard-new"
+          >
+            4. Điểm Uỷ Quyền Mới Đạt Chuẩn
+          </button>
+          <button
+            type="button"
+            class="area-menu-tab"
+            data-area-tab="standard-existing"
+          >
+            5. Điểm Uỷ Quyền Hiện Hữu Đạt Chuẩn
+          </button>
         </div>
         <div class="area-detail-placeholder" id="areaNotPsslDetailPanel">
           <div class="notpssl-alert-note">
@@ -2991,6 +3539,126 @@
             </section>
           </div>
         </div>
+
+        <div class="standard-panel" id="standardNewPanel">
+          <div class="standard-note">
+            <b>Điều kiện ĐUQ mới đạt chuẩn:</b>
+            xét theo địa bàn của từng điểm. ĐUQ phải đồng thời đạt số thuê bao PTM và doanh thu:
+            <b>5 SIM + 500.000đ</b>, <b>8 SIM + 800.000đ</b> hoặc <b>10 SIM + 1.000.000đ</b>.
+            Bảng Tổng hợp tính tỷ lệ trên toàn bộ ĐUQ mới của từng địa bàn.
+            <b>Cột Điểm = tổng số Điểm ủy quyền mới của từng đơn vị.</b>
+          </div>
+          <div class="standard-grid">
+            <section class="standard-card">
+              <div class="standard-card-title">
+                <span>Tổng hợp ĐUQ mới đạt chuẩn</span>
+                <b class="standard-count" id="standardNewAreaCount">0</b>
+              </div>
+              <div class="standard-table-wrap">
+                <table class="standard-table">
+                  <thead>
+                    <tr>
+                      <th>TT</th>
+                      <th>Đơn vị</th>
+                      <th>Nhóm</th>
+                      <th>SL điểm UQ</th>
+                      <th>SL điểm UQ đạt chuẩn</th>
+                      <th>Tỷ lệ</th>
+                      <th>SL điểm UQ không đạt chuẩn</th>
+                      <th>SL TB</th>
+                      <th>Doanh thu</th>
+                    </tr>
+                  </thead>
+                  <tbody id="standardNewSummaryBody"></tbody>
+                </table>
+              </div>
+            </section>
+            <section class="standard-card">
+              <div class="standard-card-title">
+                <span>Chi tiết ĐUQ mới (Đạt chuẩn & Chưa đạt chuẩn)</span>
+                <b class="standard-count" id="standardNewPointCount">0</b>
+              </div>
+              <div class="standard-table-wrap">
+                <table class="standard-table">
+                  <thead>
+                    <tr>
+                      <th>TT</th>
+                      <th>Đơn vị</th>
+                      <th>Nhóm</th>
+                      <th>ĐUQ</th>
+                      <th>Số Eload</th>
+                      <th>Tên Nhân viên</th>
+                      <th>Thuê bao</th>
+                      <th>Doanh thu</th>
+                      <th>Trạng thái</th>
+                    </tr>
+                  </thead>
+                  <tbody id="standardNewDetailBody"></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div class="standard-panel" id="standardExistingPanel">
+          <div class="standard-note">
+            <b>Điều kiện ĐUQ hiện hữu đạt chuẩn:</b>
+            áp dụng cùng ngưỡng theo từng địa bàn:
+            <b>5 SIM + 500.000đ</b>, <b>8 SIM + 800.000đ</b> hoặc <b>10 SIM + 1.000.000đ</b>.
+            ĐUQ hiện hữu gồm các điểm không thuộc trạng thái “ĐUQ mới”. <b>Cột Điểm = tổng số Điểm ủy quyền hiện hữu của từng đơn vị.</b>
+          </div>
+          <div class="standard-grid">
+            <section class="standard-card">
+              <div class="standard-card-title">
+                <span>Tổng hợp ĐUQ hiện hữu đạt chuẩn</span>
+                <b class="standard-count" id="standardExistingAreaCount">0</b>
+              </div>
+              <div class="standard-table-wrap">
+                <table class="standard-table">
+                  <thead>
+                    <tr>
+                      <th>TT</th>
+                      <th>Đơn vị</th>
+                      <th>Nhóm</th>
+                      <th>SL điểm UQ</th>
+                      <th>SL điểm UQ đạt chuẩn</th>
+                      <th>Tỷ lệ</th>
+                      <th>SL điểm UQ không đạt chuẩn</th>
+                      <th>SL TB</th>
+                      <th>Doanh thu</th>
+                    </tr>
+                  </thead>
+                  <tbody id="standardExistingSummaryBody"></tbody>
+                </table>
+              </div>
+            </section>
+            <section class="standard-card">
+              <div class="standard-card-title">
+                <span>Chi tiết ĐUQ hiện hữu (Đạt chuẩn & Chưa đạt chuẩn)</span>
+                <b class="standard-count" id="standardExistingPointCount">0</b>
+              </div>
+              <div class="standard-table-wrap">
+                <table class="standard-table">
+                  <thead>
+                    <tr>
+                      <th>TT</th>
+                      <th>Đơn vị</th>
+                      <th>Nhóm</th>
+                      <th>ĐUQ</th>
+                      <th>Số Eload</th>
+                      <th>Tên Nhân viên</th>
+                      <th>Thuê bao</th>
+                      <th>Doanh thu</th>
+                      <th>Trạng thái</th>
+                    </tr>
+                  </thead>
+                  <tbody id="standardExistingDetailBody"></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </div>
+
         <div class="quick-filter area-filter-compact">
           <div class="filter-field">
             <label for="areaIndicator">Bộ lọc chỉ tiêu</label>
@@ -20474,6 +21142,8 @@
           ["rev3m", "SL ĐUQ doanh thu từ 3 triệu"],
         ],
         "notpssl-detail": [["all", "Chi tiết ĐUQ chưa phát sinh sản lượng"]],
+        "standard-new": [["all", "Điểm Ủy quyền mới đạt chuẩn"]],
+        "standard-existing": [["all", "Điểm Ủy quyền hiện hữu đạt chuẩn"]],
       };
 
       function updateAreaIndicatorOptions() {
@@ -20739,19 +21409,181 @@
           );
       }
 
+
+      const STANDARD_RULES = {
+        "Tân Trụ": {sim:5,revenue:500000},
+        "Thạnh Hóa": {sim:5,revenue:500000},
+        "Vĩnh Hưng": {sim:5,revenue:500000},
+        "Tầm Vu": {sim:5,revenue:500000},
+        "Kiến Tường": {sim:5,revenue:500000},
+        "Tân Châu": {sim:5,revenue:500000},
+        "Tân Biên": {sim:5,revenue:500000},
+        "Thủ Thừa": {sim:5,revenue:500000},
+        "Châu Thành": {sim:5,revenue:500000},
+        "Tân Thạnh": {sim:5,revenue:500000},
+
+        "Đức Huệ": {sim:8,revenue:800000},
+        "Trảng Bàng": {sim:8,revenue:800000},
+        "Gò Dầu": {sim:8,revenue:800000},
+        "Bến Cầu": {sim:8,revenue:800000},
+        "Dương Minh Châu": {sim:8,revenue:800000},
+        "Hòa Thành": {sim:8,revenue:800000},
+
+        "Tân Ninh": {sim:10,revenue:1000000},
+        "Long An": {sim:10,revenue:1000000},
+        "Bến Lức": {sim:10,revenue:1000000},
+        "Cần Đước": {sim:10,revenue:1000000},
+        "Cần Giuộc": {sim:10,revenue:1000000},
+        "Đức Hòa": {sim:10,revenue:1000000},
+      };
+
+      function standardRuleFor(area){
+        return STANDARD_RULES[String(area||"").trim()] || null;
+      }
+
+      function isStandardPoint(r){
+        const rule=standardRuleFor(r["Đơn vị"]);
+        if(!rule) return false;
+        return Number(r["Số lượng Thuê bao PTM"]||0)>=rule.sim &&
+               Number(r["Doanh thu bán hàng"]||0)>=rule.revenue;
+      }
+
+      function standardStatusMatch(r,type){
+        const isNew=String(r["Trạng thái ĐUQ"]||"").trim()==="ĐUQ mới";
+        return type==="new" ? isNew : !isNew;
+      }
+
+      function renderStandardPanel(type){
+        const isNew=type==="new";
+        const prefix=isNew ? "standardNew" : "standardExisting";
+        const summaryBody=$(prefix+"SummaryBody");
+        const detailBody=$(prefix+"DetailBody");
+        if(!summaryBody || !detailBody) return;
+
+        const points=DATA.map((r,index)=>({r,index}))
+          .filter(x=>standardStatusMatch(x.r,type));
+
+        const AREA_ORDER=[
+          "Tân Trụ","Thạnh Hóa","Vĩnh Hưng","Tầm Vu","Kiến Tường",
+          "Tân Châu","Tân Biên","Thủ Thừa","Châu Thành","Tân Thạnh",
+          "Đức Huệ","Trảng Bàng","Gò Dầu","Bến Cầu","Dương Minh Châu","Hòa Thành",
+          "Tân Ninh","Long An","Bến Lức","Cần Đước","Cần Giuộc","Đức Hòa"
+        ];
+
+        const byArea=new Map();
+        AREA_ORDER.forEach(a=>byArea.set(a,[]));
+        points.forEach(x=>{
+          const area=String(x.r["Đơn vị"]||"").trim();
+          if(!byArea.has(area)) byArea.set(area,[]);
+          byArea.get(area).push(x);
+        });
+
+        const summary=AREA_ORDER.map(area=>{
+          const list=byArea.get(area)||[];
+          const total=list.length;
+          const standard=list.filter(x=>isStandardPoint(x.r)).length;
+          const notStandard=total-standard;
+          const totalSubs=list.reduce((sum,x)=>sum+Number(x.r["Số lượng Thuê bao PTM"]||0),0);
+          const totalRevenue=list.reduce((sum,x)=>sum+Number(x.r["Doanh thu bán hàng"]||0),0);
+          const standardRate=total?standard/total*100:0;
+          const rule=standardRuleFor(area);
+          const groupLabel=rule ? `${rule.sim} Sim - ${new Intl.NumberFormat("vi-VN").format(rule.revenue)}đ` : "—";
+          return {area,total,standard,notStandard,totalSubs,totalRevenue,standardRate,groupLabel};
+        });
+
+        const fmtN=v=>new Intl.NumberFormat("vi-VN").format(Number(v||0));
+        const totalAll=summary.reduce((s,a)=>s+a.total,0);
+        const standardAll=summary.reduce((s,a)=>s+a.standard,0);
+        const notStandardAll=summary.reduce((s,a)=>s+a.notStandard,0);
+        const subsAll=summary.reduce((s,a)=>s+a.totalSubs,0);
+        const revenueAll=summary.reduce((s,a)=>s+a.totalRevenue,0);
+        const rateAll=totalAll?standardAll/totalAll*100:0;
+
+        summaryBody.innerHTML=summary.map((a,i)=>`<tr>
+          <td>${i+1}</td>
+          <td><span class="standard-area">${esc(a.area)}</span></td>
+          <td><span class="standard-group-label">${esc(a.groupLabel)}</span></td>
+          <td>${fmtN(a.total)}</td>
+          <td>${fmtN(a.standard)}</td>
+          <td>${a.standardRate.toFixed(1)}%</td>
+          <td>${fmtN(a.notStandard)}</td>
+          <td>${fmtN(a.totalSubs)}</td>
+          <td>${fmtN(a.totalRevenue)}đ</td>
+        </tr>`).join("") + `<tr class="standard-total-row">
+          <td colspan="3"><b>Tổng</b></td>
+          <td><b>${fmtN(totalAll)}</b></td>
+          <td><b>${fmtN(standardAll)}</b></td>
+          <td><b>${rateAll.toFixed(1)}%</b></td>
+          <td><b>${fmtN(notStandardAll)}</b></td>
+          <td><b>${fmtN(subsAll)}</b></td>
+          <td><b>${fmtN(revenueAll)}đ</b></td>
+        </tr>`;
+
+        const detailRows=points.sort((a,b)=>{
+          const qa=isStandardPoint(a.r)?1:0;
+          const qb=isStandardPoint(b.r)?1:0;
+          if(qa!==qb) return qb-qa; // Đạt chuẩn hiển thị hết trước
+
+          const ia=AREA_ORDER.indexOf(String(a.r["Đơn vị"]||"").trim());
+          const ib=AREA_ORDER.indexOf(String(b.r["Đơn vị"]||"").trim());
+          if(ia!==ib) return ia-ib;
+
+          return Number(b.r["Số lượng Thuê bao PTM"]||0)-Number(a.r["Số lượng Thuê bao PTM"]||0) ||
+            Number(b.r["Doanh thu bán hàng"]||0)-Number(a.r["Doanh thu bán hàng"]||0) ||
+            String(a.r["Tên ĐUQ"]||"").localeCompare(String(b.r["Tên ĐUQ"]||""),"vi");
+        });
+
+        detailBody.innerHTML=detailRows.length
+          ? detailRows.map((x,detailIndex)=>{
+              const rule=standardRuleFor(x.r["Đơn vị"]);
+              const ok=isStandardPoint(x.r);
+              const groupLabel=rule ? `${rule.sim} SIM · ${fmtN(rule.revenue)}đ` : "—";
+              return `<tr data-standard-detail-index="${x.index}">
+                <td class="standard-stt">${detailIndex+1}</td>
+                <td>${esc(x.r["Đơn vị"]||"—")}</td>
+                <td><span class="standard-group-detail">${esc(groupLabel)}</span></td>
+                <td><span class="standard-name">${esc(x.r["Tên ĐUQ"]||"—")}</span></td>
+                <td><span class="standard-eload">${esc(x.r["Số điện thoại nhân viên hỗ trợ"]||"—")}</span></td>
+                <td><span class="standard-staff">${esc(x.r["Nhân viên hỗ trợ"]||"—")}</span></td>
+                <td>${fmtN(x.r["Số lượng Thuê bao PTM"]||0)}</td>
+                <td>${fmtN(x.r["Doanh thu bán hàng"]||0)}đ</td>
+                <td><span class="standard-badge${ok?"":" fail"}">${ok?"Đạt chuẩn":"Chưa đạt chuẩn"}</span></td>
+              </tr>`;
+            }).join("")
+          : `<tr><td colspan="9" class="standard-empty">Không có dữ liệu Điểm ủy quyền ${isNew?"mới":"hiện hữu"}.</td></tr>`;
+
+        if($(prefix+"AreaCount")) $(prefix+"AreaCount").textContent=22;
+        if($(prefix+"PointCount")) $(prefix+"PointCount").textContent=detailRows.length;
+
+        document.querySelectorAll("[data-standard-detail-index]").forEach(row=>{
+          row.onclick=()=>openDetail(DATA[Number(row.dataset.standardDetailIndex)],false);
+        });
+      }
+
       function renderAreas() {
         const areaView = $("areaView");
         const detailPanel = $("areaNotPsslDetailPanel");
+        const newStandardPanel = $("standardNewPanel");
+        const existingStandardPanel = $("standardExistingPanel");
         const detailMode = currentAreaTab === "notpssl-detail";
+        const standardNewMode = currentAreaTab === "standard-new";
+        const standardExistingMode = currentAreaTab === "standard-existing";
+        const specialMode = detailMode || standardNewMode || standardExistingMode;
+
         if (detailPanel)
           detailPanel.style.display = detailMode ? "block" : "none";
+        if (newStandardPanel)
+          newStandardPanel.style.display = standardNewMode ? "block" : "none";
+        if (existingStandardPanel)
+          existingStandardPanel.style.display = standardExistingMode ? "block" : "none";
+
         [
           document.querySelector("#areaView .quick-filter"),
           $("areaStatus"),
           $("areaBlockNew"),
           $("areaBlockExist"),
         ].forEach((el) => {
-          if (el) el.style.display = detailMode ? "none" : "";
+          if (el) el.style.display = specialMode ? "none" : "";
         });
         if (areaView) {
           const compact = currentAreaTab === "overview";
@@ -20760,6 +21592,14 @@
         }
         if (detailMode) {
           renderNotPsslDetail();
+          return;
+        }
+        if (standardNewMode) {
+          renderStandardPanel("new");
+          return;
+        }
+        if (standardExistingMode) {
+          renderStandardPanel("existing");
           return;
         }
         const selectedArea = $("areaMetric") ? $("areaMetric").value : "all";
