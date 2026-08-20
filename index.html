@@ -3045,6 +3045,29 @@
         white-space: nowrap;
       }
 
+
+      .excel-export-btn{
+        border:1px solid #15803d;
+        background:#16a34a;
+        color:#fff;
+        border-radius:9px;
+        padding:7px 12px;
+        font-weight:700;
+        cursor:pointer;
+        white-space:nowrap;
+        margin-left:auto;
+      }
+      .excel-export-btn:hover{filter:brightness(.96)}
+      .excel-export-btn:active{transform:translateY(1px)}
+      .standard-card-title,.notpssl-detail-title{gap:10px}
+
+
+/* Chỉ căn giữa hàng Tổng của 2 bảng Tổng hợp ĐUQ đạt chuẩn */
+#standardNewPanel .standard-card:first-child .standard-total-row td,
+#standardExistingPanel .standard-card:first-child .standard-total-row td{
+  /* text-align:center!important; */
+}
+
 </style>
   </head>
   <body>
@@ -3467,7 +3490,7 @@
             <section class="notpssl-detail-card">
               <div class="notpssl-detail-title exist">
                 <span>Cảnh báo ĐUQ hiện hữu chưa phát sinh sản lượng nhiều ngày (Trong vòng 60 ngày chưa phát sinh sản lượng)</span>
-                <b class="notpssl-title-count" id="notPsslExistCount">0</b>
+                <b class="notpssl-title-count" id="notPsslExistCount">0</b><button type="button" class="excel-export-btn" data-export-table="notpssl-exist">⬇ Xuất Excel</button>
               </div>
               <div class="notpssl-table-wrap">
                 <table class="notpssl-detail-table exist-table">
@@ -3489,7 +3512,7 @@
             <section class="notpssl-detail-card">
               <div class="notpssl-detail-title new">
                 <span>Cảnh báo ĐUQ mới nhiều ngày chưa phát sinh sản lượng</span>
-                <b class="notpssl-title-count" id="notPsslNewCount">0</b>
+                <b class="notpssl-title-count" id="notPsslNewCount">0</b><button type="button" class="excel-export-btn" data-export-table="notpssl-new">⬇ Xuất Excel</button>
               </div>
               <div class="notpssl-table-wrap">
                 <table class="notpssl-detail-table">
@@ -3523,7 +3546,7 @@
             <section class="standard-card">
               <div class="standard-card-title">
                 <span>Tổng hợp ĐUQ mới đạt chuẩn</span>
-                <b class="standard-count" id="standardNewAreaCount">0</b>
+                <b class="standard-count" id="standardNewAreaCount">0</b><button type="button" class="excel-export-btn" data-export-table="standard-new-summary">⬇ Xuất Excel</button>
               </div>
               <div class="standard-table-wrap">
                 <table class="standard-table">
@@ -3547,7 +3570,7 @@
             <section class="standard-card">
               <div class="standard-card-title">
                 <span>Chi tiết ĐUQ mới (Đạt chuẩn & Chưa đạt chuẩn)</span>
-                <b class="standard-count" id="standardNewPointCount">0</b>
+                <b class="standard-count" id="standardNewPointCount">0</b><button type="button" class="excel-export-btn" data-export-table="standard-new-detail">⬇ Xuất Excel</button>
               </div>
               <div class="standard-table-wrap">
                 <table class="standard-table">
@@ -3582,7 +3605,7 @@
             <section class="standard-card">
               <div class="standard-card-title">
                 <span>Tổng hợp ĐUQ hiện hữu đạt chuẩn</span>
-                <b class="standard-count" id="standardExistingAreaCount">0</b>
+                <b class="standard-count" id="standardExistingAreaCount">0</b><button type="button" class="excel-export-btn" data-export-table="standard-existing-summary">⬇ Xuất Excel</button>
               </div>
               <div class="standard-table-wrap">
                 <table class="standard-table">
@@ -3606,7 +3629,7 @@
             <section class="standard-card">
               <div class="standard-card-title">
                 <span>Chi tiết ĐUQ hiện hữu (Đạt chuẩn & Chưa đạt chuẩn)</span>
-                <b class="standard-count" id="standardExistingPointCount">0</b>
+                <b class="standard-count" id="standardExistingPointCount">0</b><button type="button" class="excel-export-btn" data-export-table="standard-existing-detail">⬇ Xuất Excel</button>
               </div>
               <div class="standard-table-wrap">
                 <table class="standard-table">
@@ -3675,6 +3698,7 @@
           <div class="area-dual-title">
             <h3>🆕 Bảng ĐUQ Mới</h3>
             <span class="pill-new" id="areaPillNew">0 điểm</span>
+            <button type="button" class="excel-export-btn" id="exportAreaNewExcel">⬇ Xuất Excel</button>
           </div>
           <div class="area-status" id="areaStatusNew"></div>
           <div class="area-table-wrap">
@@ -3690,6 +3714,7 @@
           <div class="area-dual-title">
             <h3>📘 Bảng ĐUQ Hiện hữu</h3>
             <span class="pill-exist" id="areaPillExist">0 điểm</span>
+            <button type="button" class="excel-export-btn" id="exportAreaExistExcel">⬇ Xuất Excel</button>
           </div>
           <div class="area-status" id="areaStatusExist"></div>
           <div class="area-table-wrap">
@@ -3898,7 +3923,7 @@
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 1,
     "Số lượng Thuê bao PTM từ 70k": 1,
-    "Doanh thu bán hàng": 100000,
+    "Doanh thu bán hàng": 200000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -3940,7 +3965,7 @@
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 1,
     "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Doanh thu bán hàng": 35000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -3960,8 +3985,8 @@
     "Số điện thoại nhân viên hỗ trợ": "918371858",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 4,
-    "Số lượng Thuê bao PTM từ 70k": 2,
-    "Doanh thu bán hàng": 250000,
+    "Số lượng Thuê bao PTM từ 70k": 4,
+    "Doanh thu bán hàng": 500000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -3982,13 +4007,13 @@
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 3,
     "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Doanh thu bán hàng": 70000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -4044,14 +4069,14 @@
     "Số điện thoại nhân viên hỗ trợ": "944044430",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 2,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 2,
+    "Doanh thu bán hàng": 250000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -4086,14 +4111,14 @@
     "Số điện thoại nhân viên hỗ trợ": "944044430",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 1,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 75000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -4149,14 +4174,14 @@
     "Số điện thoại nhân viên hỗ trợ": "911681799",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 3,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 125000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -4254,14 +4279,14 @@
     "Số điện thoại nhân viên hỗ trợ": "911681799",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 1,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 125000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -4275,14 +4300,14 @@
     "Số điện thoại nhân viên hỗ trợ": "911681799",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 3,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 3,
+    "Doanh thu bán hàng": 625000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -4317,14 +4342,14 @@
     "Số điện thoại nhân viên hỗ trợ": "948586161",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 2,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 2,
+    "Doanh thu bán hàng": 250000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -4401,12 +4426,12 @@
     "Số điện thoại nhân viên hỗ trợ": "918616779",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 8,
-    "Số lượng Thuê bao PTM từ 70k": 2,
-    "Doanh thu bán hàng": 735000,
+    "Số lượng Thuê bao PTM từ 70k": 8,
+    "Doanh thu bán hàng": 4895000,
     "Kết quả điều kiện": "Đủ điều kiện",
-    "Thứ hạng trong từng bảng": "2",
-    "Xếp loại giải thưởng": "Giải Nhì",
-    "Mức tiền thưởng": 600000,
+    "Thứ hạng trong từng bảng": "1",
+    "Xếp loại giải thưởng": "Giải Nhất",
+    "Mức tiền thưởng": 800000,
     "ĐUQ có PSSL": 1,
     "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
@@ -4422,14 +4447,14 @@
     "Số điện thoại nhân viên hỗ trợ": "918616779",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 5,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 75000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -4443,14 +4468,14 @@
     "Số điện thoại nhân viên hỗ trợ": "918616779",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 8,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 3,
+    "Doanh thu bán hàng": 370000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -4464,14 +4489,14 @@
     "Số điện thoại nhân viên hỗ trợ": "918616779",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 2,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 110000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -4507,7 +4532,7 @@
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 1,
     "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Doanh thu bán hàng": 50000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -4548,14 +4573,14 @@
     "Số điện thoại nhân viên hỗ trợ": "918616779",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 2,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 120000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -4632,14 +4657,14 @@
     "Số điện thoại nhân viên hỗ trợ": "827157857",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 3,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 3,
+    "Doanh thu bán hàng": 300000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -4695,8 +4720,8 @@
     "Số điện thoại nhân viên hỗ trợ": "889678852",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 9,
-    "Số lượng Thuê bao PTM từ 70k": 1,
-    "Doanh thu bán hàng": 90000,
+    "Số lượng Thuê bao PTM từ 70k": 2,
+    "Doanh thu bán hàng": 210000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -4884,8 +4909,8 @@
     "Số điện thoại nhân viên hỗ trợ": "823433839",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 2,
-    "Số lượng Thuê bao PTM từ 70k": 1,
-    "Doanh thu bán hàng": 155000,
+    "Số lượng Thuê bao PTM từ 70k": 2,
+    "Doanh thu bán hàng": 255000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -4989,8 +5014,8 @@
     "Số điện thoại nhân viên hỗ trợ": "949676939",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 9,
-    "Số lượng Thuê bao PTM từ 70k": 2,
-    "Doanh thu bán hàng": 424000,
+    "Số lượng Thuê bao PTM từ 70k": 3,
+    "Doanh thu bán hàng": 499000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -5010,14 +5035,14 @@
     "Số điện thoại nhân viên hỗ trợ": "949676939",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 6,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 3,
+    "Doanh thu bán hàng": 360000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -5031,8 +5056,8 @@
     "Số điện thoại nhân viên hỗ trợ": "911916234",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 4,
-    "Số lượng Thuê bao PTM từ 70k": 1,
-    "Doanh thu bán hàng": 1500000,
+    "Số lượng Thuê bao PTM từ 70k": 2,
+    "Doanh thu bán hàng": 1620000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -5052,14 +5077,14 @@
     "Số điện thoại nhân viên hỗ trợ": "911684168",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 1,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 120000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -5073,14 +5098,14 @@
     "Số điện thoại nhân viên hỗ trợ": "855819023",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 3,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 120000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -5283,14 +5308,14 @@
     "Số điện thoại nhân viên hỗ trợ": "858454279",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 5,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 3,
+    "Doanh thu bán hàng": 315000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -5325,8 +5350,8 @@
     "Số điện thoại nhân viên hỗ trợ": "886535441",
     "Bảng Thi đấu": "Bảng Plus",
     "Số lượng Thuê bao PTM": 3,
-    "Số lượng Thuê bao PTM từ 70k": 2,
-    "Doanh thu bán hàng": 250000,
+    "Số lượng Thuê bao PTM từ 70k": 3,
+    "Doanh thu bán hàng": 375000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -5430,14 +5455,14 @@
     "Số điện thoại nhân viên hỗ trợ": "855819023",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 3,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 90000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -5472,14 +5497,14 @@
     "Số điện thoại nhân viên hỗ trợ": "888487487",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 9,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 120000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -5493,11 +5518,11 @@
     "Số điện thoại nhân viên hỗ trợ": "886535441",
     "Bảng Thi đấu": "Bảng Pro",
     "Số lượng Thuê bao PTM": 60,
-    "Số lượng Thuê bao PTM từ 70k": 6,
-    "Doanh thu bán hàng": 619000,
-    "Kết quả điều kiện": "Chưa đủ điều kiện",
-    "Thứ hạng trong từng bảng": "—",
-    "Xếp loại giải thưởng": "Chưa đủ điều kiện",
+    "Số lượng Thuê bao PTM từ 70k": 11,
+    "Doanh thu bán hàng": 2618000,
+    "Kết quả điều kiện": "Đủ điều kiện",
+    "Thứ hạng trong từng bảng": "6",
+    "Xếp loại giải thưởng": "Không đạt giải",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
     "ĐUQ PSSL có gói từ 70k": 1,
@@ -5535,8 +5560,8 @@
     "Số điện thoại nhân viên hỗ trợ": "918616779",
     "Bảng Thi đấu": "Bảng Pro",
     "Số lượng Thuê bao PTM": 7,
-    "Số lượng Thuê bao PTM từ 70k": 2,
-    "Doanh thu bán hàng": 195000,
+    "Số lượng Thuê bao PTM từ 70k": 3,
+    "Doanh thu bán hàng": 1720000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -5559,9 +5584,9 @@
     "Số lượng Thuê bao PTM từ 70k": 23,
     "Doanh thu bán hàng": 2500000,
     "Kết quả điều kiện": "Đủ điều kiện",
-    "Thứ hạng trong từng bảng": "5",
-    "Xếp loại giải thưởng": "Khuyến khích",
-    "Mức tiền thưởng": 500000,
+    "Thứ hạng trong từng bảng": "8",
+    "Xếp loại giải thưởng": "Không đạt giải",
+    "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
     "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "pro"
@@ -5577,14 +5602,14 @@
     "Số điện thoại nhân viên hỗ trợ": "846850888",
     "Bảng Thi đấu": "Bảng Plus",
     "Số lượng Thuê bao PTM": 1,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 125000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "plus"
   },
   {
@@ -5682,12 +5707,12 @@
     "Số điện thoại nhân viên hỗ trợ": "915348732",
     "Bảng Thi đấu": "Bảng Plus",
     "Số lượng Thuê bao PTM": 11,
-    "Số lượng Thuê bao PTM từ 70k": 1,
-    "Doanh thu bán hàng": 125000,
-    "Kết quả điều kiện": "Chưa đủ điều kiện",
-    "Thứ hạng trong từng bảng": "—",
-    "Xếp loại giải thưởng": "Chưa đủ điều kiện",
-    "Mức tiền thưởng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 10,
+    "Doanh thu bán hàng": 1205000,
+    "Kết quả điều kiện": "Đủ điều kiện",
+    "Thứ hạng trong từng bảng": "3",
+    "Xếp loại giải thưởng": "Giải Ba",
+    "Mức tiền thưởng": 500000,
     "ĐUQ có PSSL": 1,
     "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "plus"
@@ -5724,12 +5749,12 @@
     "Số điện thoại nhân viên hỗ trợ": "949676939",
     "Bảng Thi đấu": "Bảng Pro",
     "Số lượng Thuê bao PTM": 38,
-    "Số lượng Thuê bao PTM từ 70k": 7,
-    "Doanh thu bán hàng": 745000,
-    "Kết quả điều kiện": "Chưa đủ điều kiện",
-    "Thứ hạng trong từng bảng": "—",
-    "Xếp loại giải thưởng": "Chưa đủ điều kiện",
-    "Mức tiền thưởng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 37,
+    "Doanh thu bán hàng": 7558000,
+    "Kết quả điều kiện": "Đủ điều kiện",
+    "Thứ hạng trong từng bảng": "3",
+    "Xếp loại giải thưởng": "Giải Ba",
+    "Mức tiền thưởng": 1000000,
     "ĐUQ có PSSL": 1,
     "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "pro"
@@ -5766,14 +5791,14 @@
     "Số điện thoại nhân viên hỗ trợ": "949676939",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 3,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 2,
+    "Doanh thu bán hàng": 225000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -5787,8 +5812,8 @@
     "Số điện thoại nhân viên hỗ trợ": "858454279",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 4,
-    "Số lượng Thuê bao PTM từ 70k": 2,
-    "Doanh thu bán hàng": 240000,
+    "Số lượng Thuê bao PTM từ 70k": 3,
+    "Doanh thu bán hàng": 315000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -5808,8 +5833,8 @@
     "Số điện thoại nhân viên hỗ trợ": "886535441",
     "Bảng Thi đấu": "Bảng Plus",
     "Số lượng Thuê bao PTM": 2,
-    "Số lượng Thuê bao PTM từ 70k": 1,
-    "Doanh thu bán hàng": 125000,
+    "Số lượng Thuê bao PTM từ 70k": 2,
+    "Doanh thu bán hàng": 250000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -5829,14 +5854,14 @@
     "Số điện thoại nhân viên hỗ trợ": "888487487",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 8,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 2,
+    "Doanh thu bán hàng": 190000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -5934,8 +5959,8 @@
     "Số điện thoại nhân viên hỗ trợ": "858454279",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 6,
-    "Số lượng Thuê bao PTM từ 70k": 1,
-    "Doanh thu bán hàng": 120000,
+    "Số lượng Thuê bao PTM từ 70k": 2,
+    "Doanh thu bán hàng": 240000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -6102,14 +6127,14 @@
     "Số điện thoại nhân viên hỗ trợ": "944044430",
     "Bảng Thi đấu": "Bảng Plus",
     "Số lượng Thuê bao PTM": 5,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 5,
+    "Doanh thu bán hàng": 600000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "plus"
   },
   {
@@ -6144,14 +6169,14 @@
     "Số điện thoại nhân viên hỗ trợ": "944044430",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 5,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 2,
+    "Doanh thu bán hàng": 250000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -6165,14 +6190,14 @@
     "Số điện thoại nhân viên hỗ trợ": "827157857",
     "Bảng Thi đấu": "Bảng Pro",
     "Số lượng Thuê bao PTM": 7,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 5,
+    "Doanh thu bán hàng": 500000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "pro"
   },
   {
@@ -6207,14 +6232,14 @@
     "Số điện thoại nhân viên hỗ trợ": "889678852",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 2,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 125000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -6333,14 +6358,14 @@
     "Số điện thoại nhân viên hỗ trợ": "837335252",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 3,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 600000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -6354,8 +6379,8 @@
     "Số điện thoại nhân viên hỗ trợ": "949676939",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 4,
-    "Số lượng Thuê bao PTM từ 70k": 1,
-    "Doanh thu bán hàng": 79000,
+    "Số lượng Thuê bao PTM từ 70k": 3,
+    "Doanh thu bán hàng": 329000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -6375,14 +6400,14 @@
     "Số điện thoại nhân viên hỗ trợ": "949676939",
     "Bảng Thi đấu": "Bảng Pro",
     "Số lượng Thuê bao PTM": 7,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 4,
+    "Doanh thu bán hàng": 425000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "pro"
   },
   {
@@ -6438,14 +6463,14 @@
     "Số điện thoại nhân viên hỗ trợ": "919531479",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 2,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 120000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -6459,14 +6484,14 @@
     "Số điện thoại nhân viên hỗ trợ": "948879853",
     "Bảng Thi đấu": "Bảng Plus",
     "Số lượng Thuê bao PTM": 5,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 3,
+    "Doanh thu bán hàng": 309000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "plus"
   },
   {
@@ -6480,10 +6505,10 @@
     "Số điện thoại nhân viên hỗ trợ": "888887858",
     "Bảng Thi đấu": "Bảng Pro",
     "Số lượng Thuê bao PTM": 21,
-    "Số lượng Thuê bao PTM từ 70k": 17,
-    "Doanh thu bán hàng": 2160000,
+    "Số lượng Thuê bao PTM từ 70k": 18,
+    "Doanh thu bán hàng": 2200000,
     "Kết quả điều kiện": "Đủ điều kiện",
-    "Thứ hạng trong từng bảng": "6",
+    "Thứ hạng trong từng bảng": "10",
     "Xếp loại giải thưởng": "Không đạt giải",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
@@ -6501,14 +6526,14 @@
     "Số điện thoại nhân viên hỗ trợ": "888887858",
     "Bảng Thi đấu": "Bảng Plus",
     "Số lượng Thuê bao PTM": 3,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 50000,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 170000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "plus"
   },
   {
@@ -6522,14 +6547,14 @@
     "Số điện thoại nhân viên hỗ trợ": "918371858",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 8,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 125000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -6609,9 +6634,9 @@
     "Số lượng Thuê bao PTM từ 70k": 16,
     "Doanh thu bán hàng": 1600000,
     "Kết quả điều kiện": "Đủ điều kiện",
-    "Thứ hạng trong từng bảng": "1",
-    "Xếp loại giải thưởng": "Giải Nhất",
-    "Mức tiền thưởng": 1500000,
+    "Thứ hạng trong từng bảng": "2",
+    "Xếp loại giải thưởng": "Giải Nhì",
+    "Mức tiền thưởng": 1000000,
     "ĐUQ có PSSL": 1,
     "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "plus"
@@ -6627,12 +6652,12 @@
     "Số điện thoại nhân viên hỗ trợ": "911063639",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 23,
-    "Số lượng Thuê bao PTM từ 70k": 20,
-    "Doanh thu bán hàng": 2400000,
+    "Số lượng Thuê bao PTM từ 70k": 21,
+    "Doanh thu bán hàng": 2559000,
     "Kết quả điều kiện": "Đủ điều kiện",
-    "Thứ hạng trong từng bảng": "1",
-    "Xếp loại giải thưởng": "Giải Nhất",
-    "Mức tiền thưởng": 800000,
+    "Thứ hạng trong từng bảng": "2",
+    "Xếp loại giải thưởng": "Giải Nhì",
+    "Mức tiền thưởng": 600000,
     "ĐUQ có PSSL": 1,
     "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
@@ -6648,14 +6673,14 @@
     "Số điện thoại nhân viên hỗ trợ": "918371858",
     "Bảng Thi đấu": "Bảng Plus",
     "Số lượng Thuê bao PTM": 8,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 159000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "plus"
   },
   {
@@ -6774,12 +6799,12 @@
     "Số điện thoại nhân viên hỗ trợ": "916535457",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 8,
-    "Số lượng Thuê bao PTM từ 70k": 5,
-    "Doanh thu bán hàng": 625000,
+    "Số lượng Thuê bao PTM từ 70k": 7,
+    "Doanh thu bán hàng": 850000,
     "Kết quả điều kiện": "Đủ điều kiện",
-    "Thứ hạng trong từng bảng": "3",
-    "Xếp loại giải thưởng": "Giải Nhì",
-    "Mức tiền thưởng": 600000,
+    "Thứ hạng trong từng bảng": "5",
+    "Xếp loại giải thưởng": "Giải Ba",
+    "Mức tiền thưởng": 400000,
     "ĐUQ có PSSL": 1,
     "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
@@ -6900,8 +6925,8 @@
     "Số điện thoại nhân viên hỗ trợ": "915348732",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 3,
-    "Số lượng Thuê bao PTM từ 70k": 1,
-    "Doanh thu bán hàng": 100000,
+    "Số lượng Thuê bao PTM từ 70k": 2,
+    "Doanh thu bán hàng": 200000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -6942,14 +6967,14 @@
     "Số điện thoại nhân viên hỗ trợ": "918616779",
     "Bảng Thi đấu": "Bảng Plus",
     "Số lượng Thuê bao PTM": 13,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 100000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "plus"
   },
   {
@@ -6963,14 +6988,14 @@
     "Số điện thoại nhân viên hỗ trợ": "918616779",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 1,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 125000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -7068,14 +7093,14 @@
     "Số điện thoại nhân viên hỗ trợ": "888487487",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 2,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 2,
+    "Doanh thu bán hàng": 200000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -7089,8 +7114,8 @@
     "Số điện thoại nhân viên hỗ trợ": "911684168",
     "Bảng Thi đấu": "Bảng Pro",
     "Số lượng Thuê bao PTM": 18,
-    "Số lượng Thuê bao PTM từ 70k": 10,
-    "Doanh thu bán hàng": 1150000,
+    "Số lượng Thuê bao PTM từ 70k": 13,
+    "Doanh thu bán hàng": 4275000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -7152,8 +7177,8 @@
     "Số điện thoại nhân viên hỗ trợ": "911727000",
     "Bảng Thi đấu": "Bảng Plus",
     "Số lượng Thuê bao PTM": 3,
-    "Số lượng Thuê bao PTM từ 70k": 1,
-    "Doanh thu bán hàng": 125000,
+    "Số lượng Thuê bao PTM từ 70k": 3,
+    "Doanh thu bán hàng": 1750000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -7194,14 +7219,14 @@
     "Số điện thoại nhân viên hỗ trợ": "837335252",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 3,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 3,
+    "Doanh thu bán hàng": 300000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -7236,14 +7261,14 @@
     "Số điện thoại nhân viên hỗ trợ": "858454279",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 2,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 2,
+    "Doanh thu bán hàng": 1325000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -7260,7 +7285,7 @@
     "Số lượng Thuê bao PTM từ 70k": 4,
     "Doanh thu bán hàng": 597000,
     "Kết quả điều kiện": "Đủ điều kiện",
-    "Thứ hạng trong từng bảng": "5",
+    "Thứ hạng trong từng bảng": "7",
     "Xếp loại giải thưởng": "Giải Ba",
     "Mức tiền thưởng": 400000,
     "ĐUQ có PSSL": 1,
@@ -7281,7 +7306,7 @@
     "Số lượng Thuê bao PTM từ 70k": 25,
     "Doanh thu bán hàng": 2866000,
     "Kết quả điều kiện": "Đủ điều kiện",
-    "Thứ hạng trong từng bảng": "4",
+    "Thứ hạng trong từng bảng": "5",
     "Xếp loại giải thưởng": "Khuyến khích",
     "Mức tiền thưởng": 500000,
     "ĐUQ có PSSL": 1,
@@ -7467,8 +7492,8 @@
     "Số điện thoại nhân viên hỗ trợ": "917779767",
     "Bảng Thi đấu": "Bảng Pro",
     "Số lượng Thuê bao PTM": 25,
-    "Số lượng Thuê bao PTM từ 70k": 7,
-    "Doanh thu bán hàng": 6280000,
+    "Số lượng Thuê bao PTM từ 70k": 24,
+    "Doanh thu bán hàng": 21960000,
     "Kết quả điều kiện": "Đủ điều kiện",
     "Thứ hạng trong từng bảng": "1",
     "Xếp loại giải thưởng": "Giải Nhất",
@@ -7512,9 +7537,9 @@
     "Số lượng Thuê bao PTM từ 70k": 5,
     "Doanh thu bán hàng": 625000,
     "Kết quả điều kiện": "Đủ điều kiện",
-    "Thứ hạng trong từng bảng": "4",
-    "Xếp loại giải thưởng": "Giải Nhì",
-    "Mức tiền thưởng": 600000,
+    "Thứ hạng trong từng bảng": "6",
+    "Xếp loại giải thưởng": "Giải Ba",
+    "Mức tiền thưởng": 400000,
     "ĐUQ có PSSL": 1,
     "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
@@ -7530,14 +7555,14 @@
     "Số điện thoại nhân viên hỗ trợ": "918371858",
     "Bảng Thi đấu": "Bảng Pro",
     "Số lượng Thuê bao PTM": 4,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 3,
+    "Doanh thu bán hàng": 370000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "pro"
   },
   {
@@ -7761,14 +7786,14 @@
     "Số điện thoại nhân viên hỗ trợ": "846850888",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 3,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 159000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -7824,14 +7849,14 @@
     "Số điện thoại nhân viên hỗ trợ": "858454279",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 6,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 125000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -7845,8 +7870,8 @@
     "Số điện thoại nhân viên hỗ trợ": "918371858",
     "Bảng Thi đấu": "Bảng Pro",
     "Số lượng Thuê bao PTM": 3,
-    "Số lượng Thuê bao PTM từ 70k": 1,
-    "Doanh thu bán hàng": 125000,
+    "Số lượng Thuê bao PTM từ 70k": 3,
+    "Doanh thu bán hàng": 365000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -7866,11 +7891,11 @@
     "Số điện thoại nhân viên hỗ trợ": "918371858",
     "Bảng Thi đấu": "Bảng Pro",
     "Số lượng Thuê bao PTM": 20,
-    "Số lượng Thuê bao PTM từ 70k": 7,
-    "Doanh thu bán hàng": 1095000,
-    "Kết quả điều kiện": "Chưa đủ điều kiện",
-    "Thứ hạng trong từng bảng": "—",
-    "Xếp loại giải thưởng": "Chưa đủ điều kiện",
+    "Số lượng Thuê bao PTM từ 70k": 18,
+    "Doanh thu bán hàng": 2445000,
+    "Kết quả điều kiện": "Đủ điều kiện",
+    "Thứ hạng trong từng bảng": "9",
+    "Xếp loại giải thưởng": "Không đạt giải",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
     "ĐUQ PSSL có gói từ 70k": 1,
@@ -7908,8 +7933,8 @@
     "Số điện thoại nhân viên hỗ trợ": "911684168",
     "Bảng Thi đấu": "Bảng Pro",
     "Số lượng Thuê bao PTM": 28,
-    "Số lượng Thuê bao PTM từ 70k": 21,
-    "Doanh thu bán hàng": 2100000,
+    "Số lượng Thuê bao PTM từ 70k": 25,
+    "Doanh thu bán hàng": 2500000,
     "Kết quả điều kiện": "Đủ điều kiện",
     "Thứ hạng trong từng bảng": "7",
     "Xếp loại giải thưởng": "Không đạt giải",
@@ -7950,8 +7975,8 @@
     "Số điện thoại nhân viên hỗ trợ": "911063639",
     "Bảng Thi đấu": "Bảng Pro",
     "Số lượng Thuê bao PTM": 15,
-    "Số lượng Thuê bao PTM từ 70k": 9,
-    "Doanh thu bán hàng": 1110000,
+    "Số lượng Thuê bao PTM từ 70k": 10,
+    "Doanh thu bán hàng": 1230000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -7971,12 +7996,12 @@
     "Số điện thoại nhân viên hỗ trợ": "911727000",
     "Bảng Thi đấu": "Bảng Plus",
     "Số lượng Thuê bao PTM": 16,
-    "Số lượng Thuê bao PTM từ 70k": 2,
-    "Doanh thu bán hàng": 250000,
-    "Kết quả điều kiện": "Chưa đủ điều kiện",
-    "Thứ hạng trong từng bảng": "—",
-    "Xếp loại giải thưởng": "Chưa đủ điều kiện",
-    "Mức tiền thưởng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 4,
+    "Doanh thu bán hàng": 3250000,
+    "Kết quả điều kiện": "Đủ điều kiện",
+    "Thứ hạng trong từng bảng": "1",
+    "Xếp loại giải thưởng": "Giải Nhất",
+    "Mức tiền thưởng": 1500000,
     "ĐUQ có PSSL": 1,
     "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "plus"
@@ -7992,8 +8017,8 @@
     "Số điện thoại nhân viên hỗ trợ": "944604268",
     "Bảng Thi đấu": "Bảng Plus",
     "Số lượng Thuê bao PTM": 13,
-    "Số lượng Thuê bao PTM từ 70k": 1,
-    "Doanh thu bán hàng": 159000,
+    "Số lượng Thuê bao PTM từ 70k": 8,
+    "Doanh thu bán hàng": 904000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -8013,14 +8038,14 @@
     "Số điện thoại nhân viên hỗ trợ": "948879853",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 5,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 100000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -8097,14 +8122,14 @@
     "Số điện thoại nhân viên hỗ trợ": "918371858",
     "Bảng Thi đấu": "Bảng Plus",
     "Số lượng Thuê bao PTM": 6,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 5,
+    "Doanh thu bán hàng": 575000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "plus"
   },
   {
@@ -8118,8 +8143,8 @@
     "Số điện thoại nhân viên hỗ trợ": "918371828",
     "Bảng Thi đấu": "Bảng Pro",
     "Số lượng Thuê bao PTM": 18,
-    "Số lượng Thuê bao PTM từ 70k": 1,
-    "Doanh thu bán hàng": 120000,
+    "Số lượng Thuê bao PTM từ 70k": 12,
+    "Doanh thu bán hàng": 2152000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -8160,8 +8185,8 @@
     "Số điện thoại nhân viên hỗ trợ": "919531479",
     "Bảng Thi đấu": "Bảng Plus",
     "Số lượng Thuê bao PTM": 16,
-    "Số lượng Thuê bao PTM từ 70k": 5,
-    "Doanh thu bán hàng": 600000,
+    "Số lượng Thuê bao PTM từ 70k": 7,
+    "Doanh thu bán hàng": 859000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -8202,8 +8227,8 @@
     "Số điện thoại nhân viên hỗ trợ": "911681799",
     "Bảng Thi đấu": "Bảng Pro",
     "Số lượng Thuê bao PTM": 15,
-    "Số lượng Thuê bao PTM từ 70k": 1,
-    "Doanh thu bán hàng": 120000,
+    "Số lượng Thuê bao PTM từ 70k": 12,
+    "Doanh thu bán hàng": 1445000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -8310,9 +8335,9 @@
     "Số lượng Thuê bao PTM từ 70k": 41,
     "Doanh thu bán hàng": 4250000,
     "Kết quả điều kiện": "Đủ điều kiện",
-    "Thứ hạng trong từng bảng": "3",
-    "Xếp loại giải thưởng": "Giải Ba",
-    "Mức tiền thưởng": 1000000,
+    "Thứ hạng trong từng bảng": "4",
+    "Xếp loại giải thưởng": "Khuyến khích",
+    "Mức tiền thưởng": 500000,
     "ĐUQ có PSSL": 1,
     "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "pro"
@@ -8328,14 +8353,14 @@
     "Số điện thoại nhân viên hỗ trợ": "888487487",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 2,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 125000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -8349,12 +8374,12 @@
     "Số điện thoại nhân viên hỗ trợ": "949676939",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 11,
-    "Số lượng Thuê bao PTM từ 70k": 2,
-    "Doanh thu bán hàng": 200000,
-    "Kết quả điều kiện": "Chưa đủ điều kiện",
-    "Thứ hạng trong từng bảng": "—",
-    "Xếp loại giải thưởng": "Chưa đủ điều kiện",
-    "Mức tiền thưởng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 10,
+    "Doanh thu bán hàng": 1484000,
+    "Kết quả điều kiện": "Đủ điều kiện",
+    "Thứ hạng trong từng bảng": "3",
+    "Xếp loại giải thưởng": "Giải Nhì",
+    "Mức tiền thưởng": 600000,
     "ĐUQ có PSSL": 1,
     "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
@@ -8391,8 +8416,8 @@
     "Số điện thoại nhân viên hỗ trợ": "911681799",
     "Bảng Thi đấu": "Bảng Plus",
     "Số lượng Thuê bao PTM": 7,
-    "Số lượng Thuê bao PTM từ 70k": 2,
-    "Doanh thu bán hàng": 240000,
+    "Số lượng Thuê bao PTM từ 70k": 6,
+    "Doanh thu bán hàng": 740000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -8433,14 +8458,14 @@
     "Số điện thoại nhân viên hỗ trợ": "918371858",
     "Bảng Thi đấu": "Bảng Pro",
     "Số lượng Thuê bao PTM": 5,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 100000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "pro"
   },
   {
@@ -8454,14 +8479,14 @@
     "Số điện thoại nhân viên hỗ trợ": "918371858",
     "Bảng Thi đấu": "Bảng Pro",
     "Số lượng Thuê bao PTM": 8,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 4,
+    "Doanh thu bán hàng": 1125000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "pro"
   },
   {
@@ -8517,14 +8542,14 @@
     "Số điện thoại nhân viên hỗ trợ": "918371858",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 3,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 6000,
+    "Số lượng Thuê bao PTM từ 70k": 2,
+    "Doanh thu bán hàng": 206000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -8559,8 +8584,8 @@
     "Số điện thoại nhân viên hỗ trợ": "911684168",
     "Bảng Thi đấu": "Bảng Pro",
     "Số lượng Thuê bao PTM": 47,
-    "Số lượng Thuê bao PTM từ 70k": 38,
-    "Doanh thu bán hàng": 6210000,
+    "Số lượng Thuê bao PTM từ 70k": 47,
+    "Doanh thu bán hàng": 10089000,
     "Kết quả điều kiện": "Đủ điều kiện",
     "Thứ hạng trong từng bảng": "2",
     "Xếp loại giải thưởng": "Giải Nhì",
@@ -8580,14 +8605,14 @@
     "Số điện thoại nhân viên hỗ trợ": "888887858",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 3,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 100000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -8811,8 +8836,8 @@
     "Số điện thoại nhân viên hỗ trợ": "911727000",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 11,
-    "Số lượng Thuê bao PTM từ 70k": 1,
-    "Doanh thu bán hàng": 125000,
+    "Số lượng Thuê bao PTM từ 70k": 3,
+    "Doanh thu bán hàng": 320000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -8895,12 +8920,12 @@
     "Số điện thoại nhân viên hỗ trợ": "846850888",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 13,
-    "Số lượng Thuê bao PTM từ 70k": 2,
-    "Doanh thu bán hàng": 200000,
-    "Kết quả điều kiện": "Chưa đủ điều kiện",
-    "Thứ hạng trong từng bảng": "—",
-    "Xếp loại giải thưởng": "Chưa đủ điều kiện",
-    "Mức tiền thưởng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 10,
+    "Doanh thu bán hàng": 1439000,
+    "Kết quả điều kiện": "Đủ điều kiện",
+    "Thứ hạng trong từng bảng": "4",
+    "Xếp loại giải thưởng": "Giải Nhì",
+    "Mức tiền thưởng": 600000,
     "ĐUQ có PSSL": 1,
     "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
@@ -8916,14 +8941,14 @@
     "Số điện thoại nhân viên hỗ trợ": "948879853",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 5,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 120000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -8937,14 +8962,14 @@
     "Số điện thoại nhân viên hỗ trợ": "918371828",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 1,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 159000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -8958,8 +8983,8 @@
     "Số điện thoại nhân viên hỗ trợ": "855819023",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 2,
-    "Số lượng Thuê bao PTM từ 70k": 1,
-    "Doanh thu bán hàng": 90000,
+    "Số lượng Thuê bao PTM từ 70k": 2,
+    "Doanh thu bán hàng": 165000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
@@ -9021,14 +9046,14 @@
     "Số điện thoại nhân viên hỗ trợ": "918616779",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 6,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 1,
+    "Doanh thu bán hàng": 125000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -9231,14 +9256,14 @@
     "Số điện thoại nhân viên hỗ trợ": "827157857",
     "Bảng Thi đấu": "Bảng Basic",
     "Số lượng Thuê bao PTM": 4,
-    "Số lượng Thuê bao PTM từ 70k": 0,
-    "Doanh thu bán hàng": 0,
+    "Số lượng Thuê bao PTM từ 70k": 4,
+    "Doanh thu bán hàng": 400000,
     "Kết quả điều kiện": "Chưa đủ điều kiện",
     "Thứ hạng trong từng bảng": "—",
     "Xếp loại giải thưởng": "Chưa đủ điều kiện",
     "Mức tiền thưởng": 0,
     "ĐUQ có PSSL": 1,
-    "ĐUQ PSSL có gói từ 70k": 0,
+    "ĐUQ PSSL có gói từ 70k": 1,
     "_group": "basic"
   },
   {
@@ -9442,6 +9467,36 @@
       "phone": "84915540829",
       "successDate": "2026-08-20 13:40:03",
       "revenue": 375000
+    },
+    {
+      "phone": "84828662620",
+      "successDate": "2026-08-19 10:40:05",
+      "revenue": 360000
+    },
+    {
+      "phone": "84853758375",
+      "successDate": "2026-08-15 11:50:55",
+      "revenue": 375000
+    },
+    {
+      "phone": "84946458250",
+      "successDate": "2026-08-13 16:50:07",
+      "revenue": 125000
+    },
+    {
+      "phone": "84832398729",
+      "successDate": "2026-08-13 14:00:03",
+      "revenue": 1500000
+    },
+    {
+      "phone": "84845958139",
+      "successDate": "2026-08-12 14:01:46",
+      "revenue": 1500000
+    },
+    {
+      "phone": "84847912226",
+      "successDate": "2026-08-12 11:50:06",
+      "revenue": 300000
     }
   ],
   "KBH028071_132": [
@@ -9743,6 +9798,16 @@
       "phone": "84838899819",
       "successDate": "2026-08-20 12:00:06",
       "revenue": 125000
+    },
+    {
+      "phone": "84854425199",
+      "successDate": "2026-08-11 20:30:04",
+      "revenue": 125000
+    },
+    {
+      "phone": "84853551399",
+      "successDate": "2026-08-09 09:40:05",
+      "revenue": 125000
     }
   ],
   "KBH002005_087": [
@@ -9757,6 +9822,11 @@
       "phone": "84888805989",
       "successDate": "2026-08-20 12:10:03",
       "revenue": 125000
+    },
+    {
+      "phone": "84829934886",
+      "successDate": "2026-08-15 12:20:03",
+      "revenue": 75000
     },
     {
       "phone": "84819074444",
@@ -9774,6 +9844,76 @@
       "phone": "84826767996",
       "successDate": "2026-08-20 11:00:03",
       "revenue": 100000
+    },
+    {
+      "phone": "84854855828",
+      "successDate": "2026-08-18 14:50:06",
+      "revenue": 159000
+    },
+    {
+      "phone": "84827276660",
+      "successDate": "2026-08-18 11:20:06",
+      "revenue": 125000
+    },
+    {
+      "phone": "84853646162",
+      "successDate": "2026-08-18 10:20:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84858827776",
+      "successDate": "2026-08-17 16:30:08",
+      "revenue": 100000
+    },
+    {
+      "phone": "84855993252",
+      "successDate": "2026-08-15 16:40:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84813427547",
+      "successDate": "2026-08-15 15:30:06",
+      "revenue": 1500000
+    },
+    {
+      "phone": "84854646929",
+      "successDate": "2026-08-13 18:20:06",
+      "revenue": 100000
+    },
+    {
+      "phone": "84812882940",
+      "successDate": "2026-08-13 15:10:03",
+      "revenue": 900000
+    },
+    {
+      "phone": "84847873536",
+      "successDate": "2026-08-13 12:50:03",
+      "revenue": 125000
+    },
+    {
+      "phone": "84812435067",
+      "successDate": "2026-08-13 09:50:06",
+      "revenue": 1500000
+    },
+    {
+      "phone": "84838586676",
+      "successDate": "2026-08-12 14:20:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84859393767",
+      "successDate": "2026-08-12 09:30:17",
+      "revenue": 100000
+    },
+    {
+      "phone": "84838586660",
+      "successDate": "2026-08-12 08:50:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84829234898",
+      "successDate": "2026-08-11 17:00:05",
+      "revenue": 125000
     },
     {
       "phone": "84839498292",
@@ -9798,6 +9938,86 @@
     {
       "phone": "84858669192",
       "successDate": "2026-08-11 08:20:08",
+      "revenue": 100000
+    },
+    {
+      "phone": "84835554656",
+      "successDate": "2026-08-09 11:40:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84858587969",
+      "successDate": "2026-08-09 10:50:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84856767995",
+      "successDate": "2026-08-09 10:20:06",
+      "revenue": 100000
+    },
+    {
+      "phone": "84856767599",
+      "successDate": "2026-08-09 09:20:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84836837336",
+      "successDate": "2026-08-08 14:20:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84838848556",
+      "successDate": "2026-08-08 14:10:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84836464898",
+      "successDate": "2026-08-08 13:00:03",
+      "revenue": 100000
+    },
+    {
+      "phone": "84853900410",
+      "successDate": "2026-08-08 08:50:06",
+      "revenue": 100000
+    },
+    {
+      "phone": "84843983499",
+      "successDate": "2026-08-07 19:00:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84839893646",
+      "successDate": "2026-08-07 15:20:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84839795758",
+      "successDate": "2026-08-07 13:20:03",
+      "revenue": 159000
+    },
+    {
+      "phone": "84856796662",
+      "successDate": "2026-08-07 12:40:04",
+      "revenue": 120000
+    },
+    {
+      "phone": "84838457772",
+      "successDate": "2026-08-05 13:00:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84849791828",
+      "successDate": "2026-08-04 15:30:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84857773062",
+      "successDate": "2026-08-03 10:50:06",
+      "revenue": 100000
+    },
+    {
+      "phone": "84856877736",
+      "successDate": "2026-08-03 09:00:05",
       "revenue": 100000
     }
   ],
@@ -9828,6 +10048,11 @@
       "phone": "84911630627",
       "successDate": "2026-08-18 13:40:04",
       "revenue": 125000
+    },
+    {
+      "phone": "84911262351",
+      "successDate": "2026-08-16 16:54:25",
+      "revenue": 90000
     },
     {
       "phone": "84912152921",
@@ -9958,6 +10183,51 @@
       "revenue": 1500000
     },
     {
+      "phone": "84888308751",
+      "successDate": "2026-08-18 08:40:07",
+      "revenue": 1500000
+    },
+    {
+      "phone": "84888312897",
+      "successDate": "2026-08-18 08:40:07",
+      "revenue": 1500000
+    },
+    {
+      "phone": "84888307510",
+      "successDate": "2026-08-13 15:54:56",
+      "revenue": 1500000
+    },
+    {
+      "phone": "84888308031",
+      "successDate": "2026-08-13 15:54:44",
+      "revenue": 1500000
+    },
+    {
+      "phone": "84888105716",
+      "successDate": "2026-08-13 15:30:06",
+      "revenue": 1500000
+    },
+    {
+      "phone": "84846146039",
+      "successDate": "2026-08-13 12:50:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84846946439",
+      "successDate": "2026-08-13 12:50:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84943849298",
+      "successDate": "2026-08-13 12:50:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84888148451",
+      "successDate": "2026-08-13 08:10:04",
+      "revenue": 1500000
+    },
+    {
       "phone": "84826180239",
       "successDate": "2026-08-11 08:50:13",
       "revenue": 90000
@@ -9968,8 +10238,38 @@
       "revenue": 1500000
     },
     {
+      "phone": "84832793309",
+      "successDate": "2026-08-07 17:50:06",
+      "revenue": 100000
+    },
+    {
+      "phone": "84825233309",
+      "successDate": "2026-08-07 17:40:06",
+      "revenue": 100000
+    },
+    {
       "phone": "84888014521",
       "successDate": "2026-08-07 13:50:07",
+      "revenue": 1500000
+    },
+    {
+      "phone": "84886973201",
+      "successDate": "2026-08-07 11:30:05",
+      "revenue": 1500000
+    },
+    {
+      "phone": "84847689369",
+      "successDate": "2026-08-06 17:20:06",
+      "revenue": 90000
+    },
+    {
+      "phone": "84886206802",
+      "successDate": "2026-08-06 16:03:11",
+      "revenue": 90000
+    },
+    {
+      "phone": "84886842906",
+      "successDate": "2026-08-06 09:10:05",
       "revenue": 1500000
     },
     {
@@ -9981,6 +10281,16 @@
       "phone": "84854360239",
       "successDate": "2026-08-05 16:42:44",
       "revenue": 100000
+    },
+    {
+      "phone": "84886814159",
+      "successDate": "2026-08-04 15:40:06",
+      "revenue": 1500000
+    },
+    {
+      "phone": "84886795951",
+      "successDate": "2026-08-04 15:40:06",
+      "revenue": 1500000
     }
   ],
   "KBH028071_015": [
@@ -9988,6 +10298,11 @@
       "phone": "84888306235",
       "successDate": "2026-08-20 10:40:07",
       "revenue": 1500000
+    },
+    {
+      "phone": "84914802560",
+      "successDate": "2026-08-08 13:00:03",
+      "revenue": 120000
     }
   ],
   "KBH104891": [
@@ -9995,6 +10310,16 @@
       "phone": "84912629532",
       "successDate": "2026-08-20 10:30:09",
       "revenue": 125000
+    },
+    {
+      "phone": "84913890729",
+      "successDate": "2026-08-17 10:50:08",
+      "revenue": 120000
+    },
+    {
+      "phone": "84911985465",
+      "successDate": "2026-08-02 15:40:02",
+      "revenue": 120000
     }
   ],
   "KBH028071_167": [
@@ -10025,9 +10350,49 @@
       "revenue": 125000
     },
     {
+      "phone": "84914348947",
+      "successDate": "2026-08-12 12:20:04",
+      "revenue": 125000
+    },
+    {
       "phone": "84914598870",
       "successDate": "2026-08-11 09:40:07",
       "revenue": 75000
+    },
+    {
+      "phone": "84914563207",
+      "successDate": "2026-08-10 15:00:04",
+      "revenue": 125000
+    },
+    {
+      "phone": "84856174579",
+      "successDate": "2026-08-10 09:40:05",
+      "revenue": 125000
+    },
+    {
+      "phone": "84914738385",
+      "successDate": "2026-08-10 09:10:05",
+      "revenue": 125000
+    },
+    {
+      "phone": "84823447379",
+      "successDate": "2026-08-09 15:10:03",
+      "revenue": 125000
+    },
+    {
+      "phone": "84914687292",
+      "successDate": "2026-08-09 13:40:03",
+      "revenue": 375000
+    },
+    {
+      "phone": "84914601412",
+      "successDate": "2026-08-09 08:30:04",
+      "revenue": 159000
+    },
+    {
+      "phone": "84914329070",
+      "successDate": "2026-08-05 08:20:05",
+      "revenue": 125000
     }
   ],
   "KBH028071_048": [
@@ -10130,12 +10495,27 @@
       "phone": "84914191250",
       "successDate": "2026-08-04 09:30:05",
       "revenue": 120000
+    },
+    {
+      "phone": "84915331063",
+      "successDate": "2026-08-01 17:50:04",
+      "revenue": 159000
     }
   ],
   "KBH028071_049": [
     {
       "phone": "84914705674",
       "successDate": "2026-08-20 07:40:05",
+      "revenue": 125000
+    },
+    {
+      "phone": "84816992634",
+      "successDate": "2026-08-13 08:50:05",
+      "revenue": 1500000
+    },
+    {
+      "phone": "84914681210",
+      "successDate": "2026-08-05 09:00:03",
       "revenue": 125000
     }
   ],
@@ -10361,6 +10741,26 @@
       "phone": "84915549041",
       "successDate": "2026-08-08 18:50:03",
       "revenue": 100000
+    },
+    {
+      "phone": "84915392604",
+      "successDate": "2026-08-08 16:50:03",
+      "revenue": 100000
+    },
+    {
+      "phone": "84915349028",
+      "successDate": "2026-08-08 14:40:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84915365071",
+      "successDate": "2026-08-06 13:50:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84915405572",
+      "successDate": "2026-08-03 10:20:04",
+      "revenue": 100000
     }
   ],
   "KBH002005_004": [
@@ -10378,6 +10778,18 @@
       "phone": "84915554980",
       "successDate": "2026-08-19 10:20:14",
       "revenue": 100000
+    }
+  ],
+  "KBH028071_146": [
+    {
+      "phone": "84886360752",
+      "successDate": "2026-08-19 20:30:03",
+      "revenue": 125000
+    },
+    {
+      "phone": "84888028792",
+      "successDate": "2026-08-12 12:50:04",
+      "revenue": 125000
     }
   ],
   "KBH002005_035": [
@@ -10407,6 +10819,33 @@
       "revenue": 125000
     }
   ],
+  "KBH028071_130": [
+    {
+      "phone": "84915015431",
+      "successDate": "2026-08-19 18:50:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84911695720",
+      "successDate": "2026-08-19 17:40:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84825982739",
+      "successDate": "2026-08-13 09:20:04",
+      "revenue": 125000
+    },
+    {
+      "phone": "84818811165",
+      "successDate": "2026-08-08 12:20:03",
+      "revenue": 125000
+    },
+    {
+      "phone": "84915044974",
+      "successDate": "2026-08-06 09:30:05",
+      "revenue": 125000
+    }
+  ],
   "KBH002005_023": [
     {
       "phone": "84911338790",
@@ -10421,11 +10860,258 @@
       "revenue": 100000
     }
   ],
+  "KBH028071_181": [
+    {
+      "phone": "84949598890",
+      "successDate": "2026-08-19 17:10:04",
+      "revenue": 75000
+    }
+  ],
+  "KBH028071_177": [
+    {
+      "phone": "84852872838",
+      "successDate": "2026-08-19 17:00:10",
+      "revenue": 375000
+    },
+    {
+      "phone": "84914483590",
+      "successDate": "2026-08-19 11:50:05",
+      "revenue": 125000
+    },
+    {
+      "phone": "84914521436",
+      "successDate": "2026-08-14 13:40:04",
+      "revenue": 125000
+    }
+  ],
+  "KBH104892": [
+    {
+      "phone": "84912561094",
+      "successDate": "2026-08-19 12:40:03",
+      "revenue": 100000
+    },
+    {
+      "phone": "84912121841",
+      "successDate": "2026-08-17 20:00:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84912655604",
+      "successDate": "2026-08-15 10:30:03",
+      "revenue": 100000
+    },
+    {
+      "phone": "84912689492",
+      "successDate": "2026-08-14 21:10:03",
+      "revenue": 100000
+    },
+    {
+      "phone": "84912519129",
+      "successDate": "2026-08-14 18:00:39",
+      "revenue": 100000
+    },
+    {
+      "phone": "84912639576",
+      "successDate": "2026-08-14 18:00:06",
+      "revenue": 100000
+    },
+    {
+      "phone": "84912691532",
+      "successDate": "2026-08-13 19:04:03",
+      "revenue": 100000
+    },
+    {
+      "phone": "84912564765",
+      "successDate": "2026-08-13 18:30:04",
+      "revenue": 125000
+    },
+    {
+      "phone": "84912430093",
+      "successDate": "2026-08-13 10:30:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84912602227",
+      "successDate": "2026-08-13 09:30:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84914710842",
+      "successDate": "2026-08-13 08:33:03",
+      "revenue": 270000
+    },
+    {
+      "phone": "84912612610",
+      "successDate": "2026-08-11 17:50:09",
+      "revenue": 100000
+    },
+    {
+      "phone": "84912575033",
+      "successDate": "2026-08-08 13:50:04",
+      "revenue": 125000
+    },
+    {
+      "phone": "84912539213",
+      "successDate": "2026-08-05 10:01:21",
+      "revenue": 100000
+    },
+    {
+      "phone": "84912631429",
+      "successDate": "2026-08-04 10:00:19",
+      "revenue": 300000
+    },
+    {
+      "phone": "84912473454",
+      "successDate": "2026-08-04 07:20:03",
+      "revenue": 125000
+    },
+    {
+      "phone": "84912688792",
+      "successDate": "2026-08-03 19:40:03",
+      "revenue": 300000
+    },
+    {
+      "phone": "84914874031",
+      "successDate": "2026-08-03 11:20:04",
+      "revenue": 100000
+    }
+  ],
+  "KBH028071_035": [
+    {
+      "phone": "84912925600",
+      "successDate": "2026-08-19 11:30:03",
+      "revenue": 125000
+    },
+    {
+      "phone": "84912242471",
+      "successDate": "2026-08-15 10:10:04",
+      "revenue": 125000
+    },
+    {
+      "phone": "84914296985",
+      "successDate": "2026-08-13 19:00:03",
+      "revenue": 125000
+    },
+    {
+      "phone": "84913765718",
+      "successDate": "2026-08-13 13:59:54",
+      "revenue": 100000
+    },
+    {
+      "phone": "84914968130",
+      "successDate": "2026-08-13 13:40:03",
+      "revenue": 125000
+    },
+    {
+      "phone": "84914870580",
+      "successDate": "2026-08-13 09:10:03",
+      "revenue": 125000
+    },
+    {
+      "phone": "84912931335",
+      "successDate": "2026-08-13 08:30:08",
+      "revenue": 125000
+    },
+    {
+      "phone": "84912152630",
+      "successDate": "2026-08-11 19:10:04",
+      "revenue": 125000
+    },
+    {
+      "phone": "84914523120",
+      "successDate": "2026-08-06 19:03:37",
+      "revenue": 125000
+    },
+    {
+      "phone": "84912553490",
+      "successDate": "2026-08-05 16:00:03",
+      "revenue": 100000
+    },
+    {
+      "phone": "84914724421",
+      "successDate": "2026-08-04 19:20:03",
+      "revenue": 125000
+    },
+    {
+      "phone": "84912205873",
+      "successDate": "2026-08-04 13:40:03",
+      "revenue": 120000
+    }
+  ],
   "KBH028071_202": [
     {
       "phone": "84836152039",
       "successDate": "2026-08-19 11:01:16",
       "revenue": 100000
+    }
+  ],
+  "KBH028071_082": [
+    {
+      "phone": "84913768584",
+      "successDate": "2026-08-19 10:40:04",
+      "revenue": 120000
+    },
+    {
+      "phone": "84912588715",
+      "successDate": "2026-08-19 09:30:04",
+      "revenue": 120000
+    },
+    {
+      "phone": "84856622219",
+      "successDate": "2026-08-14 14:00:03",
+      "revenue": 120000
+    },
+    {
+      "phone": "84822322209",
+      "successDate": "2026-08-14 07:40:04",
+      "revenue": 120000
+    },
+    {
+      "phone": "84824195568",
+      "successDate": "2026-08-13 18:20:06",
+      "revenue": 120000
+    },
+    {
+      "phone": "84912245812",
+      "successDate": "2026-08-13 11:00:05",
+      "revenue": 120000
+    },
+    {
+      "phone": "84912482380",
+      "successDate": "2026-08-12 07:40:03",
+      "revenue": 120000
+    },
+    {
+      "phone": "84945332304",
+      "successDate": "2026-08-10 08:20:03",
+      "revenue": 120000
+    },
+    {
+      "phone": "84826457860",
+      "successDate": "2026-08-05 11:04:41",
+      "revenue": 120000
+    },
+    {
+      "phone": "84942488638",
+      "successDate": "2026-08-04 10:00:05",
+      "revenue": 125000
+    }
+  ],
+  "KBH028071_205": [
+    {
+      "phone": "84911482169",
+      "successDate": "2026-08-19 07:59:52",
+      "revenue": 120000
+    },
+    {
+      "phone": "84912163614",
+      "successDate": "2026-08-14 12:50:03",
+      "revenue": 120000
+    },
+    {
+      "phone": "84912078124",
+      "successDate": "2026-08-13 11:50:04",
+      "revenue": 120000
     }
   ],
   "KBH028071_133": [
@@ -10567,6 +11253,16 @@
       "revenue": 125000
     },
     {
+      "phone": "84816834726",
+      "successDate": "2026-08-13 16:50:07",
+      "revenue": 1500000
+    },
+    {
+      "phone": "84816836805",
+      "successDate": "2026-08-13 16:50:06",
+      "revenue": 1500000
+    },
+    {
       "phone": "84829137737",
       "successDate": "2026-08-12 15:20:13",
       "revenue": 100000
@@ -10584,6 +11280,11 @@
     {
       "phone": "84845644139",
       "successDate": "2026-08-07 08:30:11",
+      "revenue": 125000
+    },
+    {
+      "phone": "84817617479",
+      "successDate": "2026-08-05 19:20:04",
       "revenue": 125000
     },
     {
@@ -10669,14 +11370,39 @@
       "revenue": 120000
     },
     {
+      "phone": "84824703998",
+      "successDate": "2026-08-13 10:50:04",
+      "revenue": 120000
+    },
+    {
       "phone": "84912479604",
       "successDate": "2026-08-13 09:20:05",
+      "revenue": 120000
+    },
+    {
+      "phone": "84818789735",
+      "successDate": "2026-08-13 08:50:06",
+      "revenue": 120000
+    },
+    {
+      "phone": "84915329501",
+      "successDate": "2026-08-12 16:30:04",
+      "revenue": 120000
+    },
+    {
+      "phone": "84915045850",
+      "successDate": "2026-08-12 16:00:04",
       "revenue": 120000
     },
     {
       "phone": "84912733604",
       "successDate": "2026-08-11 18:40:03",
       "revenue": 120000
+    },
+    {
+      "phone": "84816873806",
+      "successDate": "2026-08-11 18:20:05",
+      "revenue": 1500000
     },
     {
       "phone": "84911413740",
@@ -10686,6 +11412,21 @@
     {
       "phone": "84912149841",
       "successDate": "2026-08-11 12:30:04",
+      "revenue": 120000
+    },
+    {
+      "phone": "84911703142",
+      "successDate": "2026-08-09 08:30:04",
+      "revenue": 120000
+    },
+    {
+      "phone": "84813028329",
+      "successDate": "2026-08-08 19:01:15",
+      "revenue": 159000
+    },
+    {
+      "phone": "84853470480",
+      "successDate": "2026-08-08 16:40:05",
       "revenue": 120000
     },
     {
@@ -10722,6 +11463,11 @@
       "phone": "84912874156",
       "successDate": "2026-08-05 10:20:09",
       "revenue": 120000
+    },
+    {
+      "phone": "84816892461",
+      "successDate": "2026-08-04 21:40:03",
+      "revenue": 1500000
     },
     {
       "phone": "84912635460",
@@ -10799,11 +11545,65 @@
       "revenue": 120000
     }
   ],
+  "KBH028071_137": [
+    {
+      "phone": "84817048915",
+      "successDate": "2026-08-18 19:01:39",
+      "revenue": 1500000
+    },
+    {
+      "phone": "84817032548",
+      "successDate": "2026-08-18 15:50:06",
+      "revenue": 1500000
+    },
+    {
+      "phone": "84915476183",
+      "successDate": "2026-08-16 16:00:03",
+      "revenue": 125000
+    },
+    {
+      "phone": "84915497791",
+      "successDate": "2026-08-12 15:00:04",
+      "revenue": 125000
+    }
+  ],
+  "KBH002005_044": [
+    {
+      "phone": "84942126902",
+      "successDate": "2026-08-18 17:40:03",
+      "revenue": 120000
+    },
+    {
+      "phone": "84852777391",
+      "successDate": "2026-08-18 11:30:05",
+      "revenue": 120000
+    },
+    {
+      "phone": "84942175022",
+      "successDate": "2026-08-14 09:20:04",
+      "revenue": 120000
+    },
+    {
+      "phone": "84941870474",
+      "successDate": "2026-08-08 12:40:03",
+      "revenue": 120000
+    },
+    {
+      "phone": "84913782041",
+      "successDate": "2026-08-02 18:50:04",
+      "revenue": 120000
+    }
+  ],
   "KBH002005_075": [
     {
       "phone": "84917165135",
       "successDate": "2026-08-18 15:40:11",
       "revenue": 90000
+    },
+    {
+      "phone": "84918253104",
+      "successDate": "2026-08-05 10:50:04",
+      "revenue": 120000
     }
   ],
   "KBH028071_034": [
@@ -10845,6 +11645,82 @@
       "revenue": 120000
     }
   ],
+  "KBH002005_091": [
+    {
+      "phone": "84944817257",
+      "successDate": "2026-08-18 14:10:03",
+      "revenue": 75000
+    }
+  ],
+  "KBH028071_046": [
+    {
+      "phone": "84945025439",
+      "successDate": "2026-08-18 14:00:04",
+      "revenue": 125000
+    },
+    {
+      "phone": "84914037192",
+      "successDate": "2026-08-16 13:20:03",
+      "revenue": 100000
+    },
+    {
+      "phone": "84849808768",
+      "successDate": "2026-08-16 08:00:39",
+      "revenue": 159000
+    },
+    {
+      "phone": "84848894089",
+      "successDate": "2026-08-15 17:20:04",
+      "revenue": 125000
+    },
+    {
+      "phone": "84848693269",
+      "successDate": "2026-08-14 08:01:08",
+      "revenue": 125000
+    },
+    {
+      "phone": "84848713539",
+      "successDate": "2026-08-14 07:50:04",
+      "revenue": 125000
+    },
+    {
+      "phone": "84945047139",
+      "successDate": "2026-08-11 10:00:03",
+      "revenue": 100000
+    },
+    {
+      "phone": "84845845939",
+      "successDate": "2026-08-11 09:00:07",
+      "revenue": 100000
+    },
+    {
+      "phone": "84812339288",
+      "successDate": "2026-08-10 12:40:04",
+      "revenue": 360000
+    },
+    {
+      "phone": "84843989294",
+      "successDate": "2026-08-07 16:50:03",
+      "revenue": 120000
+    }
+  ],
+  "KBH028071_051": [
+    {
+      "phone": "84852800478",
+      "successDate": "2026-08-18 12:00:07",
+      "revenue": 75000
+    },
+    {
+      "phone": "84915514441",
+      "successDate": "2026-08-18 10:10:04",
+      "revenue": 125000
+    },
+    {
+      "phone": "84823943338",
+      "successDate": "2026-08-15 12:20:03",
+      "revenue": 120000
+    }
+  ],
   "KBH002005_033": [
     {
       "phone": "84913125577",
@@ -10854,6 +11730,11 @@
     {
       "phone": "84888290552",
       "successDate": "2026-08-11 22:10:08",
+      "revenue": 90000
+    },
+    {
+      "phone": "84916377327",
+      "successDate": "2026-08-11 16:30:07",
       "revenue": 90000
     },
     {
@@ -10875,6 +11756,26 @@
       "phone": "84941360552",
       "successDate": "2026-08-09 13:50:08",
       "revenue": 90000
+    },
+    {
+      "phone": "84852932538",
+      "successDate": "2026-08-08 08:20:04",
+      "revenue": 125000
+    },
+    {
+      "phone": "84942088892",
+      "successDate": "2026-08-07 15:50:08",
+      "revenue": 125000
+    },
+    {
+      "phone": "84912346952",
+      "successDate": "2026-08-07 11:42:03",
+      "revenue": 159000
+    },
+    {
+      "phone": "84917019919",
+      "successDate": "2026-08-07 09:20:04",
+      "revenue": 1500000
     }
   ],
   "KBH028071_161": [
@@ -10975,11 +11876,16 @@
       "revenue": 125000
     }
   ],
-  "KBH028071_051": [
+  "KBH028071_071": [
     {
-      "phone": "84915514441",
-      "successDate": "2026-08-18 10:10:04",
+      "phone": "84911376973",
+      "successDate": "2026-08-18 10:03:52",
       "revenue": 125000
+    },
+    {
+      "phone": "84912885102",
+      "successDate": "2026-08-17 12:40:03",
+      "revenue": 1200000
     }
   ],
   "KBH002005_022": [
@@ -11011,6 +11917,129 @@
       "phone": "84913273122",
       "successDate": "2026-08-17 20:40:05",
       "revenue": 100000
+    }
+  ],
+  "KBH028071_110": [
+    {
+      "phone": "84827137952",
+      "successDate": "2026-08-17 19:00:04",
+      "revenue": 120000
+    },
+    {
+      "phone": "84818948168",
+      "successDate": "2026-08-13 20:30:05",
+      "revenue": 477000
+    },
+    {
+      "phone": "84835654768",
+      "successDate": "2026-08-13 20:20:04",
+      "revenue": 477000
+    },
+    {
+      "phone": "84845964639",
+      "successDate": "2026-08-13 19:00:04",
+      "revenue": 120000
+    },
+    {
+      "phone": "84848544335",
+      "successDate": "2026-08-13 11:40:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84817236489",
+      "successDate": "2026-08-13 08:20:04",
+      "revenue": 120000
+    },
+    {
+      "phone": "84852750757",
+      "successDate": "2026-08-12 13:50:05",
+      "revenue": 159000
+    },
+    {
+      "phone": "84949621719",
+      "successDate": "2026-08-07 17:30:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84941415244",
+      "successDate": "2026-08-07 17:30:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84889709146",
+      "successDate": "2026-08-04 09:00:04",
+      "revenue": 120000
+    },
+    {
+      "phone": "84822408279",
+      "successDate": "2026-08-02 17:01:35",
+      "revenue": 100000
+    },
+    {
+      "phone": "84944733017",
+      "successDate": "2026-08-02 13:10:03",
+      "revenue": 159000
+    }
+  ],
+  "KBH028071_186": [
+    {
+      "phone": "84915535847",
+      "successDate": "2026-08-17 18:40:04",
+      "revenue": 125000
+    },
+    {
+      "phone": "84915526064",
+      "successDate": "2026-08-16 19:20:05",
+      "revenue": 125000
+    },
+    {
+      "phone": "84944227218",
+      "successDate": "2026-08-05 16:00:05",
+      "revenue": 120000
+    }
+  ],
+  "KBH028071_025": [
+    {
+      "phone": "84915634975",
+      "successDate": "2026-08-17 18:00:04",
+      "revenue": 100000
+    }
+  ],
+  "KBH002005_026": [
+    {
+      "phone": "84828378578",
+      "successDate": "2026-08-17 14:10:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84917001322",
+      "successDate": "2026-08-14 16:10:04",
+      "revenue": 125000
+    },
+    {
+      "phone": "84819916992",
+      "successDate": "2026-08-13 16:20:14",
+      "revenue": 125000
+    },
+    {
+      "phone": "84819912918",
+      "successDate": "2026-08-13 16:10:13",
+      "revenue": 125000
+    },
+    {
+      "phone": "84829916992",
+      "successDate": "2026-08-13 16:10:11",
+      "revenue": 125000
+    },
+    {
+      "phone": "84833915918",
+      "successDate": "2026-08-11 17:20:34",
+      "revenue": 125000
+    },
+    {
+      "phone": "84859915918",
+      "successDate": "2026-08-11 16:50:18",
+      "revenue": 125000
     }
   ],
   "KBH028071_136": [
@@ -11045,6 +12074,11 @@
       "revenue": 125000
     },
     {
+      "phone": "84912694201",
+      "successDate": "2026-08-13 08:30:03",
+      "revenue": 120000
+    },
+    {
       "phone": "84913775971",
       "successDate": "2026-08-11 17:20:04",
       "revenue": 125000
@@ -11060,11 +12094,99 @@
       "revenue": 125000
     }
   ],
+  "KBH028071_010": [
+    {
+      "phone": "84915421923",
+      "successDate": "2026-08-17 13:52:01",
+      "revenue": 100000
+    }
+  ],
+  "KBH028071_005": [
+    {
+      "phone": "84914619450",
+      "successDate": "2026-08-17 13:30:04",
+      "revenue": 750000
+    },
+    {
+      "phone": "84911205423",
+      "successDate": "2026-08-13 17:02:34",
+      "revenue": 125000
+    },
+    {
+      "phone": "84914691263",
+      "successDate": "2026-08-13 16:30:05",
+      "revenue": 125000
+    },
+    {
+      "phone": "84914953700",
+      "successDate": "2026-08-10 14:50:04",
+      "revenue": 125000
+    }
+  ],
+  "KBH104893": [
+    {
+      "phone": "84913126640",
+      "successDate": "2026-08-17 11:20:03",
+      "revenue": 120000
+    },
+    {
+      "phone": "84913244021",
+      "successDate": "2026-08-07 14:40:04",
+      "revenue": 125000
+    },
+    {
+      "phone": "84918268940",
+      "successDate": "2026-08-01 18:20:02",
+      "revenue": 125000
+    }
+  ],
+  "KBH028071_040": [
+    {
+      "phone": "84915116360",
+      "successDate": "2026-08-17 10:00:11",
+      "revenue": 125000
+    },
+    {
+      "phone": "84915277546",
+      "successDate": "2026-08-16 20:04:14",
+      "revenue": 125000
+    },
+    {
+      "phone": "84911931026",
+      "successDate": "2026-08-11 18:20:04",
+      "revenue": 125000
+    },
+    {
+      "phone": "84912873035",
+      "successDate": "2026-08-11 12:30:16",
+      "revenue": 120000
+    },
+    {
+      "phone": "84914947429",
+      "successDate": "2026-08-10 11:00:05",
+      "revenue": 125000
+    },
+    {
+      "phone": "84915403752",
+      "successDate": "2026-08-04 11:20:05",
+      "revenue": 120000
+    }
+  ],
   "KBH028071_126": [
     {
       "phone": "84839463808",
       "successDate": "2026-08-17 09:40:03",
       "revenue": 120000
+    },
+    {
+      "phone": "84848843239",
+      "successDate": "2026-08-12 14:40:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84855057277",
+      "successDate": "2026-08-12 07:40:03",
+      "revenue": 159000
     },
     {
       "phone": "84834819808",
@@ -11099,15 +12221,10 @@
       "revenue": 125000
     }
   ],
-  "KBH028071_137": [
+  "KBH028071_180": [
     {
-      "phone": "84915476183",
-      "successDate": "2026-08-16 16:00:03",
-      "revenue": 125000
-    },
-    {
-      "phone": "84915497791",
-      "successDate": "2026-08-12 15:00:04",
+      "phone": "84913048727",
+      "successDate": "2026-08-16 19:40:03",
       "revenue": 125000
     }
   ],
@@ -11118,47 +12235,48 @@
       "revenue": 100000
     }
   ],
+  "KBH028071_003": [
+    {
+      "phone": "84913612034",
+      "successDate": "2026-08-16 13:40:03",
+      "revenue": 125000
+    }
+  ],
+  "KBH028071_002": [
+    {
+      "phone": "84912863762",
+      "successDate": "2026-08-16 11:00:09",
+      "revenue": 100000
+    },
+    {
+      "phone": "84913389701",
+      "successDate": "2026-08-09 08:40:04",
+      "revenue": 100000
+    }
+  ],
   "KBH002327": [
     {
       "phone": "84915343384",
       "successDate": "2026-08-16 09:10:05",
       "revenue": 125000
+    },
+    {
+      "phone": "84911433713",
+      "successDate": "2026-08-03 18:20:04",
+      "revenue": 125000
     }
   ],
-  "KBH104892": [
+  "KBH028071_127": [
     {
-      "phone": "84912519129",
-      "successDate": "2026-08-14 18:00:39",
-      "revenue": 100000
-    },
+      "phone": "84949203240",
+      "successDate": "2026-08-16 08:30:08",
+      "revenue": 120000
+    }
+  ],
+  "KBH028071_176": [
     {
-      "phone": "84912430093",
-      "successDate": "2026-08-13 10:30:04",
-      "revenue": 100000
-    },
-    {
-      "phone": "84912602227",
-      "successDate": "2026-08-13 09:30:05",
-      "revenue": 100000
-    },
-    {
-      "phone": "84914710842",
-      "successDate": "2026-08-13 08:33:03",
-      "revenue": 270000
-    },
-    {
-      "phone": "84912539213",
-      "successDate": "2026-08-05 10:01:21",
-      "revenue": 100000
-    },
-    {
-      "phone": "84912631429",
-      "successDate": "2026-08-04 10:00:19",
-      "revenue": 300000
-    },
-    {
-      "phone": "84912473454",
-      "successDate": "2026-08-04 07:20:03",
+      "phone": "84858328878",
+      "successDate": "2026-08-14 20:00:04",
       "revenue": 125000
     }
   ],
@@ -11166,6 +12284,49 @@
     {
       "phone": "84912124360",
       "successDate": "2026-08-14 16:40:03",
+      "revenue": 100000
+    }
+  ],
+  "KBH028071_105": [
+    {
+      "phone": "84914897107",
+      "successDate": "2026-08-14 12:30:03",
+      "revenue": 120000
+    }
+  ],
+  "KBH028071_044": [
+    {
+      "phone": "84914679962",
+      "successDate": "2026-08-14 10:50:04",
+      "revenue": 159000
+    }
+  ],
+  "KBH028071_095": [
+    {
+      "phone": "84943801267",
+      "successDate": "2026-08-13 20:30:04",
+      "revenue": 125000
+    }
+  ],
+  "KBH002005_097": [
+    {
+      "phone": "84915506435",
+      "successDate": "2026-08-13 19:50:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84915509987",
+      "successDate": "2026-08-13 19:50:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84915508872",
+      "successDate": "2026-08-13 19:50:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84915510931",
+      "successDate": "2026-08-13 19:50:05",
       "revenue": 100000
     }
   ],
@@ -11183,35 +12344,118 @@
       "revenue": 125000
     },
     {
+      "phone": "84917124807",
+      "successDate": "2026-08-13 15:20:05",
+      "revenue": 125000
+    },
+    {
       "phone": "84914369121",
       "successDate": "2026-08-13 08:40:05",
       "revenue": 125000
     }
   ],
-  "KBH002005_026": [
+  "KBH002005_095": [
     {
-      "phone": "84819916992",
-      "successDate": "2026-08-13 16:20:14",
+      "phone": "84856454325",
+      "successDate": "2026-08-13 17:40:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84818360485",
+      "successDate": "2026-08-13 17:40:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84847127121",
+      "successDate": "2026-08-13 16:50:09",
+      "revenue": 100000
+    }
+  ],
+  "KBH002005_009": [
+    {
+      "phone": "84889590255",
+      "successDate": "2026-08-13 16:10:06",
+      "revenue": 100000
+    },
+    {
+      "phone": "84886588935",
+      "successDate": "2026-08-13 16:10:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84889963475",
+      "successDate": "2026-08-13 16:10:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84834353258",
+      "successDate": "2026-08-13 16:05:26",
+      "revenue": 100000
+    },
+    {
+      "phone": "84847483864",
+      "successDate": "2026-08-13 13:10:03",
+      "revenue": 100000
+    }
+  ],
+  "KBH028071_139": [
+    {
+      "phone": "84836701139",
+      "successDate": "2026-08-13 15:50:06",
+      "revenue": 100000
+    },
+    {
+      "phone": "84854457139",
+      "successDate": "2026-08-13 09:00:03",
+      "revenue": 120000
+    },
+    {
+      "phone": "84839439868",
+      "successDate": "2026-08-11 08:40:07",
+      "revenue": 159000
+    },
+    {
+      "phone": "84822083237",
+      "successDate": "2026-08-10 17:30:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84822574739",
+      "successDate": "2026-08-07 10:10:11",
+      "revenue": 100000
+    },
+    {
+      "phone": "84827514879",
+      "successDate": "2026-08-07 09:30:06",
+      "revenue": 100000
+    },
+    {
+      "phone": "84822140469",
+      "successDate": "2026-08-06 12:50:04",
       "revenue": 125000
     },
     {
-      "phone": "84819912918",
-      "successDate": "2026-08-13 16:10:13",
+      "phone": "84946427466",
+      "successDate": "2026-08-02 10:00:06",
+      "revenue": 100000
+    }
+  ],
+  "KBH002005_025": [
+    {
+      "phone": "84945464352",
+      "successDate": "2026-08-13 15:50:06",
       "revenue": 125000
     },
     {
-      "phone": "84829916992",
-      "successDate": "2026-08-13 16:10:11",
+      "phone": "84944017792",
+      "successDate": "2026-08-13 15:50:04",
       "revenue": 125000
-    },
+    }
+  ],
+  "KBH028071_041": [
     {
-      "phone": "84833915918",
-      "successDate": "2026-08-11 17:20:34",
-      "revenue": 125000
-    },
-    {
-      "phone": "84859915918",
-      "successDate": "2026-08-11 16:50:18",
+      "phone": "84845113146",
+      "successDate": "2026-08-13 15:50:05",
       "revenue": 125000
     }
   ],
@@ -11220,6 +12464,23 @@
       "phone": "84822945566",
       "successDate": "2026-08-13 15:01:59",
       "revenue": 159000
+    }
+  ],
+  "KBH028071_063": [
+    {
+      "phone": "84947555497",
+      "successDate": "2026-08-13 14:13:13",
+      "revenue": 75000
+    },
+    {
+      "phone": "84827371797",
+      "successDate": "2026-08-13 14:03:06",
+      "revenue": 120000
+    },
+    {
+      "phone": "84829292535",
+      "successDate": "2026-08-13 09:40:04",
+      "revenue": 120000
     }
   ],
   "KBH028071_157": [
@@ -11234,14 +12495,101 @@
       "revenue": 125000
     }
   ],
+  "KBH028071_065": [
+    {
+      "phone": "84914771645",
+      "successDate": "2026-08-13 11:40:03",
+      "revenue": 120000
+    },
+    {
+      "phone": "84912667106",
+      "successDate": "2026-08-04 16:40:21",
+      "revenue": 120000
+    }
+  ],
+  "KBH028071_032": [
+    {
+      "phone": "84914668742",
+      "successDate": "2026-08-13 11:20:03",
+      "revenue": 159000
+    },
+    {
+      "phone": "84914411759",
+      "successDate": "2026-08-13 10:03:24",
+      "revenue": 75000
+    },
+    {
+      "phone": "84914521112",
+      "successDate": "2026-08-13 08:30:05",
+      "revenue": 75000
+    }
+  ],
+  "KBH028071_054": [
+    {
+      "phone": "84948810769",
+      "successDate": "2026-08-13 10:50:07",
+      "revenue": 120000
+    }
+  ],
+  "KBH028071_076": [
+    {
+      "phone": "84826969575",
+      "successDate": "2026-08-12 14:20:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84837767599",
+      "successDate": "2026-08-10 14:00:04",
+      "revenue": 125000
+    },
+    {
+      "phone": "84828036696",
+      "successDate": "2026-08-08 11:00:05",
+      "revenue": 100000
+    },
+    {
+      "phone": "84858186663",
+      "successDate": "2026-08-07 08:00:04",
+      "revenue": 100000
+    }
+  ],
+  "KBH028071_111": [
+    {
+      "phone": "84889116176",
+      "successDate": "2026-08-12 13:30:04",
+      "revenue": 159000
+    }
+  ],
   "KBH028071_085": [
     {
       "phone": "84834576137",
       "successDate": "2026-08-12 12:31:54",
       "revenue": 100000
+    },
+    {
+      "phone": "84852858772",
+      "successDate": "2026-08-11 17:00:09",
+      "revenue": 100000
+    }
+  ],
+  "KBH028071_074": [
+    {
+      "phone": "84854557776",
+      "successDate": "2026-08-12 12:30:05",
+      "revenue": 125000
+    },
+    {
+      "phone": "84847477898",
+      "successDate": "2026-08-08 08:10:05",
+      "revenue": 100000
     }
   ],
   "KBH028071_072": [
+    {
+      "phone": "84822221040",
+      "successDate": "2026-08-11 18:09:08",
+      "revenue": 75000
+    },
     {
       "phone": "84948555691",
       "successDate": "2026-08-11 18:00:19",
@@ -11258,18 +12606,54 @@
       "phone": "84813799392",
       "successDate": "2026-08-11 17:30:04",
       "revenue": 79000
-    }
-  ],
-  "KBH028071_040": [
-    {
-      "phone": "84912873035",
-      "successDate": "2026-08-11 12:30:16",
-      "revenue": 120000
     },
     {
-      "phone": "84915403752",
-      "successDate": "2026-08-04 11:20:05",
+      "phone": "84833154539",
+      "successDate": "2026-08-08 15:10:05",
+      "revenue": 125000
+    },
+    {
+      "phone": "84853365079",
+      "successDate": "2026-08-07 13:00:04",
+      "revenue": 125000
+    }
+  ],
+  "KBH028071_114": [
+    {
+      "phone": "84911558946",
+      "successDate": "2026-08-11 17:10:04",
       "revenue": 120000
+    }
+  ],
+  "KBH028071_097": [
+    {
+      "phone": "84941629350",
+      "successDate": "2026-08-11 16:00:07",
+      "revenue": 90000
+    },
+    {
+      "phone": "84941562930",
+      "successDate": "2026-08-09 12:20:05",
+      "revenue": 100000
+    }
+  ],
+  "KBH028071_165": [
+    {
+      "phone": "84912870380",
+      "successDate": "2026-08-11 15:40:06",
+      "revenue": 100000
+    }
+  ],
+  "KBH002005_092": [
+    {
+      "phone": "84948278857",
+      "successDate": "2026-08-11 15:10:04",
+      "revenue": 125000
+    },
+    {
+      "phone": "84945717857",
+      "successDate": "2026-08-11 15:10:04",
+      "revenue": 125000
     }
   ],
   "KBH002005_073": [
@@ -11279,30 +12663,16 @@
       "revenue": 159000
     }
   ],
-  "KBH028071_046": [
-    {
-      "phone": "84945047139",
-      "successDate": "2026-08-11 10:00:03",
-      "revenue": 100000
-    },
-    {
-      "phone": "84845845939",
-      "successDate": "2026-08-11 09:00:07",
-      "revenue": 100000
-    }
-  ],
   "KBH028071_115": [
     {
       "phone": "84853057572",
       "successDate": "2026-08-11 09:30:06",
       "revenue": 90000
-    }
-  ],
-  "KBH028071_139": [
+    },
     {
-      "phone": "84839439868",
-      "successDate": "2026-08-11 08:40:07",
-      "revenue": 159000
+      "phone": "84823789484",
+      "successDate": "2026-08-07 08:20:02",
+      "revenue": 75000
     }
   ],
   "KBH002005_084": [
@@ -11336,6 +12706,20 @@
       "revenue": 100000
     }
   ],
+  "KBH002005_046": [
+    {
+      "phone": "84914758712",
+      "successDate": "2026-08-09 19:40:03",
+      "revenue": 600000
+    }
+  ],
+  "KBH028071_098": [
+    {
+      "phone": "84915370108",
+      "successDate": "2026-08-09 14:30:05",
+      "revenue": 120000
+    }
+  ],
   "KBH028071_120": [
     {
       "phone": "84913088672",
@@ -11353,6 +12737,52 @@
       "phone": "84853573079",
       "successDate": "2026-08-09 10:14:07",
       "revenue": 155000
+    },
+    {
+      "phone": "84915429510",
+      "successDate": "2026-08-07 10:52:51",
+      "revenue": 100000
+    }
+  ],
+  "KBH028071_080": [
+    {
+      "phone": "84832400750",
+      "successDate": "2026-08-09 08:50:06",
+      "revenue": 1500000
+    },
+    {
+      "phone": "84944554950",
+      "successDate": "2026-08-04 11:00:05",
+      "revenue": 120000
+    },
+    {
+      "phone": "84947475507",
+      "successDate": "2026-08-04 09:30:08",
+      "revenue": 75000
+    }
+  ],
+  "KBH002005_041": [
+    {
+      "phone": "84813411581",
+      "successDate": "2026-08-08 15:30:04",
+      "revenue": 90000
+    },
+    {
+      "phone": "84813489637",
+      "successDate": "2026-08-08 15:02:05",
+      "revenue": 90000
+    },
+    {
+      "phone": "84812784271",
+      "successDate": "2026-08-07 09:30:07",
+      "revenue": 120000
+    }
+  ],
+  "KBH028071_184": [
+    {
+      "phone": "84948935536",
+      "successDate": "2026-08-07 18:50:04",
+      "revenue": 120000
     }
   ],
   "KBH002005_005": [
@@ -11364,6 +12794,18 @@
     {
       "phone": "84915541611",
       "successDate": "2026-08-07 09:30:22",
+      "revenue": 100000
+    }
+  ],
+  "KBH028071_096": [
+    {
+      "phone": "84835678872",
+      "successDate": "2026-08-07 15:40:04",
+      "revenue": 100000
+    },
+    {
+      "phone": "84856756559",
+      "successDate": "2026-08-07 08:20:06",
       "revenue": 100000
     }
   ],
@@ -11386,11 +12828,25 @@
       "revenue": 90000
     }
   ],
+  "KBH028071_078": [
+    {
+      "phone": "84914524363",
+      "successDate": "2026-08-07 11:30:04",
+      "revenue": 125000
+    }
+  ],
   "KBH002005_020": [
     {
       "phone": "84914238595",
       "successDate": "2026-08-07 11:20:25",
       "revenue": 159000
+    }
+  ],
+  "KBH028071_182": [
+    {
+      "phone": "84949736747",
+      "successDate": "2026-08-07 11:00:06",
+      "revenue": 75000
     }
   ],
   "KBH028071_153": [
@@ -11417,11 +12873,25 @@
       "revenue": 100000
     }
   ],
+  "KBH028071_009": [
+    {
+      "phone": "84912318180",
+      "successDate": "2026-08-06 11:40:04",
+      "revenue": 159000
+    }
+  ],
   "KBH028071_135": [
     {
       "phone": "84816966538",
       "successDate": "2026-08-05 18:49:25",
       "revenue": 125000
+    }
+  ],
+  "KBH028071_144": [
+    {
+      "phone": "84915186754",
+      "successDate": "2026-08-05 15:00:03",
+      "revenue": 90000
     }
   ],
   "KBH028071_155": [
@@ -11431,11 +12901,11 @@
       "revenue": 90000
     }
   ],
-  "KBH028071_065": [
+  "KBH002005_001": [
     {
-      "phone": "84912667106",
-      "successDate": "2026-08-04 16:40:21",
-      "revenue": 120000
+      "phone": "84919207164",
+      "successDate": "2026-08-04 17:30:05",
+      "revenue": 125000
     }
   ],
   "KBH002005_083": [
@@ -11445,44 +12915,11 @@
       "revenue": 100000
     }
   ],
-  "KBH028071_035": [
-    {
-      "phone": "84912205873",
-      "successDate": "2026-08-04 13:40:03",
-      "revenue": 120000
-    }
-  ],
-  "KBH028071_080": [
-    {
-      "phone": "84944554950",
-      "successDate": "2026-08-04 11:00:05",
-      "revenue": 120000
-    },
-    {
-      "phone": "84947475507",
-      "successDate": "2026-08-04 09:30:08",
-      "revenue": 75000
-    }
-  ],
   "KBH028071_152": [
     {
       "phone": "84815520929",
       "successDate": "2026-08-04 10:30:12",
       "revenue": 90000
-    }
-  ],
-  "KBH028071_082": [
-    {
-      "phone": "84942488638",
-      "successDate": "2026-08-04 10:00:05",
-      "revenue": 125000
-    }
-  ],
-  "KBH028071_110": [
-    {
-      "phone": "84889709146",
-      "successDate": "2026-08-04 09:00:04",
-      "revenue": 120000
     }
   ],
   "KBH028071_129": [
@@ -11499,34 +12936,51 @@
       "revenue": 125000
     }
   ],
+  "KBH028071_028": [
+    {
+      "phone": "84914282613",
+      "successDate": "2026-08-03 08:40:08",
+      "revenue": 120000
+    }
+  ],
+  "KBH028071_086": [
+    {
+      "phone": "84911805470",
+      "successDate": "2026-08-03 08:40:05",
+      "revenue": 100000
+    }
+  ],
+  "KBH028071_073": [
+    {
+      "phone": "84914061513",
+      "successDate": "2026-08-01 10:40:03",
+      "revenue": 125000
+    }
+  ],
+  "KBH028071_087": [
+    {
+      "phone": "84912451107",
+      "successDate": "2026-08-01 10:04:12",
+      "revenue": 125000
+    }
+  ],
   "KBH002005_082": [],
   "KBH002005_086": [],
   "KBH028071_199": [],
   "KBH028071_201": [],
-  "KBH002005_092": [],
   "KBH002005_090": [],
-  "KBH002005_091": [],
   "KBH002005_094": [],
-  "KBH028071_176": [],
   "KBH028071_173": [],
   "KBH028071_178": [],
-  "KBH028071_180": [],
-  "KBH028071_177": [],
   "KBH028071_179": [],
-  "KBH028071_146": [],
   "KBH028071_149": [],
   "KBH028071_191": [],
   "KBH002005_072": [],
-  "KBH028071_182": [],
-  "KBH028071_186": [],
-  "KBH028071_181": [],
   "KBH028071_188": [],
   "KBH028071_183": [],
-  "KBH028071_184": [],
   "KBH028071_185": [],
   "KBH028071_192": [],
   "KBH002005_096": [],
-  "KBH002005_095": [],
   "KBH002005_088": [],
   "KBH002005_089": [],
   "KBH002005_074": [],
@@ -11540,33 +12994,24 @@
   "KBH002005_079": [],
   "KBH002005_080": [],
   "KBH002005_081": [],
-  "KBH028071_205": [],
-  "KBH028071_105": [],
-  "KBH028071_114": [],
   "KBH002005_066": [],
   "KBH002005_065": [],
   "KBH002005_067": [],
   "KBH028071_160": [],
   "KBH028071_163": [],
   "KBH028071_162": [],
-  "KBH028071_063": [],
   "KBH028071_042": [],
   "KBH002005_062": [],
   "KBH002005_064": [],
   "KBH002005_061": [],
   "KBH002005_063": [],
-  "KBH028071_144": [],
   "KBH002005_003": [],
-  "KBH028071_098": [],
-  "KBH028071_041": [],
   "KBH028071_026": [],
   "KBH002005_002": [],
   "KBH028071_090": [],
   "KBH028071_083": [],
   "KBH002361": [],
   "KBH028071_069": [],
-  "KBH028071_074": [],
-  "KBH028071_097": [],
   "KBH028071_092": [],
   "KBH028071_093": [],
   "KBH028071_099": [],
@@ -11575,21 +13020,10 @@
   "KBH002005_042": [],
   "KBH028071_043": [],
   "KBH028071_164": [],
-  "KBH002005_044": [],
   "KBH002005_013": [],
-  "KBH002005_025": [],
-  "KBH002005_009": [],
-  "KBH002005_001": [],
   "KBH002005_055": [],
   "KBH002005_034": [],
-  "KBH002005_046": [],
-  "KBH028071_076": [],
-  "KBH028071_127": [],
-  "KBH028071_032": [],
-  "KBH028071_054": [],
-  "KBH028071_003": [],
   "KBH002005_060": [],
-  "KBH028071_009": [],
   "KBH028071_008": [],
   "KBH028071_011": [],
   "KBH002005_070": [],
@@ -11599,17 +13033,12 @@
   "KBH028071_088": [],
   "KBH028071_089": [],
   "KBH028071_084": [],
-  "KBH028071_086": [],
-  "KBH028071_087": [],
   "KBH028071_061": [],
   "KBH028071_013": [],
   "KBH028071_029": [],
-  "KBH028071_096": [],
   "KBH028071_077": [],
   "KBH028071_050": [],
-  "KBH002005_041": [],
   "KBH002005_049": [],
-  "KBH028071_071": [],
   "KBH028071_108": [],
   "KBH002005_032": [],
   "KBH028071_001": [],
@@ -11617,36 +13046,26 @@
   "KBH002005_048": [],
   "KBH002005_050": [],
   "KBH028071_109": [],
-  "KBH104893": [],
   "KBH028071_113": [],
   "KBH028071_091": [],
   "KBH028071_023": [],
   "KBH028071_156": [],
   "KBH028071_158": [],
   "KBH028071_151": [],
-  "KBH028071_044": [],
   "KBH028071_154": [],
-  "KBH028071_073": [],
   "KBH028071_134": [],
-  "KBH028071_025": [],
   "KBH028071_019": [],
   "KBH028071_062": [],
   "KBH028071_033": [],
-  "KBH028071_130": [],
   "KBH028071_125": [],
   "KBH028071_122": [],
   "KBH002005_057": [],
   "KBH002005_006": [],
   "KBH002005_007": [],
-  "KBH028071_095": [],
   "KBH028071_124": [],
-  "KBH028071_010": [],
-  "KBH028071_005": [],
   "KBH028071_004": [],
   "KBH002005_052": [],
-  "KBH028071_002": [],
   "KBH028071_143": [],
-  "KBH028071_165": [],
   "KBH028071_166": [],
   "KBH028071_168": [],
   "KBH028071_169": [],
@@ -11657,11 +13076,8 @@
   "KBH028071_052": [],
   "KBH028071_030": [],
   "KBH028071_145": [],
-  "KBH028071_028": [],
-  "KBH028071_111": [],
   "KBH028071_018": [],
   "KBH028071_024": [],
-  "KBH028071_078": [],
   "KBH028071_209": [],
   "KBH002005_100": [],
   "KBH002005_101": [],
@@ -11671,7 +13087,6 @@
   "KBH028071_189": [],
   "KBH028071_190": [],
   "KBH002005_102": [],
-  "KBH002005_097": [],
   "KBH002005_107": [],
   "KBH002005_106": [],
   "KBH002005_105": [],
@@ -11697,32 +13112,32 @@
     {
       "phone": "84828662620",
       "successDate": "2026-08-19 10:40:05",
-      "revenue": 0
+      "revenue": 360000
     },
     {
       "phone": "84853758375",
       "successDate": "2026-08-15 11:50:55",
-      "revenue": 0
+      "revenue": 375000
     },
     {
       "phone": "84946458250",
       "successDate": "2026-08-13 16:50:07",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84832398729",
       "successDate": "2026-08-13 14:00:03",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84845958139",
       "successDate": "2026-08-12 14:01:46",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84847912226",
       "successDate": "2026-08-12 11:50:06",
-      "revenue": 0
+      "revenue": 300000
     }
   ],
   "KBH028071_132": [
@@ -12216,12 +13631,12 @@
     {
       "phone": "84854425199",
       "successDate": "2026-08-11 20:30:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84853551399",
       "successDate": "2026-08-09 09:40:05",
-      "revenue": 0
+      "revenue": 125000
     }
   ],
   "KBH002005_087": [
@@ -12245,7 +13660,7 @@
     {
       "phone": "84829934886",
       "successDate": "2026-08-15 12:20:03",
-      "revenue": 0
+      "revenue": 75000
     },
     {
       "phone": "84888876899",
@@ -12292,72 +13707,72 @@
     {
       "phone": "84854855828",
       "successDate": "2026-08-18 14:50:06",
-      "revenue": 0
+      "revenue": 159000
     },
     {
       "phone": "84827276660",
       "successDate": "2026-08-18 11:20:06",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84853646162",
       "successDate": "2026-08-18 10:20:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84858827776",
       "successDate": "2026-08-17 16:30:08",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84855993252",
       "successDate": "2026-08-15 16:40:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84813427547",
       "successDate": "2026-08-15 15:30:06",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84854646929",
       "successDate": "2026-08-13 18:20:06",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84812882940",
       "successDate": "2026-08-13 15:10:03",
-      "revenue": 0
+      "revenue": 900000
     },
     {
       "phone": "84847873536",
       "successDate": "2026-08-13 12:50:03",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84812435067",
       "successDate": "2026-08-13 09:50:06",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84838586676",
       "successDate": "2026-08-12 14:20:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84859393767",
       "successDate": "2026-08-12 09:30:17",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84838586660",
       "successDate": "2026-08-12 08:50:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84829234898",
       "successDate": "2026-08-11 17:00:05",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84858786272",
@@ -12392,82 +13807,82 @@
     {
       "phone": "84835554656",
       "successDate": "2026-08-09 11:40:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84858587969",
       "successDate": "2026-08-09 10:50:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84856767995",
       "successDate": "2026-08-09 10:20:06",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84856767599",
       "successDate": "2026-08-09 09:20:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84836837336",
       "successDate": "2026-08-08 14:20:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84838848556",
       "successDate": "2026-08-08 14:10:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84836464898",
       "successDate": "2026-08-08 13:00:03",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84853900410",
       "successDate": "2026-08-08 08:50:06",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84843983499",
       "successDate": "2026-08-07 19:00:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84839893646",
       "successDate": "2026-08-07 15:20:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84839795758",
       "successDate": "2026-08-07 13:20:03",
-      "revenue": 0
+      "revenue": 159000
     },
     {
       "phone": "84856796662",
       "successDate": "2026-08-07 12:40:04",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84838457772",
       "successDate": "2026-08-05 13:00:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84849791828",
       "successDate": "2026-08-04 15:30:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84857773062",
       "successDate": "2026-08-03 10:50:06",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84856877736",
       "successDate": "2026-08-03 09:00:05",
-      "revenue": 0
+      "revenue": 100000
     }
   ],
   "KBH028071_031": [
@@ -12486,12 +13901,12 @@
     {
       "phone": "84828378578",
       "successDate": "2026-08-17 14:10:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84917001322",
       "successDate": "2026-08-14 16:10:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84819916992",
@@ -12548,7 +13963,7 @@
     {
       "phone": "84911262351",
       "successDate": "2026-08-16 16:54:25",
-      "revenue": 50000
+      "revenue": 90000
     },
     {
       "phone": "84912152921",
@@ -12766,47 +14181,47 @@
     {
       "phone": "84888308751",
       "successDate": "2026-08-18 08:40:07",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84888312897",
       "successDate": "2026-08-18 08:40:07",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84888307510",
       "successDate": "2026-08-13 15:54:56",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84888308031",
       "successDate": "2026-08-13 15:54:44",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84888105716",
       "successDate": "2026-08-13 15:30:06",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84846146039",
       "successDate": "2026-08-13 12:50:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84846946439",
       "successDate": "2026-08-13 12:50:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84943849298",
       "successDate": "2026-08-13 12:50:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84888148451",
       "successDate": "2026-08-13 08:10:04",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84826180239",
@@ -12826,12 +14241,12 @@
     {
       "phone": "84832793309",
       "successDate": "2026-08-07 17:50:06",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84825233309",
       "successDate": "2026-08-07 17:40:06",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84888014521",
@@ -12841,22 +14256,22 @@
     {
       "phone": "84886973201",
       "successDate": "2026-08-07 11:30:05",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84847689369",
       "successDate": "2026-08-06 17:20:06",
-      "revenue": 0
+      "revenue": 90000
     },
     {
       "phone": "84886206802",
       "successDate": "2026-08-06 16:03:11",
-      "revenue": 0
+      "revenue": 90000
     },
     {
       "phone": "84886842906",
       "successDate": "2026-08-06 09:10:05",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84846202239",
@@ -12871,12 +14286,12 @@
     {
       "phone": "84886814159",
       "successDate": "2026-08-04 15:40:06",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84886795951",
       "successDate": "2026-08-04 15:40:06",
-      "revenue": 0
+      "revenue": 1500000
     }
   ],
   "KBH028071_015": [
@@ -12898,7 +14313,7 @@
     {
       "phone": "84914802560",
       "successDate": "2026-08-08 13:00:03",
-      "revenue": 0
+      "revenue": 120000
     }
   ],
   "KBH104891": [
@@ -12910,12 +14325,12 @@
     {
       "phone": "84913890729",
       "successDate": "2026-08-17 10:50:08",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84911985465",
       "successDate": "2026-08-02 15:40:02",
-      "revenue": 0
+      "revenue": 120000
     }
   ],
   "KBH002005_028": [
@@ -13039,7 +14454,7 @@
     {
       "phone": "84914348947",
       "successDate": "2026-08-12 12:20:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84914598870",
@@ -13049,27 +14464,27 @@
     {
       "phone": "84914563207",
       "successDate": "2026-08-10 15:00:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84856174579",
       "successDate": "2026-08-10 09:40:05",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84914738385",
       "successDate": "2026-08-10 09:10:05",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84823447379",
       "successDate": "2026-08-09 15:10:03",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84914687292",
       "successDate": "2026-08-09 13:40:03",
-      "revenue": 0
+      "revenue": 375000
     },
     {
       "phone": "84838848767",
@@ -13079,12 +14494,12 @@
     {
       "phone": "84914601412",
       "successDate": "2026-08-09 08:30:04",
-      "revenue": 0
+      "revenue": 159000
     },
     {
       "phone": "84914329070",
       "successDate": "2026-08-05 08:20:05",
-      "revenue": 0
+      "revenue": 125000
     }
   ],
   "KBH028071_046": [
@@ -13096,32 +14511,32 @@
     {
       "phone": "84945025439",
       "successDate": "2026-08-18 14:00:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84914037192",
       "successDate": "2026-08-16 13:20:03",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84849808768",
       "successDate": "2026-08-16 08:00:39",
-      "revenue": 0
+      "revenue": 159000
     },
     {
       "phone": "84848894089",
       "successDate": "2026-08-15 17:20:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84848693269",
       "successDate": "2026-08-14 08:01:08",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84848713539",
       "successDate": "2026-08-14 07:50:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84945047139",
@@ -13136,12 +14551,12 @@
     {
       "phone": "84812339288",
       "successDate": "2026-08-10 12:40:04",
-      "revenue": 0
+      "revenue": 360000
     },
     {
       "phone": "84843989294",
       "successDate": "2026-08-07 16:50:03",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84947774492",
@@ -13168,12 +14583,12 @@
     {
       "phone": "84911482169",
       "successDate": "2026-08-19 07:59:52",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84912163614",
       "successDate": "2026-08-14 12:50:03",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84912118965",
@@ -13183,7 +14598,7 @@
     {
       "phone": "84912078124",
       "successDate": "2026-08-13 11:50:04",
-      "revenue": 0
+      "revenue": 120000
     }
   ],
   "KBH028071_048": [
@@ -13300,7 +14715,7 @@
     {
       "phone": "84915331063",
       "successDate": "2026-08-01 17:50:04",
-      "revenue": 0
+      "revenue": 159000
     }
   ],
   "KBH028071_133": [
@@ -13484,12 +14899,12 @@
     {
       "phone": "84816992634",
       "successDate": "2026-08-13 08:50:05",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84914681210",
       "successDate": "2026-08-05 09:00:03",
-      "revenue": 0
+      "revenue": 125000
     }
   ],
   "KBH028071_036": [
@@ -13770,22 +15185,22 @@
     {
       "phone": "84915392604",
       "successDate": "2026-08-08 16:50:03",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84915349028",
       "successDate": "2026-08-08 14:40:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84915365071",
       "successDate": "2026-08-06 13:50:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84915405572",
       "successDate": "2026-08-03 10:20:04",
-      "revenue": 0
+      "revenue": 100000
     }
   ],
   "KBH002005_004": [
@@ -13826,12 +15241,12 @@
     {
       "phone": "84886360752",
       "successDate": "2026-08-19 20:30:03",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84888028792",
       "successDate": "2026-08-12 12:50:04",
-      "revenue": 0
+      "revenue": 125000
     }
   ],
   "KBH002005_007": [
@@ -13875,7 +15290,7 @@
     {
       "phone": "84949736747",
       "successDate": "2026-08-07 11:00:06",
-      "revenue": 0
+      "revenue": 75000
     }
   ],
   "KBH002005_035": [
@@ -14016,7 +15431,7 @@
     {
       "phone": "84916377327",
       "successDate": "2026-08-11 16:30:07",
-      "revenue": 0
+      "revenue": 90000
     },
     {
       "phone": "84941218257",
@@ -14061,7 +15476,7 @@
     {
       "phone": "84852932538",
       "successDate": "2026-08-08 08:20:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84888412268",
@@ -14071,17 +15486,17 @@
     {
       "phone": "84942088892",
       "successDate": "2026-08-07 15:50:08",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84912346952",
       "successDate": "2026-08-07 11:42:03",
-      "revenue": 0
+      "revenue": 159000
     },
     {
       "phone": "84917019919",
       "successDate": "2026-08-07 09:20:04",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84949207992",
@@ -14238,12 +15653,12 @@
     {
       "phone": "84915015431",
       "successDate": "2026-08-19 18:50:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84911695720",
       "successDate": "2026-08-19 17:40:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84914919307",
@@ -14253,17 +15668,17 @@
     {
       "phone": "84825982739",
       "successDate": "2026-08-13 09:20:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84818811165",
       "successDate": "2026-08-08 12:20:03",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84915044974",
       "successDate": "2026-08-06 09:30:05",
-      "revenue": 0
+      "revenue": 125000
     }
   ],
   "KBH028071_050": [
@@ -14391,7 +15806,7 @@
     {
       "phone": "84914524363",
       "successDate": "2026-08-07 11:30:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84918329402",
@@ -14420,29 +15835,29 @@
     {
       "phone": "84949598890",
       "successDate": "2026-08-19 17:10:04",
-      "revenue": 0
+      "revenue": 75000
     },
     {
       "phone": "84838119110",
       "successDate": "2026-08-18 18:20:04",
-      "revenue": 0
+      "revenue": 35000
     }
   ],
   "KBH028071_177": [
     {
       "phone": "84852872838",
       "successDate": "2026-08-19 17:00:10",
-      "revenue": 0
+      "revenue": 375000
     },
     {
       "phone": "84914483590",
       "successDate": "2026-08-19 11:50:05",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84914521436",
       "successDate": "2026-08-14 13:40:04",
-      "revenue": 0
+      "revenue": 125000
     }
   ],
   "KBH028071_139": [
@@ -14459,12 +15874,12 @@
     {
       "phone": "84836701139",
       "successDate": "2026-08-13 15:50:06",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84854457139",
       "successDate": "2026-08-13 09:00:03",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84839439868",
@@ -14474,22 +15889,22 @@
     {
       "phone": "84822083237",
       "successDate": "2026-08-10 17:30:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84822574739",
       "successDate": "2026-08-07 10:10:11",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84827514879",
       "successDate": "2026-08-07 09:30:06",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84822140469",
       "successDate": "2026-08-06 12:50:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84846149039",
@@ -14509,7 +15924,7 @@
     {
       "phone": "84946427466",
       "successDate": "2026-08-02 10:00:06",
-      "revenue": 0
+      "revenue": 100000
     }
   ],
   "KBH028071_003": [
@@ -14526,7 +15941,7 @@
     {
       "phone": "84913612034",
       "successDate": "2026-08-16 13:40:03",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84914269850",
@@ -14570,12 +15985,12 @@
     {
       "phone": "84912561094",
       "successDate": "2026-08-19 12:40:03",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84912121841",
       "successDate": "2026-08-17 20:00:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84912590709",
@@ -14585,12 +16000,12 @@
     {
       "phone": "84912655604",
       "successDate": "2026-08-15 10:30:03",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84912689492",
       "successDate": "2026-08-14 21:10:03",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84912519129",
@@ -14600,17 +16015,17 @@
     {
       "phone": "84912639576",
       "successDate": "2026-08-14 18:00:06",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84912691532",
       "successDate": "2026-08-13 19:04:03",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84912564765",
       "successDate": "2026-08-13 18:30:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84912430093",
@@ -14635,12 +16050,12 @@
     {
       "phone": "84912612610",
       "successDate": "2026-08-11 17:50:09",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84912575033",
       "successDate": "2026-08-08 13:50:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84912539213",
@@ -14660,12 +16075,12 @@
     {
       "phone": "84912688792",
       "successDate": "2026-08-03 19:40:03",
-      "revenue": 0
+      "revenue": 300000
     },
     {
       "phone": "84914874031",
       "successDate": "2026-08-03 11:20:04",
-      "revenue": 0
+      "revenue": 100000
     }
   ],
   "KBH028071_193": [
@@ -14745,7 +16160,7 @@
     {
       "phone": "84912925600",
       "successDate": "2026-08-19 11:30:03",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84917965254",
@@ -14755,32 +16170,32 @@
     {
       "phone": "84912242471",
       "successDate": "2026-08-15 10:10:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84914296985",
       "successDate": "2026-08-13 19:00:03",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84913765718",
       "successDate": "2026-08-13 13:59:54",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84914968130",
       "successDate": "2026-08-13 13:40:03",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84914870580",
       "successDate": "2026-08-13 09:10:03",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84912931335",
       "successDate": "2026-08-13 08:30:08",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84912011845",
@@ -14790,7 +16205,7 @@
     {
       "phone": "84912152630",
       "successDate": "2026-08-11 19:10:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84917789040",
@@ -14800,17 +16215,17 @@
     {
       "phone": "84914523120",
       "successDate": "2026-08-06 19:03:37",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84912553490",
       "successDate": "2026-08-05 16:00:03",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84914724421",
       "successDate": "2026-08-04 19:20:03",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84912205873",
@@ -14851,47 +16266,47 @@
     {
       "phone": "84913768584",
       "successDate": "2026-08-19 10:40:04",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84912588715",
       "successDate": "2026-08-19 09:30:04",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84856622219",
       "successDate": "2026-08-14 14:00:03",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84822322209",
       "successDate": "2026-08-14 07:40:04",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84824195568",
       "successDate": "2026-08-13 18:20:06",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84912245812",
       "successDate": "2026-08-13 11:00:05",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84912482380",
       "successDate": "2026-08-12 07:40:03",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84945332304",
       "successDate": "2026-08-10 08:20:03",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84826457860",
       "successDate": "2026-08-05 11:04:41",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84852873978",
@@ -14942,7 +16357,7 @@
     {
       "phone": "84914771645",
       "successDate": "2026-08-13 11:40:03",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84914801245",
@@ -15008,12 +16423,12 @@
     {
       "phone": "84946519500",
       "successDate": "2026-08-15 17:20:06",
-      "revenue": 0
+      "revenue": 25000
     },
     {
       "phone": "84832400750",
       "successDate": "2026-08-09 08:50:06",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84944554950",
@@ -15057,7 +16472,7 @@
     {
       "phone": "84822221040",
       "successDate": "2026-08-11 18:09:08",
-      "revenue": 0
+      "revenue": 75000
     },
     {
       "phone": "84948555691",
@@ -15089,12 +16504,12 @@
     {
       "phone": "84816834726",
       "successDate": "2026-08-13 16:50:07",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84816836805",
       "successDate": "2026-08-13 16:50:06",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84829137737",
@@ -15124,7 +16539,7 @@
     {
       "phone": "84817617479",
       "successDate": "2026-08-05 19:20:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84845005468",
@@ -15226,7 +16641,7 @@
     {
       "phone": "84824703998",
       "successDate": "2026-08-13 10:50:04",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84912479604",
@@ -15236,17 +16651,17 @@
     {
       "phone": "84818789735",
       "successDate": "2026-08-13 08:50:06",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84915329501",
       "successDate": "2026-08-12 16:30:04",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84915045850",
       "successDate": "2026-08-12 16:00:04",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84912733604",
@@ -15256,7 +16671,7 @@
     {
       "phone": "84816873806",
       "successDate": "2026-08-11 18:20:05",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84911413740",
@@ -15271,17 +16686,17 @@
     {
       "phone": "84911703142",
       "successDate": "2026-08-09 08:30:04",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84813028329",
       "successDate": "2026-08-08 19:01:15",
-      "revenue": 0
+      "revenue": 159000
     },
     {
       "phone": "84853470480",
       "successDate": "2026-08-08 16:40:05",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84912013055",
@@ -15321,7 +16736,7 @@
     {
       "phone": "84816892461",
       "successDate": "2026-08-04 21:40:03",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84912635460",
@@ -15408,12 +16823,12 @@
     {
       "phone": "84817048915",
       "successDate": "2026-08-18 19:01:39",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84817032548",
       "successDate": "2026-08-18 15:50:06",
-      "revenue": 0
+      "revenue": 1500000
     },
     {
       "phone": "84886736412",
@@ -15540,7 +16955,7 @@
     {
       "phone": "84911805470",
       "successDate": "2026-08-03 08:40:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84945535605",
@@ -15552,27 +16967,27 @@
     {
       "phone": "84942126902",
       "successDate": "2026-08-18 17:40:03",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84852777391",
       "successDate": "2026-08-18 11:30:05",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84942175022",
       "successDate": "2026-08-14 09:20:04",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84941870474",
       "successDate": "2026-08-08 12:40:03",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84913782041",
       "successDate": "2026-08-02 18:50:04",
-      "revenue": 0
+      "revenue": 120000
     }
   ],
   "KBH002005_075": [
@@ -15619,7 +17034,7 @@
     {
       "phone": "84918253104",
       "successDate": "2026-08-05 10:50:04",
-      "revenue": 0
+      "revenue": 120000
     }
   ],
   "KBH028071_004": [
@@ -15694,7 +17109,7 @@
     {
       "phone": "84852800478",
       "successDate": "2026-08-18 12:00:07",
-      "revenue": 0
+      "revenue": 75000
     },
     {
       "phone": "84915514441",
@@ -15709,7 +17124,7 @@
     {
       "phone": "84823943338",
       "successDate": "2026-08-15 12:20:03",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84837606663",
@@ -15746,12 +17161,12 @@
     {
       "phone": "84915535847",
       "successDate": "2026-08-17 18:40:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84915526064",
       "successDate": "2026-08-16 19:20:05",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84915510890",
@@ -15776,7 +17191,7 @@
     {
       "phone": "84944227218",
       "successDate": "2026-08-05 16:00:05",
-      "revenue": 0
+      "revenue": 120000
     }
   ],
   "KBH028071_034": [
@@ -15825,19 +17240,19 @@
     {
       "phone": "84833154539",
       "successDate": "2026-08-08 15:10:05",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84853365079",
       "successDate": "2026-08-07 13:00:04",
-      "revenue": 0
+      "revenue": 125000
     }
   ],
   "KBH002005_091": [
     {
       "phone": "84944817257",
       "successDate": "2026-08-18 14:10:03",
-      "revenue": 0
+      "revenue": 75000
     }
   ],
   "KBH002005_046": [
@@ -15849,7 +17264,7 @@
     {
       "phone": "84914758712",
       "successDate": "2026-08-09 19:40:03",
-      "revenue": 0
+      "revenue": 600000
     },
     {
       "phone": "84912367034",
@@ -15866,27 +17281,27 @@
     {
       "phone": "84889590255",
       "successDate": "2026-08-13 16:10:06",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84886588935",
       "successDate": "2026-08-13 16:10:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84889963475",
       "successDate": "2026-08-13 16:10:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84834353258",
       "successDate": "2026-08-13 16:05:26",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84847483864",
       "successDate": "2026-08-13 13:10:03",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84916877464",
@@ -16115,12 +17530,12 @@
     {
       "phone": "84911376973",
       "successDate": "2026-08-18 10:03:52",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84912885102",
       "successDate": "2026-08-17 12:40:03",
-      "revenue": 0
+      "revenue": 1200000
     }
   ],
   "KBH002005_022": [
@@ -16193,7 +17608,7 @@
     {
       "phone": "84948810769",
       "successDate": "2026-08-13 10:50:07",
-      "revenue": 0
+      "revenue": 120000
     }
   ],
   "KBH028071_172": [
@@ -16241,7 +17656,7 @@
     {
       "phone": "84827137952",
       "successDate": "2026-08-17 19:00:04",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84836468238",
@@ -16266,32 +17681,32 @@
     {
       "phone": "84818948168",
       "successDate": "2026-08-13 20:30:05",
-      "revenue": 0
+      "revenue": 477000
     },
     {
       "phone": "84835654768",
       "successDate": "2026-08-13 20:20:04",
-      "revenue": 0
+      "revenue": 477000
     },
     {
       "phone": "84845964639",
       "successDate": "2026-08-13 19:00:04",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84848544335",
       "successDate": "2026-08-13 11:40:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84817236489",
       "successDate": "2026-08-13 08:20:04",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84852750757",
       "successDate": "2026-08-12 13:50:05",
-      "revenue": 0
+      "revenue": 159000
     },
     {
       "phone": "84886548299",
@@ -16301,12 +17716,12 @@
     {
       "phone": "84949621719",
       "successDate": "2026-08-07 17:30:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84941415244",
       "successDate": "2026-08-07 17:30:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84889974924",
@@ -16321,12 +17736,12 @@
     {
       "phone": "84822408279",
       "successDate": "2026-08-02 17:01:35",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84944733017",
       "successDate": "2026-08-02 13:10:03",
-      "revenue": 0
+      "revenue": 159000
     }
   ],
   "KBH028071_009": [
@@ -16353,7 +17768,7 @@
     {
       "phone": "84912318180",
       "successDate": "2026-08-06 11:40:04",
-      "revenue": 0
+      "revenue": 159000
     },
     {
       "phone": "84912231775",
@@ -16375,7 +17790,7 @@
     {
       "phone": "84915634975",
       "successDate": "2026-08-17 18:00:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84912146419",
@@ -16427,7 +17842,7 @@
     {
       "phone": "84915370108",
       "successDate": "2026-08-09 14:30:05",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84915390947",
@@ -16486,7 +17901,7 @@
     {
       "phone": "84912694201",
       "successDate": "2026-08-13 08:30:03",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84913775971",
@@ -16533,7 +17948,7 @@
     {
       "phone": "84915421923",
       "successDate": "2026-08-17 13:52:01",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84945282233",
@@ -16560,17 +17975,17 @@
     {
       "phone": "84914619450",
       "successDate": "2026-08-17 13:30:04",
-      "revenue": 0
+      "revenue": 750000
     },
     {
       "phone": "84911205423",
       "successDate": "2026-08-13 17:02:34",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84914691263",
       "successDate": "2026-08-13 16:30:05",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84914971412",
@@ -16580,7 +17995,7 @@
     {
       "phone": "84914953700",
       "successDate": "2026-08-10 14:50:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84914189201",
@@ -16612,7 +18027,7 @@
     {
       "phone": "84941629350",
       "successDate": "2026-08-11 16:00:07",
-      "revenue": 0
+      "revenue": 90000
     },
     {
       "phone": "84941559603",
@@ -16622,7 +18037,7 @@
     {
       "phone": "84941562930",
       "successDate": "2026-08-09 12:20:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84941567542",
@@ -16777,12 +18192,12 @@
     {
       "phone": "84913126640",
       "successDate": "2026-08-17 11:20:03",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84913244021",
       "successDate": "2026-08-07 14:40:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84915335642",
@@ -16792,24 +18207,24 @@
     {
       "phone": "84918268940",
       "successDate": "2026-08-01 18:20:02",
-      "revenue": 0
+      "revenue": 125000
     }
   ],
   "KBH028071_040": [
     {
       "phone": "84915116360",
       "successDate": "2026-08-17 10:00:11",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84915277546",
       "successDate": "2026-08-16 20:04:14",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84911931026",
       "successDate": "2026-08-11 18:20:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84912873035",
@@ -16819,7 +18234,7 @@
     {
       "phone": "84914947429",
       "successDate": "2026-08-10 11:00:05",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84915403752",
@@ -16841,12 +18256,12 @@
     {
       "phone": "84848843239",
       "successDate": "2026-08-12 14:40:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84855057277",
       "successDate": "2026-08-12 07:40:03",
-      "revenue": 0
+      "revenue": 159000
     },
     {
       "phone": "84834819808",
@@ -16938,7 +18353,7 @@
     {
       "phone": "84914282613",
       "successDate": "2026-08-03 08:40:08",
-      "revenue": 0
+      "revenue": 120000
     }
   ],
   "KBH028071_145": [
@@ -16957,7 +18372,7 @@
     {
       "phone": "84913048727",
       "successDate": "2026-08-16 19:40:03",
-      "revenue": 0
+      "revenue": 125000
     }
   ],
   "KBH028071_042": [
@@ -17003,7 +18418,7 @@
     {
       "phone": "84949203240",
       "successDate": "2026-08-16 08:30:08",
-      "revenue": 0
+      "revenue": 120000
     }
   ],
   "KBH002005_040": [
@@ -17022,7 +18437,7 @@
     {
       "phone": "84912863762",
       "successDate": "2026-08-16 11:00:09",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84913247753",
@@ -17032,7 +18447,7 @@
     {
       "phone": "84913389701",
       "successDate": "2026-08-09 08:40:04",
-      "revenue": 0
+      "revenue": 100000
     }
   ],
   "KBH002327": [
@@ -17044,19 +18459,19 @@
     {
       "phone": "84911433713",
       "successDate": "2026-08-03 18:20:04",
-      "revenue": 0
+      "revenue": 125000
     }
   ],
   "KBH028071_201": [
     {
       "phone": "84912897251",
       "successDate": "2026-08-16 07:20:03",
-      "revenue": 0
+      "revenue": 35000
     },
     {
       "phone": "84915500142",
       "successDate": "2026-08-13 15:40:04",
-      "revenue": 0
+      "revenue": 35000
     },
     {
       "phone": "84915304101",
@@ -17139,7 +18554,7 @@
     {
       "phone": "84914061513",
       "successDate": "2026-08-01 10:40:03",
-      "revenue": 0
+      "revenue": 125000
     }
   ],
   "KBH028071_135": [
@@ -17232,17 +18647,17 @@
     {
       "phone": "84914668742",
       "successDate": "2026-08-13 11:20:03",
-      "revenue": 0
+      "revenue": 159000
     },
     {
       "phone": "84914411759",
       "successDate": "2026-08-13 10:03:24",
-      "revenue": 0
+      "revenue": 75000
     },
     {
       "phone": "84914521112",
       "successDate": "2026-08-13 08:30:05",
-      "revenue": 0
+      "revenue": 75000
     },
     {
       "phone": "84943486234",
@@ -17254,7 +18669,7 @@
     {
       "phone": "84858328878",
       "successDate": "2026-08-14 20:00:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84823939177",
@@ -17305,7 +18720,7 @@
     {
       "phone": "84911558946",
       "successDate": "2026-08-11 17:10:04",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84911584487",
@@ -17322,7 +18737,7 @@
     {
       "phone": "84914679962",
       "successDate": "2026-08-14 10:50:04",
-      "revenue": 0
+      "revenue": 159000
     },
     {
       "phone": "84914751693",
@@ -17334,14 +18749,14 @@
     {
       "phone": "84914897107",
       "successDate": "2026-08-14 12:30:03",
-      "revenue": 0
+      "revenue": 120000
     }
   ],
   "KBH028071_095": [
     {
       "phone": "84943801267",
       "successDate": "2026-08-13 20:30:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84943700441",
@@ -17353,22 +18768,22 @@
     {
       "phone": "84915506435",
       "successDate": "2026-08-13 19:50:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84915509987",
       "successDate": "2026-08-13 19:50:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84915508872",
       "successDate": "2026-08-13 19:50:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84915510931",
       "successDate": "2026-08-13 19:50:05",
-      "revenue": 0
+      "revenue": 100000
     }
   ],
   "KBH002361": [
@@ -17399,7 +18814,7 @@
     {
       "phone": "84917124807",
       "successDate": "2026-08-13 15:20:05",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84914369121",
@@ -17418,29 +18833,29 @@
     {
       "phone": "84856454325",
       "successDate": "2026-08-13 17:40:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84818360485",
       "successDate": "2026-08-13 17:40:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84847127121",
       "successDate": "2026-08-13 16:50:09",
-      "revenue": 0
+      "revenue": 100000
     }
   ],
   "KBH002005_025": [
     {
       "phone": "84945464352",
       "successDate": "2026-08-13 15:50:06",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84944017792",
       "successDate": "2026-08-13 15:50:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84886563251",
@@ -17462,26 +18877,26 @@
     {
       "phone": "84845113146",
       "successDate": "2026-08-13 15:50:05",
-      "revenue": 0
+      "revenue": 125000
     }
   ],
   "KBH028071_183": [
     {
       "phone": "84944878837",
       "successDate": "2026-08-13 14:50:05",
-      "revenue": 0
+      "revenue": 50000
     }
   ],
   "KBH028071_063": [
     {
       "phone": "84947555497",
       "successDate": "2026-08-13 14:13:13",
-      "revenue": 0
+      "revenue": 75000
     },
     {
       "phone": "84827371797",
       "successDate": "2026-08-13 14:03:06",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84914714625",
@@ -17491,7 +18906,7 @@
     {
       "phone": "84829292535",
       "successDate": "2026-08-13 09:40:04",
-      "revenue": 0
+      "revenue": 120000
     },
     {
       "phone": "84914727743",
@@ -17513,7 +18928,7 @@
     {
       "phone": "84852858772",
       "successDate": "2026-08-11 17:00:09",
-      "revenue": 0
+      "revenue": 100000
     }
   ],
   "KBH002005_084": [
@@ -17585,12 +19000,12 @@
     {
       "phone": "84826969575",
       "successDate": "2026-08-12 14:20:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84837767599",
       "successDate": "2026-08-10 14:00:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84838797338",
@@ -17605,7 +19020,7 @@
     {
       "phone": "84828036696",
       "successDate": "2026-08-08 11:00:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84886118864",
@@ -17615,26 +19030,26 @@
     {
       "phone": "84858186663",
       "successDate": "2026-08-07 08:00:04",
-      "revenue": 0
+      "revenue": 100000
     }
   ],
   "KBH028071_111": [
     {
       "phone": "84889116176",
       "successDate": "2026-08-12 13:30:04",
-      "revenue": 0
+      "revenue": 159000
     }
   ],
   "KBH028071_074": [
     {
       "phone": "84854557776",
       "successDate": "2026-08-12 12:30:05",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84847477898",
       "successDate": "2026-08-08 08:10:05",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84819798292",
@@ -17656,7 +19071,7 @@
     {
       "phone": "84912870380",
       "successDate": "2026-08-11 15:40:06",
-      "revenue": 0
+      "revenue": 100000
     }
   ],
   "KBH028071_109": [
@@ -17742,12 +19157,12 @@
     {
       "phone": "84948278857",
       "successDate": "2026-08-11 15:10:04",
-      "revenue": 0
+      "revenue": 125000
     },
     {
       "phone": "84945717857",
       "successDate": "2026-08-11 15:10:04",
-      "revenue": 0
+      "revenue": 125000
     }
   ],
   "KBH028071_083": [
@@ -17788,7 +19203,7 @@
     {
       "phone": "84823789484",
       "successDate": "2026-08-07 08:20:02",
-      "revenue": 0
+      "revenue": 75000
     }
   ],
   "KBH028071_119": [
@@ -17834,7 +19249,7 @@
     {
       "phone": "84915186754",
       "successDate": "2026-08-05 15:00:03",
-      "revenue": 0
+      "revenue": 90000
     }
   ],
   "KBH002005_070": [
@@ -17889,7 +19304,7 @@
     {
       "phone": "84915429510",
       "successDate": "2026-08-07 10:52:51",
-      "revenue": 0
+      "revenue": 100000
     }
   ],
   "KBH028071_093": [
@@ -17917,17 +19332,17 @@
     {
       "phone": "84813411581",
       "successDate": "2026-08-08 15:30:04",
-      "revenue": 0
+      "revenue": 90000
     },
     {
       "phone": "84813489637",
       "successDate": "2026-08-08 15:02:05",
-      "revenue": 0
+      "revenue": 90000
     },
     {
       "phone": "84812784271",
       "successDate": "2026-08-07 09:30:07",
-      "revenue": 0
+      "revenue": 120000
     }
   ],
   "KBH002005_001": [
@@ -17939,7 +19354,7 @@
     {
       "phone": "84919207164",
       "successDate": "2026-08-04 17:30:05",
-      "revenue": 0
+      "revenue": 125000
     }
   ],
   "KBH002005_024": [
@@ -17958,7 +19373,7 @@
     {
       "phone": "84948935536",
       "successDate": "2026-08-07 18:50:04",
-      "revenue": 0
+      "revenue": 120000
     }
   ],
   "KBH028071_069": [
@@ -17972,12 +19387,12 @@
     {
       "phone": "84835678872",
       "successDate": "2026-08-07 15:40:04",
-      "revenue": 0
+      "revenue": 100000
     },
     {
       "phone": "84856756559",
       "successDate": "2026-08-07 08:20:06",
-      "revenue": 0
+      "revenue": 100000
     }
   ],
   "KBH002005_020": [
@@ -18027,7 +19442,7 @@
     {
       "phone": "84848145579",
       "successDate": "2026-08-06 10:00:06",
-      "revenue": 0
+      "revenue": 35000
     }
   ],
   "KBH028071_029": [
@@ -18076,7 +19491,7 @@
     {
       "phone": "84912451107",
       "successDate": "2026-08-01 10:04:12",
-      "revenue": 0
+      "revenue": 125000
     }
   ],
   "KBH028071_084": [
@@ -18175,13 +19590,13 @@
     "area": "Tân Ninh",
     "total": 15,
     "pssl": 12,
-    "pssl70": 5,
+    "pssl70": 6,
     "notpssl_old": 1,
     "notpssl_2026": 0,
     "notpssl_new": 2,
     "subs": 57,
-    "subs70": 8,
-    "revenue": 909000,
+    "subs70": 10,
+    "revenue": 1154000,
     "sim_under5": 11,
     "sim5": 4,
     "sim10": 3,
@@ -18197,42 +19612,42 @@
     "area": "Long An",
     "total": 23,
     "pssl": 23,
-    "pssl70": 6,
+    "pssl70": 13,
     "notpssl_old": 0,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 105,
-    "subs70": 11,
-    "revenue": 1852000,
+    "subs70": 37,
+    "revenue": 9792000,
     "sim_under5": 14,
     "sim5": 9,
     "sim10": 6,
     "sim20": 3,
     "sim30": 0,
-    "rev_under500": 21,
-    "rev500": 2,
-    "rev1m": 0,
-    "rev2m": 0,
-    "rev3m": 0
+    "rev_under500": 19,
+    "rev500": 4,
+    "rev1m": 3,
+    "rev2m": 3,
+    "rev3m": 1
   },
   {
     "area": "Tân Biên",
     "total": 10,
     "pssl": 5,
-    "pssl70": 1,
+    "pssl70": 4,
     "notpssl_old": 0,
     "notpssl_2026": 0,
     "notpssl_new": 5,
     "subs": 17,
-    "subs70": 1,
-    "revenue": 159000,
+    "subs70": 13,
+    "revenue": 1359000,
     "sim_under5": 9,
     "sim5": 1,
     "sim10": 0,
     "sim20": 0,
     "sim30": 0,
-    "rev_under500": 10,
-    "rev500": 0,
+    "rev_under500": 9,
+    "rev500": 1,
     "rev1m": 0,
     "rev2m": 0,
     "rev3m": 0
@@ -18241,20 +19656,20 @@
     "area": "Châu Thành",
     "total": 10,
     "pssl": 7,
-    "pssl70": 1,
+    "pssl70": 5,
     "notpssl_old": 1,
     "notpssl_2026": 0,
     "notpssl_new": 2,
     "subs": 24,
-    "subs70": 2,
-    "revenue": 240000,
+    "subs70": 12,
+    "revenue": 1415000,
     "sim_under5": 7,
     "sim5": 3,
     "sim10": 0,
     "sim20": 0,
     "sim30": 0,
-    "rev_under500": 10,
-    "rev500": 0,
+    "rev_under500": 9,
+    "rev500": 1,
     "rev1m": 0,
     "rev2m": 0,
     "rev3m": 0
@@ -18269,7 +19684,7 @@
     "notpssl_new": 1,
     "subs": 28,
     "subs70": 14,
-    "revenue": 1428000,
+    "revenue": 1528000,
     "sim_under5": 11,
     "sim5": 2,
     "sim10": 1,
@@ -18285,13 +19700,13 @@
     "area": "Tân Trụ",
     "total": 13,
     "pssl": 10,
-    "pssl70": 7,
+    "pssl70": 9,
     "notpssl_old": 0,
     "notpssl_2026": 1,
     "notpssl_new": 2,
     "subs": 25,
-    "subs70": 10,
-    "revenue": 1035000,
+    "subs70": 14,
+    "revenue": 1420000,
     "sim_under5": 13,
     "sim5": 0,
     "sim10": 0,
@@ -18329,21 +19744,21 @@
     "area": "Thủ Thừa",
     "total": 10,
     "pssl": 9,
-    "pssl70": 2,
+    "pssl70": 6,
     "notpssl_old": 1,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 42,
-    "subs70": 2,
-    "revenue": 259000,
+    "subs70": 15,
+    "revenue": 1639000,
     "sim_under5": 7,
     "sim5": 3,
     "sim10": 3,
     "sim20": 1,
     "sim30": 0,
-    "rev_under500": 10,
-    "rev500": 0,
-    "rev1m": 0,
+    "rev_under500": 9,
+    "rev500": 1,
+    "rev1m": 1,
     "rev2m": 0,
     "rev3m": 0
   },
@@ -18351,20 +19766,20 @@
     "area": "Tân Châu",
     "total": 6,
     "pssl": 2,
-    "pssl70": 0,
+    "pssl70": 2,
     "notpssl_old": 1,
     "notpssl_2026": 1,
     "notpssl_new": 2,
     "subs": 6,
-    "subs70": 0,
-    "revenue": 0,
+    "subs70": 4,
+    "revenue": 900000,
     "sim_under5": 6,
     "sim5": 0,
     "sim10": 0,
     "sim20": 0,
     "sim30": 0,
-    "rev_under500": 6,
-    "rev500": 0,
+    "rev_under500": 5,
+    "rev500": 1,
     "rev1m": 0,
     "rev2m": 0,
     "rev3m": 0
@@ -18373,22 +19788,22 @@
     "area": "Đức Huệ",
     "total": 11,
     "pssl": 4,
-    "pssl70": 1,
+    "pssl70": 3,
     "notpssl_old": 3,
     "notpssl_2026": 0,
     "notpssl_new": 4,
     "subs": 22,
-    "subs70": 1,
-    "revenue": 120000,
+    "subs70": 15,
+    "revenue": 2561000,
     "sim_under5": 10,
     "sim5": 1,
     "sim10": 1,
     "sim20": 1,
     "sim30": 0,
-    "rev_under500": 11,
-    "rev500": 0,
-    "rev1m": 0,
-    "rev2m": 0,
+    "rev_under500": 10,
+    "rev500": 1,
+    "rev1m": 1,
+    "rev2m": 1,
     "rev3m": 0
   },
   {
@@ -18400,8 +19815,8 @@
     "notpssl_2026": 0,
     "notpssl_new": 1,
     "subs": 152,
-    "subs70": 95,
-    "revenue": 16996000,
+    "subs70": 113,
+    "revenue": 32796000,
     "sim_under5": 11,
     "sim5": 5,
     "sim10": 5,
@@ -18439,13 +19854,13 @@
     "area": "Cần Giuộc",
     "total": 12,
     "pssl": 9,
-    "pssl70": 6,
+    "pssl70": 7,
     "notpssl_old": 0,
     "notpssl_2026": 3,
     "notpssl_new": 0,
     "subs": 113,
-    "subs70": 77,
-    "revenue": 10910000,
+    "subs70": 94,
+    "revenue": 18434000,
     "sim_under5": 8,
     "sim5": 4,
     "sim10": 4,
@@ -18455,19 +19870,19 @@
     "rev500": 4,
     "rev1m": 4,
     "rev2m": 4,
-    "rev3m": 1
+    "rev3m": 2
   },
   {
     "area": "Tầm Vu",
     "total": 7,
     "pssl": 7,
-    "pssl70": 1,
+    "pssl70": 4,
     "notpssl_old": 0,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 27,
-    "subs70": 1,
-    "revenue": 75000,
+    "subs70": 6,
+    "revenue": 604000,
     "sim_under5": 3,
     "sim5": 4,
     "sim10": 1,
@@ -18488,52 +19903,52 @@
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 102,
-    "subs70": 34,
-    "revenue": 4199000,
+    "subs70": 42,
+    "revenue": 9298000,
     "sim_under5": 1,
     "sim5": 7,
     "sim10": 6,
     "sim20": 6,
     "sim30": 1,
-    "rev_under500": 6,
-    "rev500": 2,
-    "rev1m": 2,
-    "rev2m": 2,
-    "rev3m": 0
+    "rev_under500": 4,
+    "rev500": 4,
+    "rev1m": 4,
+    "rev2m": 4,
+    "rev3m": 1
   },
   {
     "area": "Đức Hòa",
     "total": 24,
     "pssl": 21,
-    "pssl70": 11,
+    "pssl70": 16,
     "notpssl_old": 0,
     "notpssl_2026": 0,
     "notpssl_new": 3,
     "subs": 107,
-    "subs70": 46,
-    "revenue": 5135000,
+    "subs70": 76,
+    "revenue": 9358000,
     "sim_under5": 16,
     "sim5": 8,
     "sim10": 3,
     "sim20": 3,
     "sim30": 1,
-    "rev_under500": 21,
-    "rev500": 3,
-    "rev1m": 1,
-    "rev2m": 1,
+    "rev_under500": 17,
+    "rev500": 7,
+    "rev1m": 3,
+    "rev2m": 3,
     "rev3m": 0
   },
   {
     "area": "Tân Thạnh",
     "total": 10,
     "pssl": 7,
-    "pssl70": 3,
+    "pssl70": 5,
     "notpssl_old": 0,
     "notpssl_2026": 1,
     "notpssl_new": 2,
     "subs": 37,
-    "subs70": 19,
-    "revenue": 2410000,
+    "subs70": 22,
+    "revenue": 2670000,
     "sim_under5": 9,
     "sim5": 1,
     "sim10": 1,
@@ -18549,35 +19964,35 @@
     "area": "Bến Lức",
     "total": 17,
     "pssl": 15,
-    "pssl70": 4,
+    "pssl70": 12,
     "notpssl_old": 2,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 80,
-    "subs70": 11,
-    "revenue": 1576000,
+    "subs70": 43,
+    "revenue": 6175000,
     "sim_under5": 11,
     "sim5": 6,
     "sim10": 4,
     "sim20": 1,
     "sim30": 1,
-    "rev_under500": 16,
-    "rev500": 1,
-    "rev1m": 1,
-    "rev2m": 1,
+    "rev_under500": 13,
+    "rev500": 4,
+    "rev1m": 2,
+    "rev2m": 2,
     "rev3m": 0
   },
   {
     "area": "Thạnh Hóa",
     "total": 7,
     "pssl": 5,
-    "pssl70": 3,
+    "pssl70": 4,
     "notpssl_old": 2,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 28,
-    "subs70": 7,
-    "revenue": 840000,
+    "subs70": 10,
+    "revenue": 1219000,
     "sim_under5": 5,
     "sim5": 2,
     "sim10": 1,
@@ -18585,7 +20000,7 @@
     "sim30": 0,
     "rev_under500": 6,
     "rev500": 1,
-    "rev1m": 0,
+    "rev1m": 1,
     "rev2m": 0,
     "rev3m": 0
   },
@@ -18598,8 +20013,8 @@
     "notpssl_2026": 2,
     "notpssl_new": 4,
     "subs": 20,
-    "subs70": 6,
-    "revenue": 715000,
+    "subs70": 8,
+    "revenue": 940000,
     "sim_under5": 10,
     "sim5": 2,
     "sim10": 1,
@@ -18607,7 +20022,7 @@
     "sim30": 0,
     "rev_under500": 11,
     "rev500": 1,
-    "rev1m": 0,
+    "rev1m": 1,
     "rev2m": 0,
     "rev3m": 0
   },
@@ -18620,8 +20035,8 @@
     "notpssl_2026": 0,
     "notpssl_new": 3,
     "subs": 75,
-    "subs70": 14,
-    "revenue": 1634000,
+    "subs70": 21,
+    "revenue": 3883000,
     "sim_under5": 7,
     "sim5": 2,
     "sim10": 1,
@@ -18629,31 +20044,31 @@
     "sim30": 1,
     "rev_under500": 7,
     "rev500": 2,
-    "rev1m": 0,
-    "rev2m": 0,
+    "rev1m": 1,
+    "rev2m": 1,
     "rev3m": 0
   },
   {
     "area": "Vĩnh Hưng",
     "total": 15,
     "pssl": 15,
-    "pssl70": 6,
+    "pssl70": 12,
     "notpssl_old": 0,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 105,
-    "subs70": 15,
-    "revenue": 1808000,
+    "subs70": 73,
+    "revenue": 13200000,
     "sim_under5": 7,
     "sim5": 8,
     "sim10": 3,
     "sim20": 2,
     "sim30": 1,
-    "rev_under500": 14,
-    "rev500": 1,
-    "rev1m": 0,
-    "rev2m": 0,
-    "rev3m": 0
+    "rev_under500": 12,
+    "rev500": 3,
+    "rev1m": 3,
+    "rev2m": 3,
+    "rev3m": 1
   }
 ];
       const AREA_STATS_NEW = [
@@ -18666,8 +20081,8 @@
     "notpssl_2026": 0,
     "notpssl_new": 2,
     "subs": 22,
-    "subs70": 2,
-    "revenue": 249000,
+    "subs70": 3,
+    "revenue": 369000,
     "sim_under5": 3,
     "sim5": 2,
     "sim10": 2,
@@ -18683,13 +20098,13 @@
     "area": "Long An",
     "total": 10,
     "pssl": 10,
-    "pssl70": 2,
+    "pssl70": 6,
     "notpssl_old": 0,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 34,
-    "subs70": 3,
-    "revenue": 835000,
+    "subs70": 15,
+    "revenue": 5720000,
     "sim_under5": 7,
     "sim5": 3,
     "sim10": 2,
@@ -18697,21 +20112,21 @@
     "sim30": 0,
     "rev_under500": 9,
     "rev500": 1,
-    "rev1m": 0,
-    "rev2m": 0,
-    "rev3m": 0
+    "rev1m": 1,
+    "rev2m": 1,
+    "rev3m": 1
   },
   {
     "area": "Tân Biên",
     "total": 7,
     "pssl": 2,
-    "pssl70": 0,
+    "pssl70": 2,
     "notpssl_old": 0,
     "notpssl_2026": 0,
     "notpssl_new": 5,
     "subs": 7,
-    "subs70": 0,
-    "revenue": 0,
+    "subs70": 7,
+    "revenue": 700000,
     "sim_under5": 7,
     "sim5": 0,
     "sim10": 0,
@@ -18727,13 +20142,13 @@
     "area": "Châu Thành",
     "total": 5,
     "pssl": 3,
-    "pssl70": 1,
+    "pssl70": 3,
     "notpssl_old": 0,
     "notpssl_2026": 0,
     "notpssl_new": 2,
     "subs": 6,
-    "subs70": 2,
-    "revenue": 240000,
+    "subs70": 5,
+    "revenue": 565000,
     "sim_under5": 5,
     "sim5": 0,
     "sim10": 0,
@@ -18755,7 +20170,7 @@
     "notpssl_new": 1,
     "subs": 7,
     "subs70": 5,
-    "revenue": 545000,
+    "revenue": 645000,
     "sim_under5": 6,
     "sim5": 0,
     "sim10": 0,
@@ -18776,8 +20191,8 @@
     "notpssl_2026": 0,
     "notpssl_new": 2,
     "subs": 2,
-    "subs70": 1,
-    "revenue": 155000,
+    "subs70": 2,
+    "revenue": 255000,
     "sim_under5": 3,
     "sim5": 0,
     "sim10": 0,
@@ -18859,13 +20274,13 @@
     "area": "Đức Huệ",
     "total": 5,
     "pssl": 1,
-    "pssl70": 0,
+    "pssl70": 1,
     "notpssl_old": 0,
     "notpssl_2026": 0,
     "notpssl_new": 4,
     "subs": 2,
-    "subs70": 0,
-    "revenue": 0,
+    "subs70": 2,
+    "revenue": 250000,
     "sim_under5": 5,
     "sim5": 0,
     "sim10": 0,
@@ -18991,20 +20406,20 @@
     "area": "Đức Hòa",
     "total": 11,
     "pssl": 8,
-    "pssl70": 3,
+    "pssl70": 6,
     "notpssl_old": 0,
     "notpssl_2026": 0,
     "notpssl_new": 3,
     "subs": 12,
-    "subs70": 3,
-    "revenue": 350000,
+    "subs70": 8,
+    "revenue": 1225000,
     "sim_under5": 11,
     "sim5": 0,
     "sim10": 0,
     "sim20": 0,
     "sim30": 0,
-    "rev_under500": 11,
-    "rev500": 0,
+    "rev_under500": 10,
+    "rev500": 1,
     "rev1m": 0,
     "rev2m": 0,
     "rev3m": 0
@@ -19035,20 +20450,20 @@
     "area": "Bến Lức",
     "total": 4,
     "pssl": 4,
-    "pssl70": 2,
+    "pssl70": 3,
     "notpssl_old": 0,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 9,
-    "subs70": 3,
-    "revenue": 350000,
+    "subs70": 5,
+    "revenue": 705000,
     "sim_under5": 4,
     "sim5": 0,
     "sim10": 0,
     "sim20": 0,
     "sim30": 0,
-    "rev_under500": 4,
-    "rev500": 0,
+    "rev_under500": 3,
+    "rev500": 1,
     "rev1m": 0,
     "rev2m": 0,
     "rev3m": 0
@@ -19123,13 +20538,13 @@
     "area": "Vĩnh Hưng",
     "total": 2,
     "pssl": 2,
-    "pssl70": 1,
+    "pssl70": 2,
     "notpssl_old": 0,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 15,
-    "subs70": 2,
-    "revenue": 424000,
+    "subs70": 6,
+    "revenue": 859000,
     "sim_under5": 0,
     "sim5": 2,
     "sim10": 1,
@@ -19147,13 +20562,13 @@
     "area": "Tân Ninh",
     "total": 10,
     "pssl": 9,
-    "pssl70": 3,
+    "pssl70": 4,
     "notpssl_old": 1,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 35,
-    "subs70": 6,
-    "revenue": 660000,
+    "subs70": 7,
+    "revenue": 785000,
     "sim_under5": 8,
     "sim5": 2,
     "sim10": 1,
@@ -19169,42 +20584,42 @@
     "area": "Long An",
     "total": 13,
     "pssl": 13,
-    "pssl70": 4,
+    "pssl70": 7,
     "notpssl_old": 0,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 71,
-    "subs70": 8,
-    "revenue": 1017000,
+    "subs70": 22,
+    "revenue": 4072000,
     "sim_under5": 7,
     "sim5": 6,
     "sim10": 4,
     "sim20": 3,
     "sim30": 0,
-    "rev_under500": 12,
-    "rev500": 1,
-    "rev1m": 0,
-    "rev2m": 0,
+    "rev_under500": 10,
+    "rev500": 3,
+    "rev1m": 2,
+    "rev2m": 2,
     "rev3m": 0
   },
   {
     "area": "Tân Biên",
     "total": 3,
     "pssl": 3,
-    "pssl70": 1,
+    "pssl70": 2,
     "notpssl_old": 0,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 10,
-    "subs70": 1,
-    "revenue": 159000,
+    "subs70": 6,
+    "revenue": 659000,
     "sim_under5": 2,
     "sim5": 1,
     "sim10": 0,
     "sim20": 0,
     "sim30": 0,
-    "rev_under500": 3,
-    "rev500": 0,
+    "rev_under500": 2,
+    "rev500": 1,
     "rev1m": 0,
     "rev2m": 0,
     "rev3m": 0
@@ -19213,20 +20628,20 @@
     "area": "Châu Thành",
     "total": 5,
     "pssl": 4,
-    "pssl70": 0,
+    "pssl70": 2,
     "notpssl_old": 1,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 18,
-    "subs70": 0,
-    "revenue": 0,
+    "subs70": 7,
+    "revenue": 850000,
     "sim_under5": 2,
     "sim5": 3,
     "sim10": 0,
     "sim20": 0,
     "sim30": 0,
-    "rev_under500": 5,
-    "rev500": 0,
+    "rev_under500": 4,
+    "rev500": 1,
     "rev1m": 0,
     "rev2m": 0,
     "rev3m": 0
@@ -19257,13 +20672,13 @@
     "area": "Tân Trụ",
     "total": 10,
     "pssl": 9,
-    "pssl70": 6,
+    "pssl70": 8,
     "notpssl_old": 0,
     "notpssl_2026": 1,
     "notpssl_new": 0,
     "subs": 23,
-    "subs70": 9,
-    "revenue": 880000,
+    "subs70": 12,
+    "revenue": 1165000,
     "sim_under5": 10,
     "sim5": 0,
     "sim10": 0,
@@ -19301,21 +20716,21 @@
     "area": "Thủ Thừa",
     "total": 10,
     "pssl": 9,
-    "pssl70": 2,
+    "pssl70": 6,
     "notpssl_old": 1,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 42,
-    "subs70": 2,
-    "revenue": 259000,
+    "subs70": 15,
+    "revenue": 1639000,
     "sim_under5": 7,
     "sim5": 3,
     "sim10": 3,
     "sim20": 1,
     "sim30": 0,
-    "rev_under500": 10,
-    "rev500": 0,
-    "rev1m": 0,
+    "rev_under500": 9,
+    "rev500": 1,
+    "rev1m": 1,
     "rev2m": 0,
     "rev3m": 0
   },
@@ -19323,20 +20738,20 @@
     "area": "Tân Châu",
     "total": 4,
     "pssl": 2,
-    "pssl70": 0,
+    "pssl70": 2,
     "notpssl_old": 1,
     "notpssl_2026": 1,
     "notpssl_new": 0,
     "subs": 6,
-    "subs70": 0,
-    "revenue": 0,
+    "subs70": 4,
+    "revenue": 900000,
     "sim_under5": 4,
     "sim5": 0,
     "sim10": 0,
     "sim20": 0,
     "sim30": 0,
-    "rev_under500": 4,
-    "rev500": 0,
+    "rev_under500": 3,
+    "rev500": 1,
     "rev1m": 0,
     "rev2m": 0,
     "rev3m": 0
@@ -19345,22 +20760,22 @@
     "area": "Đức Huệ",
     "total": 6,
     "pssl": 3,
-    "pssl70": 1,
+    "pssl70": 2,
     "notpssl_old": 3,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 20,
-    "subs70": 1,
-    "revenue": 120000,
+    "subs70": 13,
+    "revenue": 2311000,
     "sim_under5": 5,
     "sim5": 1,
     "sim10": 1,
     "sim20": 1,
     "sim30": 0,
-    "rev_under500": 6,
-    "rev500": 0,
-    "rev1m": 0,
-    "rev2m": 0,
+    "rev_under500": 5,
+    "rev500": 1,
+    "rev1m": 1,
+    "rev2m": 1,
     "rev3m": 0
   },
   {
@@ -19372,8 +20787,8 @@
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 152,
-    "subs70": 95,
-    "revenue": 16996000,
+    "subs70": 113,
+    "revenue": 32796000,
     "sim_under5": 10,
     "sim5": 5,
     "sim10": 5,
@@ -19411,13 +20826,13 @@
     "area": "Cần Giuộc",
     "total": 12,
     "pssl": 9,
-    "pssl70": 6,
+    "pssl70": 7,
     "notpssl_old": 0,
     "notpssl_2026": 3,
     "notpssl_new": 0,
     "subs": 113,
-    "subs70": 77,
-    "revenue": 10910000,
+    "subs70": 94,
+    "revenue": 18434000,
     "sim_under5": 8,
     "sim5": 4,
     "sim10": 4,
@@ -19427,19 +20842,19 @@
     "rev500": 4,
     "rev1m": 4,
     "rev2m": 4,
-    "rev3m": 1
+    "rev3m": 2
   },
   {
     "area": "Tầm Vu",
     "total": 7,
     "pssl": 7,
-    "pssl70": 1,
+    "pssl70": 4,
     "notpssl_old": 0,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 27,
-    "subs70": 1,
-    "revenue": 75000,
+    "subs70": 6,
+    "revenue": 604000,
     "sim_under5": 3,
     "sim5": 4,
     "sim10": 1,
@@ -19460,52 +20875,52 @@
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 102,
-    "subs70": 34,
-    "revenue": 4199000,
+    "subs70": 42,
+    "revenue": 9298000,
     "sim_under5": 1,
     "sim5": 7,
     "sim10": 6,
     "sim20": 6,
     "sim30": 1,
-    "rev_under500": 6,
-    "rev500": 2,
-    "rev1m": 2,
-    "rev2m": 2,
-    "rev3m": 0
+    "rev_under500": 4,
+    "rev500": 4,
+    "rev1m": 4,
+    "rev2m": 4,
+    "rev3m": 1
   },
   {
     "area": "Đức Hòa",
     "total": 13,
     "pssl": 13,
-    "pssl70": 8,
+    "pssl70": 10,
     "notpssl_old": 0,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 95,
-    "subs70": 43,
-    "revenue": 4785000,
+    "subs70": 68,
+    "revenue": 8133000,
     "sim_under5": 5,
     "sim5": 8,
     "sim10": 3,
     "sim20": 3,
     "sim30": 1,
-    "rev_under500": 10,
-    "rev500": 3,
-    "rev1m": 1,
-    "rev2m": 1,
+    "rev_under500": 7,
+    "rev500": 6,
+    "rev1m": 3,
+    "rev2m": 3,
     "rev3m": 0
   },
   {
     "area": "Tân Thạnh",
     "total": 8,
     "pssl": 7,
-    "pssl70": 3,
+    "pssl70": 5,
     "notpssl_old": 0,
     "notpssl_2026": 1,
     "notpssl_new": 0,
     "subs": 37,
-    "subs70": 19,
-    "revenue": 2410000,
+    "subs70": 22,
+    "revenue": 2670000,
     "sim_under5": 7,
     "sim5": 1,
     "sim10": 1,
@@ -19521,35 +20936,35 @@
     "area": "Bến Lức",
     "total": 13,
     "pssl": 11,
-    "pssl70": 2,
+    "pssl70": 9,
     "notpssl_old": 2,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 71,
-    "subs70": 8,
-    "revenue": 1226000,
+    "subs70": 38,
+    "revenue": 5470000,
     "sim_under5": 7,
     "sim5": 6,
     "sim10": 4,
     "sim20": 1,
     "sim30": 1,
-    "rev_under500": 12,
-    "rev500": 1,
-    "rev1m": 1,
-    "rev2m": 1,
+    "rev_under500": 10,
+    "rev500": 3,
+    "rev1m": 2,
+    "rev2m": 2,
     "rev3m": 0
   },
   {
     "area": "Thạnh Hóa",
     "total": 7,
     "pssl": 5,
-    "pssl70": 3,
+    "pssl70": 4,
     "notpssl_old": 2,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 28,
-    "subs70": 7,
-    "revenue": 840000,
+    "subs70": 10,
+    "revenue": 1219000,
     "sim_under5": 5,
     "sim5": 2,
     "sim10": 1,
@@ -19557,7 +20972,7 @@
     "sim30": 0,
     "rev_under500": 6,
     "rev500": 1,
-    "rev1m": 0,
+    "rev1m": 1,
     "rev2m": 0,
     "rev3m": 0
   },
@@ -19570,8 +20985,8 @@
     "notpssl_2026": 2,
     "notpssl_new": 0,
     "subs": 19,
-    "subs70": 6,
-    "revenue": 715000,
+    "subs70": 8,
+    "revenue": 940000,
     "sim_under5": 5,
     "sim5": 2,
     "sim10": 1,
@@ -19579,7 +20994,7 @@
     "sim30": 0,
     "rev_under500": 6,
     "rev500": 1,
-    "rev1m": 0,
+    "rev1m": 1,
     "rev2m": 0,
     "rev3m": 0
   },
@@ -19592,8 +21007,8 @@
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 74,
-    "subs70": 14,
-    "revenue": 1634000,
+    "subs70": 21,
+    "revenue": 3883000,
     "sim_under5": 3,
     "sim5": 2,
     "sim10": 1,
@@ -19601,31 +21016,31 @@
     "sim30": 1,
     "rev_under500": 3,
     "rev500": 2,
-    "rev1m": 0,
-    "rev2m": 0,
+    "rev1m": 1,
+    "rev2m": 1,
     "rev3m": 0
   },
   {
     "area": "Vĩnh Hưng",
     "total": 13,
     "pssl": 13,
-    "pssl70": 5,
+    "pssl70": 10,
     "notpssl_old": 0,
     "notpssl_2026": 0,
     "notpssl_new": 0,
     "subs": 90,
-    "subs70": 13,
-    "revenue": 1384000,
+    "subs70": 67,
+    "revenue": 12341000,
     "sim_under5": 7,
     "sim5": 6,
     "sim10": 2,
     "sim20": 2,
     "sim30": 1,
-    "rev_under500": 12,
-    "rev500": 1,
-    "rev1m": 0,
-    "rev2m": 0,
-    "rev3m": 0
+    "rev_under500": 10,
+    "rev500": 3,
+    "rev1m": 3,
+    "rev2m": 3,
+    "rev3m": 1
   }
 ];
 
@@ -20647,6 +22062,15 @@
           return {area,total,standard,notStandard,totalSubs,totalRevenue,standardRate,groupLabel};
         });
 
+        // Sắp xếp SL TB từ lớn đến nhỏ trong từng nhóm định biên,
+        // vẫn giữ nguyên 3 ô Nhóm đang được gộp như giao diện hiện tại.
+        const summaryGroups=[summary.slice(0,10),summary.slice(10,16),summary.slice(16,22)];
+        summaryGroups.forEach(group=>group.sort((a,b)=>
+          b.totalSubs-a.totalSubs || b.totalRevenue-a.totalRevenue ||
+          String(a.area).localeCompare(String(b.area),"vi")
+        ));
+        summary.splice(0,summary.length,...summaryGroups.flat());
+
         const fmtN=v=>new Intl.NumberFormat("vi-VN").format(Number(v||0));
         const totalAll=summary.reduce((s,a)=>s+a.total,0);
         const standardAll=summary.reduce((s,a)=>s+a.standard,0);
@@ -20673,13 +22097,13 @@
           <td>${fmtN(a.totalSubs)}</td>
           <td>${fmtN(a.totalRevenue)}đ</td>
         </tr>`).join("") + `<tr class="standard-total-row">
-          <td colspan="3"><b>Tổng</b></td>
-          <td><b>${fmtN(totalAll)}</b></td>
-          <td><b>${fmtN(standardAll)}</b></td>
-          <td><b>${rateAll.toFixed(1)}%</b></td>
-          <td><b>${fmtN(notStandardAll)}</b></td>
-          <td><b>${fmtN(subsAll)}</b></td>
-          <td><b>${fmtN(revenueAll)}đ</b></td>
+          <td colspan="3" style="text-align:center!important"><b>Tổng</b></td>
+          <td style="text-align:center!important"><b>${fmtN(totalAll)}</b></td>
+          <td style="text-align:center!important"><b>${fmtN(standardAll)}</b></td>
+          <td style="text-align:center!important"><b>${rateAll.toFixed(1)}%</b></td>
+          <td style="text-align:center!important"><b>${fmtN(notStandardAll)}</b></td>
+          <td style="text-align:center!important"><b>${fmtN(subsAll)}</b></td>
+          <td style=""><b>${fmtN(revenueAll)}đ</b></td>
         </tr>`;
 
         const detailRows=points.sort((a,b)=>{
@@ -20687,13 +22111,18 @@
           const qb=isStandardPoint(b.r)?1:0;
           if(qa!==qb) return qb-qa; // Đạt chuẩn hiển thị hết trước
 
+          // Trong từng trạng thái, ưu tiên Thuê Bao từ lớn đến nhỏ.
+          const subsDiff=Number(b.r["Số lượng Thuê bao PTM"]||0)-Number(a.r["Số lượng Thuê bao PTM"]||0);
+          if(subsDiff!==0) return subsDiff;
+
+          const revenueDiff=Number(b.r["Doanh thu bán hàng"]||0)-Number(a.r["Doanh thu bán hàng"]||0);
+          if(revenueDiff!==0) return revenueDiff;
+
           const ia=AREA_ORDER.indexOf(String(a.r["Đơn vị"]||"").trim());
           const ib=AREA_ORDER.indexOf(String(b.r["Đơn vị"]||"").trim());
           if(ia!==ib) return ia-ib;
 
-          return Number(b.r["Số lượng Thuê bao PTM"]||0)-Number(a.r["Số lượng Thuê bao PTM"]||0) ||
-            Number(b.r["Doanh thu bán hàng"]||0)-Number(a.r["Doanh thu bán hàng"]||0) ||
-            String(a.r["Tên ĐUQ"]||"").localeCompare(String(b.r["Tên ĐUQ"]||""),"vi");
+          return String(a.r["Tên ĐUQ"]||"").localeCompare(String(b.r["Tên ĐUQ"]||""),"vi");
         });
 
         detailBody.innerHTML=detailRows.length
@@ -21524,6 +22953,242 @@
       $("modal").onclick = (e) => {
         if (e.target.id === "modal") $("modal").classList.remove("show");
       };
-    </script>
+    
+
+      function exportTableToExcel(table, fileName, sheetName){
+        if(!table) return;
+
+        const rows = Array.from(table.querySelectorAll("tr")).map(tr =>
+          Array.from(tr.children).map(cell => {
+            let text = (cell.innerText || cell.textContent || "").trim();
+            text = text.replace(/\s+/g," ");
+            // Giữ số tiền ở dạng số để Excel có thể tính toán.
+            if(/^-?[\d.]+đ$/.test(text)){
+              const v = Number(text.replace(/[.đ]/g,""));
+              return Number.isFinite(v) ? {t:"n",v} : {t:"s",v:text};
+            }
+            if(/^-?[\d.]+$/.test(text) && !/^0\d+/.test(text)){
+              const v = Number(text.replace(/\./g,""));
+              return Number.isFinite(v) ? {t:"n",v} : {t:"s",v:text};
+            }
+            return {t:"s",v:text};
+          })
+        ).filter(r => r.length);
+
+        const escXml = v => String(v ?? "")
+          .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+          .replace(/"/g,"&quot;").replace(/'/g,"&apos;");
+
+        const colName = n => {
+          let s="";
+          while(n>0){ n--; s=String.fromCharCode(65+(n%26))+s; n=Math.floor(n/26); }
+          return s;
+        };
+
+        const sheetRows = rows.map((row,ri) =>
+          `<row r="${ri+1}">` + row.map((c,ci)=>{
+            const ref=`${colName(ci+1)}${ri+1}`;
+            if(c.t==="n") return `<c r="${ref}"><v>${c.v}</v></c>`;
+            return `<c r="${ref}" t="inlineStr"><is><t xml:space="preserve">${escXml(c.v)}</t></is></c>`;
+          }).join("") + `</row>`
+        ).join("");
+
+        const worksheet = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
+  <sheetData>${sheetRows}</sheetData>
+</worksheet>`;
+
+        const workbook = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+ xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+ <sheets><sheet name="${escXml((sheetName||"Du lieu").slice(0,31))}" sheetId="1" r:id="rId1"/></sheets>
+</workbook>`;
+
+        const rels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+ <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>
+</Relationships>`;
+
+        const rootRels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+ <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>
+</Relationships>`;
+
+        const types = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+ <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+ <Default Extension="xml" ContentType="application/xml"/>
+ <Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>
+ <Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>
+</Types>`;
+
+        // ZIP writer nhỏ, dùng STORE method. Excel mở trực tiếp, không cần thư viện/CDN.
+        const enc = new TextEncoder();
+        const crcTable = (()=> {
+          const t=new Uint32Array(256);
+          for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?0xedb88320^(c>>>1):c>>>1;t[n]=c>>>0;}
+          return t;
+        })();
+        const crc32 = bytes => {
+          let c=0xffffffff;
+          for(const b of bytes)c=crcTable[(c^b)&255]^(c>>>8);
+          return (c^0xffffffff)>>>0;
+        };
+        const u16=n=>new Uint8Array([n&255,(n>>>8)&255]);
+        const u32=n=>new Uint8Array([n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255]);
+        const cat=parts=>{
+          const len=parts.reduce((s,p)=>s+p.length,0), out=new Uint8Array(len);
+          let o=0; parts.forEach(p=>{out.set(p,o);o+=p.length}); return out;
+        };
+        const files=[
+          ["[Content_Types].xml",types],["_rels/.rels",rootRels],
+          ["xl/workbook.xml",workbook],["xl/_rels/workbook.xml.rels",rels],
+          ["xl/worksheets/sheet1.xml",worksheet]
+        ];
+        let offset=0; const locals=[], centrals=[];
+        files.forEach(([name,content])=>{
+          const nb=enc.encode(name), db=enc.encode(content), crc=crc32(db);
+          const local=cat([u32(0x04034b50),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(db.length),u32(db.length),u16(nb.length),u16(0),nb,db]);
+          locals.push(local);
+          const central=cat([u32(0x02014b50),u16(20),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(db.length),u32(db.length),u16(nb.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(offset),nb]);
+          centrals.push(central); offset+=local.length;
+        });
+        const centralBlock=cat(centrals);
+        const end=cat([u32(0x06054b50),u16(0),u16(0),u16(files.length),u16(files.length),u32(centralBlock.length),u32(offset),u16(0)]);
+        const zip=cat([...locals,centralBlock,end]);
+        const blob=new Blob([zip],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+        const a=document.createElement("a");
+        a.href=URL.createObjectURL(blob);
+        a.download=(fileName||"du-lieu")+".xlsx";
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(()=>URL.revokeObjectURL(a.href),1500);
+      }
+
+      function bindExcelExportButtons(){
+        const map={
+          "notpssl-exist":["#areaNotPsslDetailPanel .exist-table","DUQ_hien_huu_chua_PSSL","Hien huu chua PSSL"],
+          "notpssl-new":["#areaNotPsslDetailPanel .notpssl-detail-card:nth-child(2) table","DUQ_moi_chua_PSSL","DUQ moi chua PSSL"],
+          "standard-new-summary":["#standardNewPanel .standard-card:nth-child(1) table","Tong_hop_DUQ_moi_dat_chuan","TH DUQ moi"],
+          "standard-new-detail":["#standardNewPanel .standard-card:nth-child(2) table","Chi_tiet_DUQ_moi_dat_chuan","CT DUQ moi"],
+          "standard-existing-summary":["#standardExistingPanel .standard-card:nth-child(1) table","Tong_hop_DUQ_hien_huu_dat_chuan","TH DUQ hien huu"],
+          "standard-existing-detail":["#standardExistingPanel .standard-card:nth-child(2) table","Chi_tiet_DUQ_hien_huu_dat_chuan","CT DUQ hien huu"]
+        };
+        document.querySelectorAll("[data-export-table]").forEach(btn=>{
+          btn.addEventListener("click",e=>{
+            e.stopPropagation();
+            const cfg=map[btn.dataset.exportTable];
+            if(!cfg) return;
+            exportTableToExcel(document.querySelector(cfg[0]),cfg[1]+"_20-08-2026",cfg[2]);
+          });
+        });
+      }
+
+bindExcelExportButtons();
+
+
+      function addExcelButtonToHeading(heading, table, fileName, sheetName){
+        if(!heading || !table) return;
+        const host = heading.parentElement || heading;
+        if(host.querySelector && host.querySelector(`.excel-export-btn[data-auto-export="${fileName}"]`)) return;
+
+        const btn=document.createElement("button");
+        btn.type="button";
+        btn.className="excel-export-btn";
+        btn.dataset.autoExport=fileName;
+        btn.textContent="⬇ Xuất Excel";
+        btn.style.marginLeft="10px";
+        btn.addEventListener("click",e=>{
+          e.preventDefault();
+          e.stopPropagation();
+          exportTableToExcel(table,fileName+"_20-08-2026",sheetName);
+        });
+
+        if(host.classList && (host.classList.contains("list-head") || host.classList.contains("area-card-title") || host.classList.contains("standard-card-title"))){
+          host.appendChild(btn);
+        }else{
+          heading.insertAdjacentElement("afterend",btn);
+        }
+      }
+
+      function addOverviewRevenueExcelButtons(){
+        // Tìm tất cả bảng đang thuộc Tab 1 Tổng quan và Tab 2 Thuê bao & Doanh thu.
+        const panels = [
+          document.querySelector("#areaOverviewPanel"),
+          document.querySelector("#areaRevenuePanel")
+        ].filter(Boolean);
+
+        let seq=1;
+        panels.forEach((panel,panelIndex)=>{
+          const tables=Array.from(panel.querySelectorAll("table"));
+          tables.forEach((table,i)=>{
+            // Tìm tiêu đề gần nhất phía trên bảng.
+            let heading=null;
+            const card=table.closest(".area-card,.standard-card,.notpssl-detail-card,.panel,.card") || table.parentElement;
+            if(card){
+              heading=card.querySelector("h2,h3,.area-card-title,.standard-card-title,.notpssl-detail-title");
+            }
+            if(!heading){
+              let prev=table.previousElementSibling;
+              while(prev && !heading){
+                if(prev.matches && prev.matches("h2,h3,.area-card-title,.standard-card-title,.notpssl-detail-title")) heading=prev;
+                else heading=prev.querySelector?.("h2,h3,.area-card-title,.standard-card-title,.notpssl-detail-title") || null;
+                prev=prev.previousElementSibling;
+              }
+            }
+
+            const title=(heading?.innerText || (panelIndex===0 ? `Tong_quan_${i+1}` : `Thue_bao_Doanh_thu_${i+1}`))
+              .replace(/⬇\s*Xuất Excel/g,"")
+              .trim();
+            const safe=title.normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+              .replace(/đ/g,"d").replace(/Đ/g,"D")
+              .replace(/[^A-Za-z0-9]+/g,"_").replace(/^_+|_+$/g,"")
+              .slice(0,60) || `Bang_${seq}`;
+
+            addExcelButtonToHeading(
+              heading || table,
+              table,
+              safe,
+              title.slice(0,31) || `Bang ${seq}`
+            );
+            seq++;
+          });
+        });
+      }
+
+      // Nếu các bảng được render lại khi đổi tab, chạy lại sau mỗi lần click tab.
+      addOverviewRevenueExcelButtons();
+      document.querySelectorAll(".area-menu-tab").forEach(btn=>{
+        btn.addEventListener("click",()=>setTimeout(addOverviewRevenueExcelButtons,50));
+      });
+
+
+      function exportCurrentAreaTable(kind){
+        if(currentAreaTab !== "overview" && currentAreaTab !== "performance") return;
+        const isNew = kind === "new";
+        const block = document.getElementById(isNew ? "areaBlockNew" : "areaBlockExist");
+        const table = block ? block.querySelector("table") : null;
+        if(!table) return;
+        const tabLabel = currentAreaTab === "overview" ? "Tong_quan" : "Thue_bao_Doanh_thu";
+        const kindLabel = isNew ? "DUQ_Moi" : "DUQ_Hien_huu";
+        const sheetLabel = currentAreaTab === "overview"
+          ? (isNew ? "Tong quan DUQ Moi" : "Tong quan DUQ HH")
+          : (isNew ? "TB DT DUQ Moi" : "TB DT DUQ HH");
+        exportTableToExcel(table, `${tabLabel}_${kindLabel}_20-08-2026`, sheetLabel);
+      }
+      const exportAreaNewExcel=document.getElementById("exportAreaNewExcel");
+      const exportAreaExistExcel=document.getElementById("exportAreaExistExcel");
+      if(exportAreaNewExcel) exportAreaNewExcel.onclick=(e)=>{e.stopPropagation();exportCurrentAreaTable("new")};
+      if(exportAreaExistExcel) exportAreaExistExcel.onclick=(e)=>{e.stopPropagation();exportCurrentAreaTable("exist")};
+      function syncAreaExportButtons(){
+        const show = currentAreaTab === "overview" || currentAreaTab === "performance";
+        if(exportAreaNewExcel) exportAreaNewExcel.style.display = show ? "inline-flex" : "none";
+        if(exportAreaExistExcel) exportAreaExistExcel.style.display = show ? "inline-flex" : "none";
+      }
+      syncAreaExportButtons();
+      document.querySelectorAll(".area-menu-tab").forEach(btn=>{
+        btn.addEventListener("click",()=>setTimeout(syncAreaExportButtons,0));
+      });
+
+</script>
   </body>
 </html>
